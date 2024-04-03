@@ -8,16 +8,26 @@ public class AdminController {
 	
 	@GetMapping("/quanli")
 	public String admindashboardFrm() {
-		return "admindashboard";
+		return "admin-dashboard";
 	}
 	
-	@GetMapping("/admin-productmanager")
+	@GetMapping("/admin-product")
 	public String productManagerFrm() {
-		return "admin-productmanager";
+		return "admin-product";
 	}
 	
 	@GetMapping("/admin-addproduct")
 	public String addProductFrm() {
 		return "admin-addproduct";
+	}
+	
+	@GetMapping("/admin-category")
+	public String categoryFrm() {
+		return "admin-category";
+	}
+	
+	@GetMapping("/admin-account")
+	public String accountFrm() {
+		return "admin-account";
 	}
 }

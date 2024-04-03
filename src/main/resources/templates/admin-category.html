@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Quản lí tài khoản</title>
+	<title>Quản lí danh mục</title>
 
 	<!--Jquery.js-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
@@ -171,26 +171,18 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">Quản lí tài khoản</h1>
+					<h1 class="mt-4">Quản lí danh mục</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="index.html">Trang chính</a></li>
-						<li class="breadcrumb-item active">Quản lí tài khoản</li>
+						<li class="breadcrumb-item active">Quản lí danh mục</li>
 					</ol>
 					<div class="card mb-4">
 						<div class="card-header bg-danger text-white">
 							<i class="fas fa-table me-1"></i>
-							Danh sách tài khoản
+							Danh sách danh mục
 						</div>
 						<div class="card-body">
 							<div class="mb-3 d-flex">
-								<div class="col-sm-2 me-3">
-									<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-										<option selected>--Vai trò--</option>
-										<option value="1">QUANLI</option>
-										<option value="2">KHACHHANG</option>
-										<option value="3">NHANVIENKHO</option>
-									</select>
-								</div>
 								<div class="input-group">
 									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
 										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
@@ -198,7 +190,7 @@
 											class="fas fa-search"></i></button>
 								</div>
 								<button class="btn btn-success btn-sm col-md-2"><i class="fa-solid fa-plus"></i> Thêm
-									tài khoản</button>
+									hãng</button>
 							</div>
 							<div class="table-response">
 								<table class="table table-striped">
@@ -209,10 +201,9 @@
 													id="flexCheckDefault">
 											</th>
 											<th scope="col">Mã</th>
-											<th scope="col">Họ tên</th>
-											<th scope="col">Email</th>
-											<th scope="col">Số điện thọai</th>
-											<th scope="col">Tình trạng</th>
+											<th scope="col">Ảnh</th>
+											<th scope="col">Tên hãng</th>
+											<th scope="col">Mô tả</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
@@ -226,11 +217,11 @@
 											<td>Otto</td>
 											<td>@mdo</td>
 											<td>@mdo</td>
-											<td>@mdo</td>
 											<td>
 												<button class="btn btn-success"><i
 														class="fa-solid fa-pen-to-square"></i></button>
-												<button class="btn btn-danger"><i class="fa-solid fa-lock"></i></button>
+												<button class="btn btn-danger"><i
+														class="fa-solid fa-trash"></i></i></button>
 											</td>
 										</tr>
 										<tr>
@@ -242,11 +233,11 @@
 											<td>Thornton</td>
 											<td>@fat</td>
 											<td>@mdo</td>
-											<td>@mdo</td>
 											<td>
 												<button class="btn btn-success"><i
 														class="fa-solid fa-pen-to-square"></i></button>
-												<button class="btn btn-danger"><i class="fa-solid fa-lock"></i></button>
+												<button class="btn btn-danger"><i
+														class="fa-solid fa-trash"></i></i></button>
 											</td>
 										</tr>
 										<tr>
@@ -258,11 +249,11 @@
 											<td>the Bird</td>
 											<td>@twitter</td>
 											<td>@mdo</td>
-											<td>@mdo</td>
 											<td>
 												<button class="btn btn-success"><i
 														class="fa-solid fa-pen-to-square"></i></button>
-												<button class="btn btn-danger"><i class="fa-solid fa-lock"></i></button>
+												<button class="btn btn-danger"><i
+														class="fa-solid fa-trash"></i></i></button>
 											</td>
 										</tr>
 									</tbody>
@@ -272,8 +263,8 @@
 										<li class="page-item disabled">
 											<a class="page-link" href="#" tabindex="-1">Previous</a>
 										</li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item active">
+										<li class="page-item active"><a class="page-link" href="#">1</a></li>
+										<li class="page-item">
 											<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
 										</li>
 										<li class="page-item"><a class="page-link" href="#">3</a></li>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chi tiet</title>
+
+	<!--Jquery.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+	<!-- Bootstrap icons-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+	<!-- Bootstrap JS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Add Popper.js -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Bootstrap JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!--fontAwesome-->
+	<script src="https://kit.fontawesome.com/d75d72b9b4.js" crossorigin="anonymous"></script>
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/signin.css">
+	<!-- Custom JS -->
+	<script src="/js/productdetailjs.js"></script>
+	<script src="/js/menu_js.js"></script>
+</head>
+
+<body>
+	<!--Menu-->
+	<nav style="background-color: #cd1818;" class="navbar navbar-expand-md navbar-dark">
+		<div class="container">
+			<a class="navbar-brand" href="home?action=view"><i class="fa-brands fa-shopify"></i> VNMOBILE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+				aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+				<ul class="navbar-nav m-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/home"> <i class="fa-solid fa-house"></i>
+							Trang chủ<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#"><i class="fa-solid fa-cart-plus"></i> Danh mục</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/contact"><i class="fa-solid fa-phone"></i> Hỗ trợ</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/contact"><i class="fa-regular fa-lightbulb"></i> Thông tin</a>
+					</li>
+				</ul>
+				<form action="/search" class="form-inline my-2 my-lg-0" accept-charset="UTF-8">
+					<div class="input-group input-group-sm">
+						<input name="txt" type="text" class="form-control" aria-label="Small"
+							aria-describedby="inputGroup-sizing-sm" placeholder="Bạn cần tìm gì?">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-dark btn-number">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<a id="cartInMenuBtn" class="btn btn-success btn-sm ml-3 mr-2" href="/cart">
+					<i class="fa fa-shopping-cart"></i> Giỏ hàng
+					<span id="cartInMenuQuantity" class="badge badge-danger rounded-circle"></span>
+				</a>
+
+				<ul class="navbar-nav">
+					<li id="loginMenu" class="nav-item active">
+						<a class="nav-link" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a>
+					</li>
+					<li style="display: none;" id="userDropdown" class="nav-item active dropdown">
+						<a class="nav-link active dropdown-toggle d-flex align-items-center" data-toggle="dropdown"
+							href="#">
+							<div class="avatar-container"
+								style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
+								<img id="userAvatar" class="avatar"
+									style="width: 100%; height: auto; object-fit: cover;" src="" alt="Avatar">
+							</div>
+							<span id="userfullName" class="ml-1"></span>
+						</a>
+
+						<div id="userMenu" class="dropdown-menu my-border">
+							<a class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i> Tài
+								khoản</a>
+							<a id="orderHistory" class="dropdown-item" href="/customer/order"><i
+									class="fa-solid fa-bag-shopping"></i> Đơn
+								hàng của tôi</a>
+							<a id="adminDashBoard" class="dropdown-item" href="/admin/dashboard"><i
+									class="fa-solid fa-bag-shopping"></i>
+								Admin DashBoard</a>
+							<hr>
+							<a id="logoutAdmin" style="color: red;" class="dropdown-item" href=""><i
+									class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+	<nav class="navbar navbar-expand-lg navbar-dark" style="max-height: 35px; background-color: #252525;">
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="#"><i style="font-size: 0.8em" class="fa-brands fa-facebook"></i>
+							Facebook<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#"><i style="font-size: 0.8em" class="fa-brands fa-instagram"></i>
+							Instagram</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#"><i style="font-size: 0.8em"
+								class="fa-brands fa-salesforce"></i></i> Khuyến mãi</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#"><i style="font-size: 0.8em" class="fa-solid fa-headset"></i> Hỗ
+							trợ</a>
+					</li>
+					<li class="nav-item dropdown active">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i style="font-size: 0.8em" class="fa-solid fa-bell fa-shake"></i> Thông báo
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Thông báo 1</a>
+							<a class="dropdown-item" href="#">Thông báo 2</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Thông báo 3</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!--End of Menu-->
+
+	<div class="container">
+		<div class="row bg-light">
+			<div class="col bg-light">
+				<nav aria-label="breadcrumb bg-light">
+					<ol class="breadcrumb bg-light">
+						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="/home"><i
+									style="color: #cd1818" ; class="fa-solid fa-house"></i> Trang chủ</a></li>
+						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="/category"><i
+									style="color: #cd1818" class="fa-solid fa-mobile-screen-button"></i> Điện thoại</a>
+						</li>
+						<li class="breadcrumb-item"><a id="productSlugNav" style="color: black; font-size: 0.9em"
+								href="#"></a></li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product section-->
+	<div id="productDetail" class="container">
+		<section class="py-2">
+			<div class="container px-4 px-lg-5 my-5">
+				<div class="row gx-4 gx-lg-5 bg-white">
+					<div class="col-md-6">
+						<img id="productThumbnail" class="card-img-top mt-3 mb-5 mb-md-0 img-fluid" src="" alt="..." />
+					</div>
+					<div class="col-md-6">
+						<div id="productNoId" class="small mt-2 mb-1">Id san pham</div>
+						<p id="productTitle" style="font-size: 1.7em" class="display-5 fw-bolder"><strong>Ten san
+								pham</strong>
+						</p>
+						<p id="productRateStar">
+							<i style="color: orange" class="fa-solid fa-star"></i>
+							<i style="color: orange" class="fa-solid fa-star"></i>
+							<i style="color: orange" class="fa-solid fa-star"></i>
+							<i style="color: orange" class="fa-solid fa-star"></i>
+							<i style="color: #CCC" class="fa-solid fa-star"></i>
+							(3.5) | 2 đánh giá
+						</p>
+						<div id="priceSection" class="fs-5 mb-3">
+							<strong><span id="productPrice"
+									style="color: red; font-size: 1.7em">30.490.000đ</span></strong>
+							<span id="productDiscount"
+								style="text-decoration: line-through; font-size: 1em">32.990.000đ</span>
+						</div>
+						<p><strong><i style="color: green" class="fa-solid fa-circle-check"></i> Chọn dung lượng để xem
+								giá!</strong></p>
+						<form id="formVersion" class="mb-2">
+						</form>
+						<p><strong><i style="color: green" class="fa-solid fa-circle-check"></i> Màu sắc:</strong></p>
+						<form id="formColor" class="mb-2">
+						</form>
+						<p id="colorQuantity">
+							<span id="soldQuantity" style="font-size: 1em">Đã bán: 0</span>
+							<span id="inventoryQuantity" style="margin-left: 10px; font-size: 1em">Tồn kho: 20</span>
+						</p>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<button class="btn btn-danger minus-btn" type="button">-</button>
+							</div>
+							<input id="quantitySubmit" type="number" class="form-control quantity-input" name="quantity"
+								min="1" max="10" value="1">
+							<div class="input-group-append">
+								<button class="btn btn-success plus-btn" type="button">+</button>
+							</div>
+						</div>
+						<br>
+
+						<a id="addToCartBtn" class="btn btn-danger btn-lg btn-block text-uppercase col-12"><i
+								class="fa-solid fa-cart-shopping"></i> THÊM VÀO GIỎ HÀNG</a>
+						<div class="product_rassurance mb-3">
+							<ul class="list-inline">
+								<li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br />Giao hàng nhanh</li>
+								<li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br />Thanh toán an
+									toàn</li>
+								<li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br />0867865001</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<!-- Description -->
+			<div class="col-12">
+				<div class="card border-light mb-3 my-border">
+					<div class="card-header bg-danger text-white text-uppercase"><i class="fa fa-align-justify"></i>
+						THÔNG SỐ KĨ THUẬT
+					</div>
+					<div class="card-body">
+						<div class="row" id="productTnfomation">
+							<div class="col-md-8">
+								<div class="card-body">
+									<p class="card-text">
+										<strong><i style="color: green" class="fa-solid fa-circle-check"></i> Đặc điểm
+											nổi bật:</strong>
+										<br>
+										<span id="productDescription"></span>
+									</p>
+									<br><!-- comment -->
+									<p class="card-text">
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Mới, đầy đủ
+											phụ kiện từ nhà sản xuất</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Hộp, Sách
+											hướng dẫn, Cây lấy sim, Cáp sạc</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Hàng chính
+											hãng - Bảo hành 12 Tháng</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Giá sản phẩm
+											đã bao gồm VAT</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Gọi
+											0867865001 để được tư vấn mua hàng</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Cổng thanh
+											toán trực tuyến VNPay</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Bảo hành 12
+											tháng tại trung tâm bảo hành Chính hãng. 1 đổi 1 trong 30 ngày nếu có lỗi
+											phần cứng từ nhà sản xuất. (xem chi tiết)</span>
+										<br>
+										<span><i style="color: green" class="fa-solid fa-circle-check"></i> Giao hàng
+											toàn quốc với GHN(Giao hàng nhanh)</span>
+										<br>
+									</p>
+
+								</div>
+							</div>
+							<div class="col-md-4 my-border">
+								<p style="font-size: 1.2em"><strong>Thông số kĩ thuật</strong></p>
+								<table class="table table-striped table-bordered" style="font-size: 0.8em;">
+									<tbody>
+										<tr>
+											<td>Màn hình</td>
+											<td id="productScreen"></td>
+										</tr>
+										<tr>
+											<td>Camera sau</td>
+											<td id="productBackCamera"></td>
+										</tr>
+										<tr>
+											<td>Camera Selfie</td>
+											<td id="productFrontCamera"></td>
+										</tr>
+										<tr>
+											<td>RAM</td>
+											<td id="productRam"></td>
+										</tr>
+										<tr>
+											<td>Bộ nhớ trong</td>
+											<td id="productRoom"></td>
+										</tr>
+										<tr>
+											<td>CPU</td>
+											<td id="productCpu"></td>
+										</tr>
+										<tr>
+											<td>GPU</td>
+											<td id="productGpu"></td>
+										</tr>
+										<tr>
+											<td>Dung lượng pin</td>
+											<td id="productBattery"></td>
+										</tr>
+										<tr>
+											<td>Hệ điều hành</td>
+											<td id="productSystem"></td>
+										</tr>
+										<tr>
+											<td>Trọng lượng</td>
+											<td id="productWeight"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12">
+				<div class="col-sm-8">
+					<div id="productReview" class="card border-light mb-3 my-border">
+						<div class="card-header bg-danger text-white text-uppercase"><i class="fa-solid fa-comment"></i>
+							ĐÁNH GIÁ VÀ BÌNH LUẬN
+						</div>
+					</div>
+					<div class="col-12">
+						<nav aria-label="...">
+							<ul class="pagination">
+								<li class="page-item disabled">
+									<a class="page-link" href="#" tabindex="-1">Previous</a>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item active">
+									<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+									<a class="page-link" href="#">Next</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Add Review -->
+	<div class="modal fade" id="insertReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Thêm đánh giá về sản phẩm</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="review">Đánh giá sao:</label>
+							<br>
+							<input type="number" name="rating" id="insert_rating" min="1" max="5" value="5" required>
+						</div>
+						<div class="form-group">
+							<label for="review">Bình luận:</label>
+							<textarea class="form-control" id="insert_comment" rows="3"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+					<button id="submitInsertReview" type="button" class="btn btn-primary">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal Update Review -->
+	<div class="modal fade" id="updateReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Sửa đánh giá về sản phẩm</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="review">Đánh giá sao:</label>
+							<br>
+							<input type="number" name="rating" id="update_rating" min="1" max="5" value="5" required>
+						</div>
+						<div class="form-group">
+							<label for="review">Bình luận:</label>
+							<textarea class="form-control" id="update_comment" rows="3"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+					<button id="submitUpdateReview" type="button" class="btn btn-primary">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Delete Review -->
+	<div class="modal fade" id="deleteReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xóa đánh giá về sản phẩm</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p style="color: #cd1818;"><strong>Bạn có chắc muốn xóa đánh giá này?</strong></strong></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+					<button id="submitDeleteReview" type="button" class="btn btn-danger">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Confirm Modal -->
+	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p id="messageConfirm"></p>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmButton" type="button" class="btn btn-success" data-dismiss="modal">Xác
+						nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Footer-->
+	<footer class="text-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-lg-4 col-xl-3">
+					<h5>About</h5>
+					<hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+					<p class="mb-0">
+						Luôn đem đến những sản phẩm uy tín và chất lượng đến cho bạn!
+					</p>
+				</div>
+
+				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+					<h5>Informations</h5>
+					<hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+					<ul class="list-unstyled">
+						<li><a href="">Về cửa hàng</a></li>
+						<li><a href="">Về chúng tôi</a></li>
+						<li><a href="">Thông tin</a></li>
+						<li><a href="">Hỗ trợ</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+					<h5>Others links</h5>
+					<hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+					<ul class="list-unstyled">
+						<li><a href=""><i class="fa-brands fa-facebook"></i> VnMobile</a></li>
+						<li><a href=""><i class="fa-brands fa-instagram"></i> shop.VnMobile</a></li>
+						<li><a href="#">Trang chủ</a></li>
+						<li><a href="#">Danh mục</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-4 col-lg-3 col-xl-3">
+					<h5>Contact</h5>
+					<hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+					<ul class="list-unstyled">
+						<li><i class="fa fa-home mr-2"></i>VnMobile</li>
+						<li><i class="fa fa-envelope mr-2"></i> anhoang10052002@gmail.com</li>
+						<li><i class="fa fa-phone mr-2"></i> 0867865001</li>
+						<li><i class="fa fa-print mr-2"></i> 0582066307</li>
+					</ul>
+				</div>
+				<div class="col-12 copyright mt-3">
+					<p class="float-left">
+						<a href="#">Quay lại đầu trang</a>
+					</p>
+					<p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a
+							href="#"><i>An</i></a> | <span>v. 1.0</span></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- End of footer-->
+
+</body>
+
+</html>
+<style>
+	.my-border {
+		border-radius: 2%;
+		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	}
+</style>

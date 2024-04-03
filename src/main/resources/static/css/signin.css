@@ -1,0 +1,48 @@
+body {
+	background-color: #f8f9fa;
+}
+
+.login-container {
+	margin-top: 80px;
+	margin-bottom: 100px;
+	border-radius: 5%;
+}
+
+/* CSS */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu xám với độ mờ 50% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-spinner {
+    color: white;
+    font-size: 24px;
+}
+
+.notification {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: green;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        display: none; /* Ẩn ban đầu */
+}
+
+footer {
+	background: #343a40;
+	padding: 40px;
+	margin-top: 20px;
+}
+
+footer a {
+	color: #f8f9fa !important
+}

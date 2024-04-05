@@ -71,4 +71,9 @@ public class UserController {
 	public String contactFrm() {
 		return "contact";
 	}
+	
+	@GetMapping("/create-order")
+	public String createOrderFrm() {
+		return "create-order";
+	}
 }

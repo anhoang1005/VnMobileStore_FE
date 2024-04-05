@@ -187,7 +187,7 @@ $(document).ready(function() {
 					confirmCart.push(cartItem);
 				});
 				localStorage.setItem("VNMobileOrderCart_" + vnMobileToken.email, JSON.stringify(confirmCart));
-				window.location.href='/checkout';
+				window.location.href='/create-order';
 			});
 		}
 	});

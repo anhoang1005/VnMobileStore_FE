@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Giỏ hàng</title>
+	<title>Tạo đơn hàng</title>
 
 	<!--Jquery.js-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/signin.css">
 	<!-- Custom JS -->
-	<script src="/js/customer-cart_js.js"></script>
+	<script src="/js/create-order_js.js"></script>
 	<script src="/js/menu_js.js"></script>
 </head>
 
@@ -113,6 +113,7 @@
 			</div>
 		</div>
 	</nav>
+
 	<nav class="navbar navbar-expand-lg navbar-dark" style="max-height: 35px; background-color: #252525;">
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -156,151 +157,144 @@
 			<div class="col bg-light">
 				<nav aria-label="breadcrumb bg-light">
 					<ol class="breadcrumb bg-light">
-						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="/home"><i
+						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="home"><i
 									style="color: #cd1818" ; class="fa-solid fa-house"></i> Trang chủ</a></li>
-						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="/category"><i
+						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="category"><i
 									style="color: #cd1818" class="fa-solid fa-mobile-screen-button"></i> Điện thoại</a>
-						</li>
-						<li class="breadcrumb-item"><a id="productSlugNav" style="color: black; font-size: 0.9em"
-								href="#">Giỏ hàng của tôi</a></li>
+						<li class="breadcrumb-item"><a style="color: black; font-size: 0.9em" href="category"><i
+									style="color: #cd1818" class="fa-solid fa-cart-shopping"></i> Tạo đơn hàng</a>
 					</ol>
 				</nav>
 			</div>
 		</div>
 	</div>
 
-	<div class="container mb-4">
-		<div class="d-flex justify-content-between align-items-center mb-3">
-			<h3 id="cartItemQuantity" class="mb-0"></h3>
-			<a href="/home" class="btn btn-success btn-lg">
-				<i class="fa fa-shopping-cart"></i> TIẾP TỤC MUA HÀNG
-			</a>
-		</div>
+	<!--Container-->
+	<div class="container">
 		<div class="row">
-			<div class="col-lg-9">
-				<div id="emptyCart">
-					<p> Bạn chưa thêm sản phẩm nào! </p>
-				</div>
-				<div id="cartTable" class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th class="text-center" scope="col">
-									<input id="allCartItemChecked" name="allCartItemChecked" type="checkbox"
-										aria-label="Checkbox for following text input">
-								</th>
-								<th class="text-center" scope="col"></th>
-								<th class="text-center" scope="col"></th>
-								<th class="text-center" scope="col"></th>
-								<th class="text-center" scope="col"></th>
-								<th class="text-center" scope="col">
-									<button id="deleteAllCartItem" class="btn btn-sm btn-danger">
-										Xóa tất cả
-									</button>
-								</th>
-							</tr>
-						</thead>
+			<div class="col-md-4 order-md-2 mb-4">
+				<nav aria-label="breadcrumb" class="bg-danger my-border">
+					<ol class="breadcrumb bg-danger">
+						<h4 class="d-flex justify-content-between align-items-center mb-3">
+							<span class="text-white">Đơn hàng của bạn</span>
+							<span id="orderCartQuantity" class="text-white">(3)</span>
+						</h4>
+					</ol>
+				</nav>
+				<ul id="listOrderItem" class="list-group mb-3 sticky-top my-border">
 
-						<tbody id="cartItemColumn">
-						</tbody>
-					</table>
-				</div>
+				</ul>
 			</div>
-
-			<div class="col-lg-3">
-				<div class="card bg-light mb-3">
-					<div class="card-header bg-danger text-white text-uppercase"><i
-							class="fa-solid fa-cart-shopping"></i> Thanh toán giỏ hàng</div>
-					<div class="card-body">
-						<p class="name" style="color: black; font-size: 1em">
-							<strong>Số mặt hàng đã chọn: <span id="checkedCartIemquantityd"></span></strong>
-						</p>
-						<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
-						<div>
-							<div class="form-group">
-								<label for="shipping">Mã Shipping:</label>
-								<input class="form-control" type="text" name="shipping">
-							</div>
-							<div class="form-group">
-								<label for="givesale">Mã giảm giá:</label>
-								<input class="form-control" type="text" name="givesale" placeholder="Nhap code...">
-							</div>
-							<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
-							<p class="name" style="color: black; font-size: 1em"><strong>Thành tiền: <span
-										id="totalCheckedCart" style="color: red"></span></strong></p>
-							<button id="checkoutCart" class="btn btn-danger btn-md col-sm-12">
-								<i class="fa fa-shopping-cart"></i> THANH TOÁN
-							</button>
+			<div class="col-md-8 order-md-1 my-border">
+				<h4 class="mb-3 mt-3">Thông tin thanh toán:</h4>
+				<div class="needs-validation" novalidate="">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="firstname"><strong>Họ Tên:</strong></label>
+							<input id="customerName" name="nameorder" type="text" class="form-control"
+								placeholder="Họ tên" required="">
+							<div class="invalid-feedback">Bắt buộc nhập tên hợp lệ!</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="lastName"><strong>Số điện thoại</strong></label>
+							<input name="telorder" type="text" value="" class="form-control" id="phoneNumber"
+								placeholder="Số điện thoại" required="">
+							<div class="invalid-feedback"> Bắt buộc! </div>
 						</div>
 					</div>
+					<div class="mb-3">
+						<label for="username"><strong>Email</strong></label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">@</span>
+							</div>
+							<input name="userorder" type="text" value="" class="form-control" id="customerEmail"
+								placeholder="Email" required="">
+							<div class="invalid-feedback" style="width: 100%;"> Bắt buộc! </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="province"><strong>Tỉnh, thành phố:</strong></label>
+							<select name="province" class="custom-select d-block w-100" id="provinceName" required="">
+								<option value="INVALID" selected>--Tỉnh, Thành phố--</option>
+								<option value="Hà Noi">Hà Nội</option>
+							</select>
+							<div class="invalid-feedback"> Vui lòng chon tỉnh thánh phố! </div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="districtName"><strong>Quận/Huyện</strong></label>
+							<select name="districtName" class="custom-select d-block w-100" id="districtName"
+								required="">
+								<option value="INVALID" selected>--Quận, Huyện--</option>
+								<option value="Hà Noi">Hà Nội</option>
+							</select>
+							<div class="invalid-feedback"> Vui lòng chọn Quận Huyện! </div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="xaphuongName"><strong>Xã, phường</strong></label>
+							<select name="xaphuongName" class="custom-select d-block w-100" id="xaphuongName"
+								required="">
+								<option value="INVALID" selected>--Xã, Phường--</option>
+
+								<option value="Hà Noi">Hà Nội</option>
+							</select>
+							<div class="invalid-feedback"> Vui lòng chọn xã, phường! </div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="houseName"><strong>Địa chỉ cụ thể</strong></label>
+							<input name="houseName" type="text" value="" class="form-control" id="houseName"
+								placeholder="--Số nhà 12, Ngõ 3 Ao Sen--" required="">
+							<div class="invalid-feedback"> Vui lòng nhập địa chỉ! </div>
+						</div>
+
+						<div class="col-md-12 mb-3">
+							<label for="notecheck"><strong>Ghi chú:</strong></label>
+							<input id="customerNote" name="notecheck" type="text" class="form-control"
+								placeholder="Ghi chú">
+						</div>
+					</div>
+					<hr class="mb-4">
+					<label class="mb-3" for="shipment"><Strong>Phương thức giao hàng:</Strong></label>
+					<div id="formVersion" class="mb-2">
+						<input type="radio" class="btn-check" name="options-outlined" id="success-outlined"
+							autocomplete="off" checked>
+						<label class="btn btn-outline-success" style="text-align: left;" for="success-outlined">
+							<span class="mb-3"><strong>Giao hàng nhanh</strong></span><br>
+							<div class="d-flex">
+								<span class="mb-3" id="deliveryForecast"></span><br>
+								<span class="mb-3 ml-auto" id="feePrice" feePrice-order=""></span>
+							</div>
+							<span class="mb-3" id="deliveryForecastAt"><i class="fa-solid fa-truck-fast"></i> Nhận hàng
+								dự kiến:</span>
+						</label>
+					</div>
+
+					<hr class="mb-4">
+					<div class="d-block my-3">
+						<label for="state"><Strong>Phương thức thanh toán:</Strong></label>
+						<div class="custom-control custom-radio">
+							<input id="credit" name="checkmethod" value="1" type="radio" class="custom-control-input"
+								checked="" required="">
+							<label class="custom-control-label" for="credit">Thanh toán khi nhận hàng</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input id="debit" name="checkmethod" value="0" type="radio" class="custom-control-input"
+								required="">
+							<label class="custom-control-label" for="debit">VNPAY</label>
+						</div>
+					</div>
+					<hr class="mb-4">
+					<div class="row">
+						<p id="introMessage">
+						</p>
+					</div>
+					<button id="submitOrderCart" class="btn btn-primary btn-lg btn-block mb-3">THANH TOÁN</button>
 				</div>
 			</div>
 		</div>
-		<div class="col-12">
-			<nav aria-label="...">
-				<ul class="pagination">
-					<li class="page-item disabled">
-						<a class="page-link" href="#" tabindex="-1">Previous</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item active">
-						<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="#">Next</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
 	</div>
-
-	<!-- Modal Delete Cart -->
-	<div class="modal fade" id="deleteCartItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Bỏ sản phẩm khỏi giỏ hàng</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p id="messageDelete" style="color: #cd1818;"><strong>Bạn có chắc muốn bỏ sản phẩm này khỏi giỏ hàng?</strong>
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-					<button id="submitDeleteCartItem" type="button" class="btn btn-danger">Xác nhận</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Confirm Modal -->
-	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p id="messageConfirm"></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-					<button id="confirmModalButton" type="button" class="btn btn-success" data-dismiss="modal">Xác
-						nhận</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<!-- end container -->
 
 	<!--Footer-->
 	<footer class="text-light">
@@ -351,9 +345,7 @@
 						<a href="#">Quay lại đầu trang</a>
 					</p>
 					<p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a
-							href="#"><i>An</i></a> |
-						<span>v. 1.0</span>
-					</p>
+							href="#"><i>An</i></a> | <span>v. 1.0</span></p>
 				</div>
 			</div>
 		</div>
@@ -362,3 +354,9 @@
 </body>
 
 </html>
+<style>
+	.my-border {
+		border-radius: 2%;
+		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	}
+</style>

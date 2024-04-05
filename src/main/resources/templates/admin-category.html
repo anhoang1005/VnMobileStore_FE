@@ -190,7 +190,8 @@
 									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
 											class="fas fa-search"></i></button>
 								</div>
-								<button class="btn btn-success btn-sm col-md-2"><i class="fa-solid fa-plus"></i> Thêm
+								<button id="insertCategoryBtn" class="btn btn-success btn-sm col-md-2"><i
+										class="fa-solid fa-plus"></i> Thêm
 									hãng</button>
 							</div>
 							<div class="table-response">
@@ -247,6 +248,151 @@
 					</div>
 				</div>
 			</main>
+
+			<!-- Modal them category-->
+			<div class="modal fade" id="insertCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Thêm danh mục</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="mb-3">
+									<label for="category-name" class="col-form-label">Tên danh mục:</label>
+									<input type="text" class="form-control" id="category-name">
+									<small style="color: red;" id="nameMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="category-image" class="col-form-label">Ảnh minh họa:</label>
+									<input type="file" class="form-control" id="category-image">
+									<small style="color: red;" id="imageMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="message-text" class="col-form-label">Mô tả:</label>
+									<textarea class="form-control" id="message-text"></textarea>
+									<small style="color: red;" id="desMessage"></small>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitInsertCategory" class="btn btn-primary ml-auto">Thêm mới</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal update category-->
+			<div class="modal fade" id="updateCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Sửa danh mục</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="mb-3">
+									<input type="hidden" class="form-control" id="hidden-id">
+								</div>
+								<div class="mb-3">
+									<label for="upcategory-name" class="col-form-label">Tên danh mục:</label>
+									<input type="text" class="form-control" id="upcategory-name">
+									<small style="color: red;" id="upNameMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="upcategory-image" class="col-form-label">Ảnh minh họa:</label>
+									<input type="file" class="form-control" id="upcategory-image">
+									<small style="color: red;" id="upImageMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="upmessage-text" class="col-form-label">Mô tả:</label>
+									<textarea class="form-control" id="upmessage-text"></textarea>
+									<small style="color: red;" id="upDesMessage"></small>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitUpdateCategory" class="btn btn-primary ml-auto">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Confirm Modal -->
+			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p id="confirmMess"></p>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Delete Modal-->
+			<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" id="deleted-id">
+							</div>
+							<p id="deleteMessage" style="color: red;"><i style="color: red" class="fa-solid fa-circle-info"></i> Bạn có
+								chắc muốn khóa hãng
+								này?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmDeleteBtn" class="btn btn-danger">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!--Unlock Delete Modal-->
+			<div class="modal fade" id="undeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" id="undeleted-id">
+							</div>
+							<p id="deleteMessage" style="color: red;"><i style="color: red" class="fa-solid fa-circle-info"></i> Bạn có
+								chắc muốn mở khóa hãng
+								này?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmUnLockDeleteBtn" class="btn btn-danger">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">
 					<div class="d-flex align-items-center justify-content-between small">

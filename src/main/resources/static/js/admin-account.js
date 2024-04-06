@@ -66,14 +66,14 @@ $(document).ready(function() {
 
 			if (value.deleted === true) {
 				tableHtml += `<td>
-								<button class="btn btn-success update-account"><i class="fa-solid fa-pen-to-square"></i></button>
-								<button class="btn btn-danger lock-account"><i class="fa-solid fa-lock"></i></button>
+								<button account-id="${value.id}" class="btn btn-success update-account"><i class="fa-solid fa-pen-to-square"></i></button>
+								<button account-id="${value.id}" class="btn btn-danger lock-account"><i class="fa-solid fa-lock"></i></button>
 							</td>`
 			}
 			else {
 				tableHtml += `<td>
-								<button class="btn btn-success update-account"><i class="fa-solid fa-pen-to-square"></i></button>
-								<button class="btn btn-warning unlock-account"><i class="fa-solid fa-unlock"></i></button>
+								<button account-id="${value.id}" class="btn btn-success update-account"><i class="fa-solid fa-pen-to-square"></i></button>
+								<button account-id="${value.id}" class="btn btn-warning unlock-account"><i class="fa-solid fa-unlock"></i></button>
 							</td>`
 			}
 
@@ -81,19 +81,115 @@ $(document).ready(function() {
 		});
 		$("#bodyTable").html(tableHtml);
 	}
-	
+
 	//Phan quyen tai khoan
 	$(document).on('click', '.update-account', function() {
+		var userId = $(this).attr('account-id');
 		$("#phanquyenModal").modal('show');
+
+		$("#submitUpdateAccount").click(function() {
+			var updateRole = $("#roleSelect").val();
+			if (updateRole === "") {
+				$("#phanquyenMessage").html('Bạn phải chọn quyền!');
+				return;
+			}
+
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/admin/user/updateRole",
+				data: {
+					id: userId,
+					updateRole: updateRole
+				},
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+				},
+				success: function(response) {
+					$("#phanquyenModal").modal('hide');
+					if (response.success) {
+						$("#confirmMess").html('<i style="color: green" class="fa-regular fa-circle-check"></i> Cập nhật quyền thành công!')
+						$("#confirmModal").modal('show');
+						baseTable();
+					} else {
+						$("#confirmMess").html('<i style="color: red" class="fa-regular fa-circle-xmark"></i> Cập nhật quyền thất bại!')
+						$("#confirmModal").modal('show');
+					}
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+					//window.location.href = "/403";
+				}
+			});
+		});
 	});
-	
+
 	//Khoa tai khoan
 	$(document).on('click', '.lock-account', function() {
+		var userId = $(this).attr('account-id');
 		$("#lockModal").modal('show');
+
+		$("#confirmLockBtn").click(function() {
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/admin/user/lockStatus",
+				data: {
+					id: userId,
+					deleted: false
+				},
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+				},
+				success: function(response) {
+					$("#lockModal").modal('hide');
+					if (response.success) {
+						$("#confirmMess").html('<i style="color: green" class="fa-regular fa-circle-check"></i> Khóa tài khoản thành công!')
+						$("#confirmModal").modal('show');
+						baseTable();
+					} else {
+						$("#confirmMess").html('<i style="color: red" class="fa-regular fa-circle-xmark"></i> Khóa tài khoản thất bại!')
+						$("#confirmModal").modal('show');
+					}
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+					//window.location.href = "/403";
+				}
+			});
+		});
 	});
-	
+
 	//Mo khoa tai khoan
 	$(document).on('click', '.unlock-account', function() {
+		var userId = $(this).attr('account-id');
 		$("#unlockModal").modal('show');
+
+		$("#confirmUnLockBtn").click(function() {
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/admin/user/lockStatus",
+				data: {
+					id: userId,
+					deleted: true
+				},
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+				},
+				success: function(response) {
+					$("#unlockModal").modal('hide');
+					if (response.success) {
+						$("#confirmMess").html('<i style="color: green" class="fa-regular fa-circle-check"></i> Mở khóa tài khoản thành công!')
+						$("#confirmModal").modal('show');
+						baseTable();
+					} else {
+						$("#confirmMess").html('<i style="color: red" class="fa-regular fa-circle-xmark"></i> Mở khóa tài khoản thất bại!')
+						$("#confirmModal").modal('show');
+					}
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+					//window.location.href = "/403";
+				}
+			});
+		});
 	});
 });

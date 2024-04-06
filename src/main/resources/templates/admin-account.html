@@ -185,8 +185,8 @@
 							Danh sách tài khoản
 						</div>
 						<div class="card-body">
-							<div class="mb-3 d-flex">
-								<div class="col-sm-2 me-3">
+							<div class="d-flex bd-highlight mb-3">
+								<div class="col-sm-2 me-3 p-2 bd-highlight">
 									<select class="form-select form-select-sm" aria-label=".form-select-sm example">
 										<option selected>--Vai trò--</option>
 										<option value="1">QUANLI</option>
@@ -194,14 +194,22 @@
 										<option value="3">NHANVIENKHO</option>
 									</select>
 								</div>
-								<div class="input-group">
+								<div class="col-sm-2 me-3 p-2 bd-highlight">
+									<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+										<option selected>--Tình trạng--</option>
+										<option value="1">Đã xác thực</option>
+										<option value="2">Chưa xác thực</option>
+										<option value="3">Bị khóa</option>
+										<option value="3">Không bị khóa</option>
+									</select>
+								</div>
+								
+								<div class="input-group ms-auto p-2 bd-highlight">
 									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
 										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
 											class="fas fa-search"></i></button>
 								</div>
-								<button class="btn btn-success btn-sm col-md-2"><i class="fa-solid fa-plus"></i> Thêm
-									tài khoản</button>
 							</div>
 							<div class="table-response">
 								<table class="table table-striped">
@@ -279,7 +287,7 @@
 								</div>
 								<div class="mb-3">
 									<label for="upcategory-name" class="col-form-label">Quyền truy cập:</label>
-									<select class="form-select" aria-label="Default select example">
+									<select id="roleSelect" class="form-select" aria-label="Default select example">
 										<option value="" selected>--Vai trò--</option>
 										<option value="QUANLI">Quản lí</option>
 										<option value="KHACHHANG">Khách hàng</option>
@@ -293,7 +301,7 @@
 						</div>
 						<div class="modal-footer d-flex">
 							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="submitUpdateCategory" class="btn btn-primary ml-auto">Xác nhận</button>
+							<button id="submitUpdateAccount" class="btn btn-primary ml-auto">Xác nhận</button>
 						</div>
 					</div>
 				</div>
@@ -338,7 +346,7 @@
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="confirmDeleteBtn" class="btn btn-danger">Xác nhận</button>
+							<button id="confirmLockBtn" class="btn btn-danger">Xác nhận</button>
 						</div>
 					</div>
 				</div>
@@ -364,7 +372,7 @@
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="confirmUnLockDeleteBtn" class="btn btn-danger">Xác nhận</button>
+							<button id="confirmUnLockBtn" class="btn btn-danger">Xác nhận</button>
 						</div>
 					</div>
 				</div>

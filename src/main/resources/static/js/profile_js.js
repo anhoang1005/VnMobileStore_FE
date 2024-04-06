@@ -73,7 +73,12 @@ $(document).ready(function() {
 			success: function(response) {
 				if (response.success) {
 					$("#updateProfileModal").modal('hide');
-					showInfo(vnMobileToken);
+					vnMobileToken.fullName = fullName;
+					vnMobileToken.phoneNumber = phoneNumber;
+					vnMobileToken.avatar = avatar;
+					localStorage.setItem('VnMobileToken', JSON.stringify(vnMobileToken));
+					window.location.href='/profile';
+					//showInfo(vnMobileToken);
 				} else {
 					window.location.href = "/404";
 				}

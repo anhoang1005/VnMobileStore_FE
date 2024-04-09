@@ -69,7 +69,7 @@ $(document).ready(function() {
 				$("#productNoId").html(`(No.0000${response.data.id})`); //Product Id
 				$("#productTitle").html(`<strong>${response.data.title}</strong>`); //Product Title
 				$("#productPrice").html(`${response.data.price.toLocaleString('vi-VN')}đ`); //Product Price version
-				$("#productPrice").html(`${response.data.discount.toLocaleString('vi-VN')}đ`); //Product Discount Version
+				$("#productDiscount").html(`${response.data.discount.toLocaleString('vi-VN')}đ`); //Product Discount Version
 				$("#productDescription").html(`${response.data.description}`)
 				$("#productScreen").html(`${response.data.productInfo.screen}`);
 				$("#productBackCamera").html(`${response.data.productInfo.backCamera}`);
@@ -79,6 +79,12 @@ $(document).ready(function() {
 				$("#productBattery").html(`${response.data.productInfo.battery}`);
 				$("#productSystem").html(`${response.data.productInfo.operatingSystem}`);
 				$("#productWeight").html(`${response.data.productInfo.weight}`);
+				
+				$("#customScreen").html(`<i class="fa-solid fa-mobile-screen"></i> ${response.data.productInfo.screen}`);
+				$("#customBackCamera").html(`<i class="fa-solid fa-video"></i> ${response.data.productInfo.backCamera}`);
+				$("#customFrontCamera").html(`<i class="fa-solid fa-camera"></i> ${response.data.productInfo.frontCamera}`);
+				$("#customCpu").html(`<i class="fa-solid fa-microchip"></i> ${response.data.productInfo.cpu}`);
+				$("#customRom").html(`<i class="fa-solid fa-hard-drive"></i> ${response.data.productInfo.operatingSystem}`);
 
 				var integerStar = Math.floor(response.data.ratingStar);
 				var decimalStar = response.data.ratingStar - integerStar;
@@ -103,7 +109,7 @@ $(document).ready(function() {
 				//Type da chon
 				var typeProduct = response.data.listType.find(type => type.room == version); //Type Product
 				$("#productPrice").html(`${typeProduct.price.toLocaleString('vi-VN')}đ`); //Product Price version
-				$("#productPrice").html(`${typeProduct.discount.toLocaleString('vi-VN')}đ`); //Product Discount Version
+				$("#productDiscount").html(`${typeProduct.discount.toLocaleString('vi-VN')}đ`); //Product Discount Version
 				$("#productRam").html(`${typeProduct.ram} GB`);
 				$("#productRoom").html(`${typeProduct.room} GB`);
 				//list Product Type
@@ -197,8 +203,14 @@ $(document).ready(function() {
 						var reviewHtml = `
 							<div class="card-body">
                                 <p class="card-text">
-                                    <strong><i class="fa-solid fa-user"></i> ${vnMobileToken.fullName}(${vnMobileToken.role.toLowerCase()})</strong>
-                                    <br>
+                                	<div class="d-flex align-items-center">
+										<div class="avatar-container"
+											style="width: 35px; height: 35px; overflow: hidden; border-radius: 50%;">
+											<img id="userAvatar" class="avatar"
+												style="width: 100%; height: 100%; object-fit: cover;" src="${vnMobileToken.avatar}" alt="Avatar">
+										</div>
+										<span class="ml-1"><strong>${vnMobileToken.fullName}(${vnMobileToken.role.toLowerCase()})</strong></span>
+									</div>
                                 </p>
                                 <p class="card-text">
                                     <span>Bạn chưa đánh giá cho sản phẩm này!</span>
@@ -268,9 +280,15 @@ $(document).ready(function() {
 						var myReviewHtml = `
 								<div class="card-body">
                                     <p class="card-text">
-                                        <strong><i class="fa-solid fa-user"></i> ${myReview.fullName}(Tôi)</strong>
-                                        <br>
-                                    <p>`;
+                                        <div class="d-flex align-items-center">
+											<div class="avatar-container"
+												style="width: 35px; height: 35px; overflow: hidden; border-radius: 50%;">
+												<img id="userAvatar" class="avatar"
+													style="width: 100%; height: 100%; object-fit: cover;" src="${myReview.avatar}" alt="Avatar">
+											</div>
+											<span class="ml-1"><strong>${myReview.fullName}(Me)</strong></span>
+										</div>
+                                    <p style="font-size: 0.8em mt-2">`;
 						for (var i = 1; i <= myReview.rateStar; i++) {
 							myReviewHtml += `<i style="color: orange" class="fa fa-star"></i>`;
 						}
@@ -418,8 +436,14 @@ $(document).ready(function() {
 					userReviewHtml += `
 								<div class="card-body">
                                     <p class="card-text">
-                                        <strong><i class="fa-solid fa-user"></i> ${value.fullName}</strong>
-                                        <br>
+                                        <div class="d-flex align-items-center">
+											<div class="avatar-container"
+												style="width: 35px; height: 35px; overflow: hidden; border-radius: 50%;">
+												<img id="userAvatar" class="avatar"
+													style="width: 100%; height: 100%; object-fit: cover;" src="${value.avatar}" alt="Avatar">
+											</div>
+											<span class="ml-1"><strong>${value.fullName}(Me)</strong></span>
+										</div>
                                     <p>`;
 					for (var i = 1; i <= value.rateStar; i++) {
 						userReviewHtml += `<i style="color: orange" class="fa fa-star"></i>`;

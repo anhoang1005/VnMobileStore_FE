@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#overlay").hide();
 	//Token
 	var vnMobileToken = null;
 	if (localStorage.getItem('VnMobileToken') !== null) {
@@ -20,13 +21,20 @@ $(document).ready(function() {
 				if (userInfo.success) {
 					localStorage.setItem("CURRENT_USER_INFO", JSON.stringify(userInfo.data));
 					var userInfoHtml = `<div class="card-body text-center">
-								<img id="userAvatar" src="${userInfo.data.avatar}" alt="avatar" class="rounded-circle img-fluid" style="width: 210px;">
+								<div class="d-flex justify-content-center align-items-center">
+									<div class="avatar-container"
+										style="width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+										<img id="userAvatar" class="avatar"
+											style="width: 100%; height: 100%; object-fit: cover;" src="${userInfo.data.avatar}"
+											alt="Avatar">
+									</div>
+								</div>
 								<h5 id="userFullName" class="my-3">${userInfo.data.fullName}</h5>
 								<p id="userRole" class="text-muted mb-1">${userInfo.data.role.toLowerCase()}</p>
 								<p id="userPhoneNumber" class="text-muted mb-4">${userInfo.data.phoneNumber}</p>
 								<div class="d-flex justify-content-center mb-2">
 									<button id="changePasswordBtn" type="button" class="btn btn-danger mr-2 col-sm-5">Đổi mật khẩu</button>
-									<button type="button" class="btn btn-success col-sm-5">Đổi avatar</button>
+									<button id="changeAvatarBtn" class="btn btn-success col-sm-5">Đổi avatar</button>
 								</div>
 							</div>`
 					$("#userInfomation").html(userInfoHtml);
@@ -77,7 +85,7 @@ $(document).ready(function() {
 					vnMobileToken.phoneNumber = phoneNumber;
 					vnMobileToken.avatar = avatar;
 					localStorage.setItem('VnMobileToken', JSON.stringify(vnMobileToken));
-					window.location.href='/profile';
+					window.location.href = '/profile';
 					//showInfo(vnMobileToken);
 				} else {
 					window.location.href = "/404";
@@ -90,7 +98,6 @@ $(document).ready(function() {
 			}
 		});
 	}
-
 
 	//Click nut sua
 	$("#updateProfileBtn").click(function() {
@@ -127,6 +134,68 @@ $(document).ready(function() {
 			window.location.href = '/403';
 		}
 	});
+
+
+	$(document).on('click', '#changeAvatarBtn', function() {
+		$("#changeAvatarModal").modal('show');
+		$('#update-avatar').change(function() {
+			$("#avatarMessage").html(``);
+			var fileInput = $(this)[0];
+			var file = fileInput.files[0]; // Lấy file đầu tiên trong danh sách các file được chọn
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#changeAvatarImg').attr('src', e.target.result)
+				};
+				reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
+			} else {
+				$("#avatarMessage").html(`Bạn chưa chọn ảnh!`);
+				$('#changeAvatarImg').attr('src', '/img/avatar/user.png');
+			}
+		});
+	});
+
+	$(document).on('click', '#submitChangeAvatar', function() {
+		var fileInput = $('#update-avatar')[0];
+		var file = fileInput.files[0];
+		var fullName = vnMobileToken.fullName;
+		var phoneNumber = vnMobileToken.phoneNumber;
+		var email = vnMobileToken.email;
+		if(!file){
+			$("#avatarMessage").html(`Bạn chưa chọn ảnh!`);
+			return;
+		}
+		var formData = new FormData();
+		formData.append('image', file);
+		$("#changeAvatarModal").modal('hide');
+		$("#overlay").show();
+		$.ajax({
+			method: "POST",
+			url: "http://localhost:8888/api/cloudinary/upload",
+			data: formData,
+			processData: false, // Không xử lý dữ liệu
+			contentType: false, // Không cần thiết vì FormData tự sinh content type
+			headers: {
+				'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+			},
+			success: function(response) {
+				$("#overlay").hide();
+				if (response.success) {
+					var avatar = response.data.secure_url;
+					editProfile(fullName, phoneNumber, email, avatar);
+				} else {
+					window.location.href = "/403";
+				}
+			},
+			error: function(xhr, status, error) {
+				$("#overlay").hide();
+				console.log(error);
+				//window.location.href = "/403";
+			}
+		});
+	});
+
+
 
 	$(document).on('click', '#changePasswordBtn', function() {
 		$("#changePasswordModal").modal('show');

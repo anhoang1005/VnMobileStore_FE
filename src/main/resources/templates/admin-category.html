@@ -33,7 +33,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
-	<script src="/js/admin-category.js"></script>
+	<script src="/js/category.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -229,17 +229,27 @@
 									</tbody>
 								</table>
 								<nav aria-label="...">
-									<ul class="pagination">
-										<li class="page-item disabled">
-											<a class="page-link" href="#" tabindex="-1">Previous</a>
-										</li>
-										<li class="page-item active"><a class="page-link" href="#">1</a></li>
+									<ul id="pageCurrent" page-current="1" class="pagination">
 										<li class="page-item">
-											<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+											<a id="pageNumberPrevious" class="page-link">Trang truớc</a>
 										</li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
 										<li class="page-item">
-											<a class="page-link" href="#">Next</a>
+											<a id="pagePrevious" class="page-link"></a>
+										</li>
+										<li class="page-item active">
+											<a id="pageNumberCurrent" class="page-link"></a>
+										</li>
+										<li class="page-item">
+											<a id="pageNext" class="page-link"></a>
+										</li>
+										<li class="page-item">
+											<a class="page-link">...</a>
+										</li>
+										<li class="page-item">
+											<a id="pageCount" class="page-link">102</a>
+										</li>
+										<li class="page-item">
+											<a id="pageNumberNext" class="page-link">Trang sau</a>
 										</li>
 									</ul>
 								</nav>

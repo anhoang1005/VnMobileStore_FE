@@ -86,10 +86,13 @@
 					<li style="display: none;" id="userDropdown" class="nav-item active dropdown">
 						<a class="nav-link active dropdown-toggle d-flex align-items-center" data-toggle="dropdown"
 							href="#">
-							<div class="avatar-container"
-								style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
-								<img id="userAvatar" class="avatar"
-									style="width: 100%; height: auto; object-fit: cover;" src="" alt="Avatar">
+							<div class="d-flex justify-content-center align-items-center">
+								<div class="avatar-container"
+									style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
+									<img id="userAvatar" class="avatar"
+										style="width: 100%; height: 100%; object-fit: cover;" src="/img/avatar/user.png"
+										alt="Avatar">
+								</div>
 							</div>
 							<span id="userfullName" class="ml-1"></span>
 						</a>
@@ -176,8 +179,12 @@
 				<div class="col-lg-4">
 					<div id="userInfomation" class="card mb-4 my-border">
 						<div class="card-body text-center">
-							<img id="userAvatar" src="/img/avatar/user.png" alt="avatar"
-								class="rounded-circle img-fluid" style="width: 150px;">
+							<div class="avatar-container"
+								style="width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+								<img id="userAvatar" class="avatar"
+									style="width: 200px; height: 200px; object-fit: cover;" src="/img/avatar/user.png"
+									alt="Avatar">
+							</div>
 							<h5 id="userFullName" class="my-3">John Smith</h5>
 							<p id="userRole" class="text-muted mb-1">Khách hàng</p>
 							<p id="userPhoneNumber" class="text-muted mb-4">Bay Area, San Francisco, CA</p>
@@ -404,6 +411,43 @@
 		</div>
 	</div>
 
+	<!-- Modal Change avatar -->
+	<div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Đổi ảnh đại diện</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="update-avatar">Chọn avatar:</label>
+							<input id="update-avatar" type="file" accept="image/*" class="form-control" required>
+							<small style="color: red;" id="avatarMessage"></small>
+						</div>
+						<div class="d-flex justify-content-center align-items-center">
+							<div class="avatar-container"
+								style="width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+								<img id="changeAvatarImg" class="avatar"
+									style="width: 100%; height: 100%; object-fit: cover;" src="/img/avatar/user.png"
+									alt="Avatar">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer d-flex">
+					<button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Hủy</button>
+					<button id="submitChangeAvatar" type="button" class="btn btn-primary col-md-3 ml-auto">Xác
+						nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Confirm Modal -->
 	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
@@ -419,10 +463,19 @@
 					<p id="messageConfirm"></p>
 				</div>
 				<div class="modal-footer">
-					<button id="confirmModalButton" type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
+					<button id="confirmModalButton" type="button" class="btn btn-success" data-dismiss="modal">Xác
+						nhận</button>
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<!--Overlay-->
+	<div id="overlay" class="overlay">
+		<div id="loadingSpinner" class="loading-spinner spinner-border text-primary" role="status">
+			<!--<i class="fas fa-spinner fa-spin"></i>-->
+			<span class="sr-only">Loading...</span>
+		</div> <span style="color: white; margin-left: 5px;"> Loading...</span>
 	</div>
 
 	<!--Footer-->

@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Tables - SB Admin</title>
+	<title>Quản lí mặt hàng</title>
 
 	<!--Jquery.js-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
@@ -33,6 +33,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
+
+	<script src="/js/admin-product.js"></script>
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -92,73 +95,59 @@
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Chính</div>
 						<a class="nav-link" href="/quanli">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
 							Trang chính
 						</a>
 						<div class="sb-sidenav-menu-heading">Quản lí</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+						<a class="nav-link" href="/admin-product">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
 							Quản lí mặt hàng
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
-						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/admin-productmanager">Xem mặt hàng</a>
-								<a class="nav-link" href="/admin-add-product">Thêm mặt hàng</a>
-							</nav>
-						</div>
+						<a class="nav-link" href="/admin-category">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+							Quản lí danh mục
+						</a>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-							Quản lí nhập hàng
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
+							Quản lí kho hàng
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Nhập hàng</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Nhà cung cấp</a>
+								<a class="nav-link" href="/admin-supplier">Nhập hàng</a>
+								<a class="nav-link" href="/admin-supplier-bill">Hóa đơn nhập hàng</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseAccount" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
 							Quản lí tài khoản
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseAccount" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Danh sách tài khoản</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Danh sách nhân viên</a>
+								<a class="nav-link" href="/admin-account">Danh sách tài khoản</a>
+								<a class="nav-link" href="/404">Danh sách nhân viên</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrder"
-							aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+						<a class="nav-link" href="/admin-order">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
 							Quản lí đơn hàng
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
-						<div class="collapse" id="collapseOrder" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Danh sách đơn hàng</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Cập nhật đơn hàng</a>
-							</nav>
-						</div>
 
 						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
-						<a class="nav-link" href="charts.html">
+						<a class="nav-link" href="/admin-revenue-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
 							Thống kê doanh thu
 						</a>
-						<a class="nav-link" href="tables.html">
+						<a class="nav-link" href="/admin-product-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							Thống kê sản phẩm
 						</a>
-						<a class="nav-link" href="tables.html">
+						<a class="nav-link" href="/admin-supplier-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							Thống kê nhập hàng
 						</a>
@@ -174,107 +163,209 @@
 					<h1 class="mt-4">Quản lí mặt hàng</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="index.html">Trang chính</a></li>
-						<li class="breadcrumb-item active">Bảng mặt hàng</li>
+						<li class="breadcrumb-item active">Quản lí mặt hàng</li>
 					</ol>
 					<div class="card mb-4">
-						<div class="card-header">
+						<div class="card-header bg-danger text-white">
 							<i class="fas fa-table me-1"></i>
-							Danh sách các mặt hàng
+							Danh sách mặt hàng
 						</div>
 						<div class="card-body">
-							<table id="datatablesSimple">
-								<thead>
-									<tr>
-										<th>STT</th>
-										<th>Ảnh</th>
-										<th>Tên</th>
-										<th>Giá cơ bản</th>
-										<th>Giá bán</th>
-										<th>Danh mục</th>
-										<th>Nhà cung cấp</th>
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th>Name</th>
-										<th>Position</th>
-										<th>Office</th>
-										<th>Age</th>
-										<th>Start date</th>
-										<th>Salary</th>
-										<th>Salary</th>
-									</tr>
-								</tfoot>
-								<tbody>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<th>Salary</th>
-									</tr>
-									<tr>
-										<td>Garrett Winters</td>
-										<td>Accountant</td>
-										<td>Tokyo</td>
-										<td>63</td>
-										<td>2011/07/25</td>
-										<td>$170,750</td>
-										<th>Salary</th>
-									</tr>
-									<tr>
-										<td>Ashton Cox</td>
-										<td>Junior Technical Author</td>
-										<td>San Francisco</td>
-										<td>66</td>
-										<td>2009/01/12</td>
-										<td>$86,000</td>
-										<th>Salary</th>
-									</tr>
-									<tr>
-										<td>Cedric Kelly</td>
-										<td>Senior Javascript Developer</td>
-										<td>Edinburgh</td>
-										<td>22</td>
-										<td>2012/03/29</td>
-										<td>$433,060</td>
-										<th>Salary</th>
-									</tr>
-									<tr>
-										<td>Airi Satou</td>
-										<td>Accountant</td>
-										<td>Tokyo</td>
-										<td>33</td>
-										<td>2008/11/28</td>
-										<td>$162,700</td>
-										<th>Salary</th>
-									</tr>
-									<tr>
-										<td>Brielle Williamson</td>
-										<td>Integration Specialist</td>
-										<td>New York</td>
-										<td>61</td>
-										<td>2012/12/02</td>
-										<td>$372,000</td>
-										<th>Salary</th>
-									</tr>
-									<tr>
-										<td>Herrod Chandler</td>
-										<td>Sales Assistant</td>
-										<td>San Francisco</td>
-										<td>59</td>
-										<td>2012/08/06</td>
-										<td>$137,500</td>
-										<th>Salary</th>
-									</tr>
-								</tbody>
-							</table>
+							<div class="d-flex bd-highlight mb-3">
+								<div class="col-sm-2 me-3 p-2 bd-highlight">
+									<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+										<option selected>--Danh mục--</option>
+										<option value="1">QUANLI</option>
+										<option value="2">KHACHHANG</option>
+										<option value="3">NHANVIENKHO</option>
+									</select>
+								</div>
+								<div class="col-sm-2 me-3 p-2 bd-highlight">
+									<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+										<option selected>--Tình trạng--</option>
+										<option value="1">Đã xác thực</option>
+										<option value="2">Chưa xác thực</option>
+										<option value="3">Bị khóa</option>
+										<option value="3">Không bị khóa</option>
+									</select>
+								</div>
+
+								<div class="input-group ms-auto p-2 bd-highlight">
+									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
+										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+											class="fas fa-search"></i></button>
+								</div>
+							</div>
+							<div class="table-response">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th scope="col">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckDefault">
+											</th>
+											<th scope="col">Mã</th>
+											<th scope="col">Ảnh sản phẩm</th>
+											<th scope="col">Tên sản phẩm</th>
+											<th scope="col">Danh mục</th>
+											<th scope="col">Thời gian tạo</th>
+											<th scope="col">Đánh giá</th>
+											<th scope="col">Số phiên bản</th>
+											<th scope="col">Đã bán</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody id="bodyTable">
+										<tr>
+											<th scope="row">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckDefault">
+											</th>
+											<td>Mark</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+											<td>@mdo</td>
+											<td>@mdo</td>
+											<td>@mdo</td>
+											<td>@mdo</td>
+											<td>
+												<button class="btn btn-success"><i
+														class="fa-solid fa-pen-to-square"></i></button>
+												<button class="btn btn-danger"><i class="fa-solid fa-lock"></i></button>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+								<nav aria-label="...">
+									<ul class="pagination">
+										<li class="page-item disabled">
+											<a class="page-link" href="#" tabindex="-1">Previous</a>
+										</li>
+										<li class="page-item"><a class="page-link" href="#">1</a></li>
+										<li class="page-item active">
+											<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+										</li>
+										<li class="page-item"><a class="page-link" href="#">3</a></li>
+										<li class="page-item">
+											<a class="page-link" href="#">Next</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
 						</div>
 					</div>
 				</div>
 			</main>
+
+			<!-- Phan quyen Account-->
+			<div class="modal fade" id="phanquyenModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Phân quyền</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="mb-3">
+									<input type="hidden" class="form-control" id="hidden-id">
+								</div>
+								<div class="mb-3">
+									<label for="upcategory-name" class="col-form-label">Quyền truy cập:</label>
+									<select id="roleSelect" class="form-select" aria-label="Default select example">
+										<option value="" selected>--Vai trò--</option>
+										<option value="QUANLI">Quản lí</option>
+										<option value="KHACHHANG">Khách hàng</option>
+										<option value="NHANVIENKHO">Nhân viên kho</option>
+										<option value="NHANVIENBANHANG">Nhân viên bán hàng</option>
+										<option value="NHANVIENGIAOHANG">Nhân viên giao hàng</option>
+									</select>
+									<small style="color: red;" id="phanquyenMessage"></small>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitUpdateAccount" class="btn btn-primary ml-auto">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Confirm Modal -->
+			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p id="confirmMess"></p>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Lock Account Modal-->
+			<div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" id="deleted-id">
+							</div>
+							<p id="deleteMessage" style="color: red;"><i style="color: red"
+									class="fa-solid fa-circle-info"></i> Bạn có
+								chắc muốn khóa tài khoản
+								này?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmLockBtn" class="btn btn-danger">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Unlock Delete Modal-->
+			<div class="modal fade" id="unlockModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" id="undeleted-id">
+							</div>
+							<p id="deleteMessage" style="color: red;"><i style="color: red"
+									class="fa-solid fa-circle-info"></i> Bạn có
+								chắc muốn mở khóa tài khoản
+								này?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmUnLockBtn" class="btn btn-danger">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">
 					<div class="d-flex align-items-center justify-content-between small">

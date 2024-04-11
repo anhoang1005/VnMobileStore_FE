@@ -95,73 +95,59 @@
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Chính</div>
 						<a class="nav-link" href="/quanli">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
 							Trang chính
 						</a>
 						<div class="sb-sidenav-menu-heading">Quản lí</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+						<a class="nav-link" href="/admin-product">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
 							Quản lí mặt hàng
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
-						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/admin-productmanager">Xem mặt hàng</a>
-								<a class="nav-link" href="/admin-add-product">Thêm mặt hàng</a>
-							</nav>
-						</div>
+						<a class="nav-link" href="/admin-category">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+							Quản lí danh mục
+						</a>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-							Quản lí nhập hàng
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
+							Quản lí kho hàng
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Nhập hàng</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Nhà cung cấp</a>
+								<a class="nav-link" href="/admin-supplier">Nhập hàng</a>
+								<a class="nav-link" href="/admin-supplier-bill">Hóa đơn nhập hàng</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseAccount" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
 							Quản lí tài khoản
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseAccount" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Danh sách tài khoản</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Danh sách nhân viên</a>
+								<a class="nav-link" href="/admin-account">Danh sách tài khoản</a>
+								<a class="nav-link" href="/404">Danh sách nhân viên</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrder"
-							aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+						<a class="nav-link" href="/admin-order">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
 							Quản lí đơn hàng
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
-						<div class="collapse" id="collapseOrder" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Danh sách đơn hàng</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Cập nhật đơn hàng</a>
-							</nav>
-						</div>
 
 						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
-						<a class="nav-link" href="charts.html">
+						<a class="nav-link" href="/admin-revenue-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
 							Thống kê doanh thu
 						</a>
-						<a class="nav-link" href="tables.html">
+						<a class="nav-link" href="/admin-product-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							Thống kê sản phẩm
 						</a>
-						<a class="nav-link" href="tables.html">
+						<a class="nav-link" href="/admin-supplier-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							Thống kê nhập hàng
 						</a>
@@ -203,7 +189,7 @@
 										<option value="3">Không bị khóa</option>
 									</select>
 								</div>
-								
+
 								<div class="input-group ms-auto p-2 bd-highlight">
 									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
 										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
@@ -327,8 +313,7 @@
 			</div>
 
 			<!--Lock Account Modal-->
-			<div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-				aria-hidden="true">
+			<div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">

@@ -93,73 +93,59 @@
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Chính</div>
 						<a class="nav-link" href="/quanli">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
 							Trang chính
 						</a>
 						<div class="sb-sidenav-menu-heading">Quản lí</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+						<a class="nav-link" href="/admin-product">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
 							Quản lí mặt hàng
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
-						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/admin-productmanager">Xem mặt hàng</a>
-								<a class="nav-link" href="/admin-add-product">Thêm mặt hàng</a>
-							</nav>
-						</div>
+						<a class="nav-link" href="/admin-category">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+							Quản lí danh mục
+						</a>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-							Quản lí nhập hàng
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
+							Quản lí kho hàng
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Nhập hàng</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Nhà cung cấp</a>
+								<a class="nav-link" href="/admin-supplier">Nhập hàng</a>
+								<a class="nav-link" href="/admin-supplier-bill">Hóa đơn nhập hàng</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 							data-bs-target="#collapseAccount" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
 							Quản lí tài khoản
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
 						<div class="collapse" id="collapseAccount" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Danh sách tài khoản</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Danh sách nhân viên</a>
+								<a class="nav-link" href="/admin-account">Danh sách tài khoản</a>
+								<a class="nav-link" href="/404">Danh sách nhân viên</a>
 							</nav>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrder"
-							aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+						<a class="nav-link" href="/admin-order">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
 							Quản lí đơn hàng
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
-						<div class="collapse" id="collapseOrder" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/productmanager">Danh sách đơn hàng</a>
-								<a class="nav-link" href="layout-sidenav-light.html">Cập nhật đơn hàng</a>
-							</nav>
-						</div>
 
 						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
-						<a class="nav-link" href="charts.html">
+						<a class="nav-link" href="/admin-revenue-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
 							Thống kê doanh thu
 						</a>
-						<a class="nav-link" href="tables.html">
+						<a class="nav-link" href="/admin-product-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							Thống kê sản phẩm
 						</a>
-						<a class="nav-link" href="tables.html">
+						<a class="nav-link" href="/admin-supplier-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							Thống kê nhập hàng
 						</a>
@@ -276,27 +262,30 @@
 							<div>
 								<div class="mb-3">
 									<label for="supplier-name" class="col-form-label">Tên nhà cung cấp:</label>
-									<input type="text" class="form-control" id="supplier-name">
+									<input type="text" class="form-control" id="supplier-name"
+										placeholder="Tên nhà cung cấp">
 									<small style="color: red;" id="nameMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="supplier-phonenumber" class="col-form-label">Số điện thoại:</label>
-									<input type="text" class="form-control" id="supplier-phonenumber">
+									<input type="text" class="form-control" id="supplier-phonenumber"
+										placeholder="Số điện thoại">
 									<small style="color: red;" id="phoneNumberMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="supplier-email" class="col-form-label">Email:</label>
-									<input type="text" class="form-control" id="supplier-email">
+									<input type="text" class="form-control" id="supplier-email" placeholder="Email">
 									<small style="color: red;" id="emailMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="supplier-adress" class="col-form-label">Địa chỉ:</label>
-									<input type="text" class="form-control" id="supplier-adress">
+									<input type="text" class="form-control" id="supplier-adress" placeholder="Địa chỉ">
 									<small style="color: red;" id="adressMessage"></small>
 								</div>
 								<div class="mb-3">
-									<label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-									<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+									<label for="supplier-des" class="form-label">Mô tả</label>
+									<textarea class="form-control" id="supplier-des" rows="3"
+										placeholder="Mô tả"></textarea>
 									<small style="color: red;" id="desMessage"></small>
 								</div>
 							</div>
@@ -322,35 +311,40 @@
 							<div>
 								<div class="mb-3">
 									<label for="update-supplier-name" class="col-form-label">Tên nhà cung cấp:</label>
-									<input type="text" class="form-control" id="update-supplier-name">
-									<small style="color: red;" id="nameMessage"></small>
+									<input type="text" class="form-control" id="update-supplier-name"
+										placeholder="Tên nhà cung cấp">
+									<small style="color: red;" id="upnameMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="update-supplier-phonenumber" class="col-form-label">Số điện
 										thoại:</label>
-									<input type="text" class="form-control" id="update-supplier-phonenumber">
-									<small style="color: red;" id="phoneNumberMessage"></small>
+									<input type="text" class="form-control" id="update-supplier-phonenumber"
+										placeholder="Số điện thoại">
+									<small style="color: red;" id="upphoneNumberMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="update-supplier-email" class="col-form-label">Email:</label>
-									<input type="text" class="form-control" id="update-supplier-email">
-									<small style="color: red;" id="emailMessage"></small>
+									<input type="text" class="form-control" id="update-supplier-email"
+										placeholder="Email">
+									<small style="color: red;" id="upemailMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="update-supplier-adress" class="col-form-label">Địa chỉ:</label>
-									<input type="text" class="form-control" id="update-supplier-adress">
-									<small style="color: red;" id="adressMessage"></small>
+									<input type="text" class="form-control" id="update-supplier-adress"
+										placeholder="Địa chỉ">
+									<small style="color: red;" id="upadressMessage"></small>
 								</div>
 								<div class="mb-3">
 									<label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-									<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+									<textarea class="form-control" id="update-supplier-des" rows="3"
+										placeholder="Mô tả"></textarea>
 									<small style="color: red;" id="updesMessage"></small>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer d-flex">
 							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="submitUpdateSupplier" class="btn btn-primary ml-auto">Thêm mới</button>
+							<button id="submitUpdateSupplier" class="btn btn-primary ml-auto">Xác nhận</button>
 						</div>
 					</div>
 				</div>
@@ -359,7 +353,7 @@
 			<!--Confirm Modal -->
 			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
@@ -377,7 +371,7 @@
 
 			<!--Lock Modal-->
 			<div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
@@ -403,7 +397,7 @@
 			<!--Unlock Delete Modal-->
 			<div class="modal fade" id="unlockModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>

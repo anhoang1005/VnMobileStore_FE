@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Quản lí nhà cung cấp</title>
+
+	<!--Jquery.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+	<!-- Add Popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	<!-- Bootstrap JS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+	<link href="/css/401.css" rel="stylesheet" />
+	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/asset/js/scripts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/asset/js/datatables-simple-demo.js"></script>
+	<script src="/js/admin-import-product.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+
+	<!--Thanhmenu-->
+	<nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #cd1818;">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="index.html">VnMobile</a>
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+				class="fas fa-bars"></i></button>
+		<!-- Navbar Search-->
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?" aria-label="Search for..."
+					aria-describedby="btnNavbarSearch" />
+				<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+						class="fas fa-search"></i></button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" href="#" role="button"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					<div class="avatar-container"
+						style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
+						<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
+							src="/img/avatar/me.jpg" alt="Avatar">
+					</div>
+					<span id="userfullName" class="ml-2 text-white">Hoàng Văn An</span>
+				</a>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i> Tài khoản</a></li>
+					<li><a class="dropdown-item" href="/notifycation"><i class="fa-solid fa-bell"></i> Thông báo</a>
+					</li>
+					<li>
+						<hr class="dropdown-divider" />
+					</li>
+					<li>
+						<a id="logoutUser" style="color: red;" class="dropdown-item" href="#!">
+							<i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<!--End-->
+
+	<div id="layoutSidenav">
+
+		<!--Menu ngang-->
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">Chính</div>
+						<a class="nav-link" href="/quanli">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
+							Trang chính
+						</a>
+						<div class="sb-sidenav-menu-heading">Quản lí</div>
+						<a class="nav-link" href="/admin-product">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+							Quản lí mặt hàng
+						</a>
+						<a class="nav-link" href="/admin-category">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+							Quản lí danh mục
+						</a>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
+							Quản lí kho hàng
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
+							data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin-supplier">Nhập hàng</a>
+								<a class="nav-link" href="/admin-supplier-bill">Hóa đơn nhập hàng</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseAccount" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
+							Quản lí tài khoản
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseAccount" aria-labelledby="headingOne"
+							data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin-account">Danh sách tài khoản</a>
+								<a class="nav-link" href="/404">Danh sách nhân viên</a>
+							</nav>
+						</div>
+						<a class="nav-link" href="/admin-order">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+							Quản lí đơn hàng
+						</a>
+
+						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
+						<a class="nav-link" href="/admin-revenue-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+							Thống kê doanh thu
+						</a>
+						<a class="nav-link" href="/admin-product-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							Thống kê sản phẩm
+						</a>
+						<a class="nav-link" href="/admin-supplier-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							Thống kê nhập hàng
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!--end-->
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<h1 class="mt-4">Nhập hàng</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a href="index.html">Trang chính</a></li>
+						<li class="breadcrumb-item active">Nhập hàng</li>
+					</ol>
+					<div class="mb-3 d-flex">
+						<h4>Nhà cung cấp đã chọn: <span id="supplierNameChoose"></span></h4>
+						<button id="backPage" class="btn btn-success btn-sm col-sm-3 ms-auto"><i
+								class="fa-solid fa-plus"></i> Chọn nhà cung cấp khác</button>
+					</div>
+					<div class="card mb-4">
+						<div class="card-header bg-danger text-white">
+							<i class="fas fa-table me-1"></i> Nhà cung cấp: <span id="supplierName">FPT (23 sản
+								phẩm)</span>
+						</div>
+						<div class="card-body">
+							<div class="mb-3 d-flex">
+								<div class="input-group">
+									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
+										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+											class="fas fa-search"></i></button>
+								</div>
+								<select style="max-width: 200px;" class="form-select form-select-sm"
+									aria-label=".form-select-sm example">
+									<option selected>--Chọn--</option>
+									<option value="1">Giá thấp</option>
+									<option value="2">Giá cao</option>
+									<option value="3">Mới nhất</option>
+								</select>
+							</div>
+							<div class="table-response">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th scope="col">Mã sản phẩm</th>
+											<th scope="col">Ảnh minh họa</th>
+											<th scope="col">Tên sản phẩm</th>
+											<th scope="col">Danh mục</th>
+											<th scope="col">Số sao</th>
+											<th scope="col">Số phiên bản</th>
+											<th scope="col">Đã bán</th>
+											<th scope="col"></th>
+										</tr>
+									</thead>
+									<tbody id="bodyTable">
+										<tr>
+											<td>#S001</td>
+											<td>
+												<div class="avatar-container" style="width: 70px; overflow: hidden;">
+													<img id="userAvatar" class="avatar"
+														style="width: 100%; height: auto; object-fit: cover;"
+														src="/img/avatar/me.jpg" alt="Avatar">
+												</div>
+											</td>
+											<td>San pham 1</td>
+											<td>Apple</td>
+											<td>3</td>
+											<td>
+												<button supplier-id="1" id="importProduct"
+													class="btn btn-success btn-sm col-sm-12"><i
+														class="fa-solid fa-cart-plus"></i> Thêm</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<nav aria-label="...">
+									<ul id="pageCurrent" page-current="1" class="pagination">
+										<li class="page-item disable">
+											<a id="pageNumberPrevious" class="page-link disable">Trang truớc</a>
+										</li>
+										<li class="page-item d-none">
+											<a id="pagePrevious" class="page-link">1</a>
+										</li>
+										<li class="page-item active">
+											<a id="pageNumberCurrent" class="page-link">1</a>
+										</li>
+										<li class="page-item d-none">
+											<a id="pageNext" class="page-link">3</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link">...</a>
+										</li>
+										<li class="page-item">
+											<a id="pageCount" class="page-link">1</a>
+										</li>
+										<li class="page-item disable">
+											<a id="pageNumberNext" class="page-link disable">Trang sau</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!-- Modal them category-->
+			<div class="modal fade" id="insertSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Thêm nhà cung cấp</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="mb-3">
+									<label for="supplier-name" class="col-form-label">Tên nhà cung cấp:</label>
+									<input type="text" class="form-control" id="supplier-name"
+										placeholder="Tên nhà cung cấp">
+									<small style="color: red;" id="nameMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="supplier-phonenumber" class="col-form-label">Số điện thoại:</label>
+									<input type="text" class="form-control" id="supplier-phonenumber"
+										placeholder="Số điện thoại">
+									<small style="color: red;" id="phoneNumberMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="supplier-email" class="col-form-label">Email:</label>
+									<input type="text" class="form-control" id="supplier-email" placeholder="Email">
+									<small style="color: red;" id="emailMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="supplier-adress" class="col-form-label">Địa chỉ:</label>
+									<input type="text" class="form-control" id="supplier-adress" placeholder="Địa chỉ">
+									<small style="color: red;" id="adressMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="supplier-des" class="form-label">Mô tả</label>
+									<textarea class="form-control" id="supplier-des" rows="3"
+										placeholder="Mô tả"></textarea>
+									<small style="color: red;" id="desMessage"></small>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitInsertSupplier" class="btn btn-primary ml-auto">Thêm mới</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal sua category-->
+			<div class="modal fade" id="updateSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Sửa thông tin nhà cung cấp</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="mb-3">
+									<label for="update-supplier-name" class="col-form-label">Tên nhà cung cấp:</label>
+									<input type="text" class="form-control" id="update-supplier-name"
+										placeholder="Tên nhà cung cấp">
+									<small style="color: red;" id="upnameMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="update-supplier-phonenumber" class="col-form-label">Số điện
+										thoại:</label>
+									<input type="text" class="form-control" id="update-supplier-phonenumber"
+										placeholder="Số điện thoại">
+									<small style="color: red;" id="upphoneNumberMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="update-supplier-email" class="col-form-label">Email:</label>
+									<input type="text" class="form-control" id="update-supplier-email"
+										placeholder="Email">
+									<small style="color: red;" id="upemailMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="update-supplier-adress" class="col-form-label">Địa chỉ:</label>
+									<input type="text" class="form-control" id="update-supplier-adress"
+										placeholder="Địa chỉ">
+									<small style="color: red;" id="upadressMessage"></small>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
+									<textarea class="form-control" id="update-supplier-des" rows="3"
+										placeholder="Mô tả"></textarea>
+									<small style="color: red;" id="updesMessage"></small>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitUpdateSupplier" class="btn btn-primary ml-auto">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Confirm Modal -->
+			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p id="confirmMess"></p>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Lock Modal-->
+			<div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" id="deleted-id">
+							</div>
+							<p id="deleteMessage" style="color: red;"><i style="color: red"
+									class="fa-solid fa-circle-info"></i> Bạn có
+								chắc muốn khóa hãng
+								này?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmLockBtn" class="btn btn-danger">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Unlock Delete Modal-->
+			<div class="modal fade" id="unlockModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" id="undeleted-id">
+							</div>
+							<p id="deleteMessage" style="color: red;"><i style="color: red"
+									class="fa-solid fa-circle-info"></i> Bạn có
+								chắc muốn mở khóa hãng
+								này?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmUnLockBtn" class="btn btn-danger">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid px-4">
+					<div class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Created By Hoàng Văn An 2023</div>
+						<div>
+							<a href="#">Privacy Policy</a>
+							&middot;
+							<a href="#">Terms &amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</body>
+
+</html>

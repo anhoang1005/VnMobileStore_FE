@@ -49,7 +49,7 @@ $(document).ready(function() {
 							<td>
 								<div class="avatar-container"
 									style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%;">
-									<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
+									<img id="userAvatar" class="avatar" style="width: 100%; height: 100%; object-fit: cover;"
 									src="${value.avatar}" alt="Avatar">
 								</div>
 							</td>

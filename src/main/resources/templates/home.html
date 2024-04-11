@@ -168,21 +168,29 @@
 							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
 							<!-- Thêm các điểm chỉ mục cho mỗi slide -->
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-wrapper">
 								<div class="carousel-item active">
-									<img class="d-block w-100 my-border" src="/img/slider1.webp" alt="First slide">
+									<img class="d-block w-100 my-border" src="/img/slider9.jpg" alt="First slide">
 								</div>
 								<div class="carousel-item">
-									<img class="d-block w-100 my-border" src="/img/slider2.webp" alt="Second slide">
+									<img class="d-block w-100 my-border" src="/img/slider5.webp" alt="Second slide">
 								</div>
 								<div class="carousel-item">
-									<img class="d-block w-100 my-border" src="/img/slider3.webp" alt="Second slide">
+									<img class="d-block w-100 my-border" src="/img/slider6.webp" alt="Second slide">
 								</div>
 								<div class="carousel-item">
-									<img class="d-block w-100 my-border" src="/img/slider4.jpg" alt="Second slide">
+									<img class="d-block w-100 my-border" src="/img/slider7.webp" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block w-100 my-border" src="/img/slider8.webp" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block w-100 my-border" src="/img/slider10.png" alt="Second slide">
 								</div>
 								<!-- Thêm các slide khác -->
 							</div>
@@ -210,11 +218,120 @@
 			<div class="col-lg-3">
 				<nav aria-label="breadcrumb" class="my-border">
 					<ol class="breadcrumb text-white" style="background-color: #cd1818;">
-						<a class="text-white" href="home"><i class="fa-solid fa-cart-shopping"></i> SẢN PHẨM</a>
+						<a class="text-white" href="home"><i class="fa-solid fa-cart-shopping"></i> PHÂN LOẠI</a>
 					</ol>
 				</nav>
+				<div class="mt-0 mb-3 col-12">
+					<div class="row" id="categorySelect">
+						<p class="pl-0 ml-0 col-12"><strong>Hãng sản xuất</strong></p>
+						<div class="form-check col-6 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="allCategory" checked>
+							<label class="form-check-label" for="allCategory">Tất cả</label>
+						</div>
+					</div>
+				</div>
+				<div class="mt-0 mb-3 col-12">
+					<div class="row">
+						<p class="pl-0 ml-0 col-12"><strong>Mức giá</strong></p>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="allPrice" checked>
+							<label class="form-check-label" for="allPrice">Tất cả</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Dưới 2 triệu</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Từ 2 - 4 triệu</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Từ 4 - 8 triệu</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Từ 8 - 15 triệu</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Trên 15 triệu</label>
+						</div>
+					</div>
+				</div>
+				<div class="mt-0 mb-3 col-12">
+					<div class="row">
+						<p class="pl-0 ml-0 col-12"><strong>Hệ điều hành</strong></p>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="allSystem" checked>
+							<label class="form-check-label" for="allSystem">Tất cả</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Android</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">IOS (Apple)</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Bàn phím 4G</label>
+						</div>
+					</div>
+				</div>
+				<div class="mt-0 mb-3 col-12">
+					<div class="row">
+						<p class="pl-0 ml-0 col-12"><strong>RAM</strong></p>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="allSystem" checked>
+							<label class="form-check-label" for="allSystem">Tất cả</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Ram dưới 4GB</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Ram từ 4 - 6 GB</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Ram từ 6 - 8 GB</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Ram trên 8 GB</label>
+						</div>
+					</div>
+				</div>
+				<div class="mt-0 mb-3 col-12">
+					<div class="row">
+						<p class="pl-0 ml-0 col-12"><strong>Hiệu năng và pin</strong></p>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="allBattery" checked>
+							<label class="form-check-label" for="allBattery">Tất cả</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Dưới 3000 mah</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Pin từ 3000 - 4000 mah</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Pin từ 4000 - 5000 mah</label>
+						</div>
+						<div class="form-check col-12 mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">Siêu trâu trên 5000 mah</label>
+						</div>
+					</div>
+				</div>
 
-				<div class="card bg-light mb-3 my-border">
+				<!--<div class="card bg-light mb-3 my-border">
 					<div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> DANH MỤC
 					</div>
 					<ul class="list-group category_block">
@@ -223,13 +340,15 @@
 						<li class="list-group-item text-white"><a href="home?action=cateview&cid=${cate.id}">SamSung</a>
 						</li>
 					</ul>
-				</div>
+				</div>-->
+
+
 
 			</div>
 			<div class="col-lg-9">
 				<div id="priceSection" class="fs-5 mb-3 my-border">
-					<strong><span id="productPrice" class="mr-2 ml-3 mt-2" style="font-size: 1.7em">Danh
-							mục</span></strong>
+					<strong><span id="productPrice" class="mr-2 ml-3 mt-2" style="font-size: 1.7em">Điện
+							thoại</span></strong>
 					<span id="productDiscount" style="font-size: 1em">(43 sản phẩm)</span>
 					<hr class="bg-light d-inline-block mx-auto w-100 mb-0">
 					<nav id="categoryBar" class="navbar navbar-expand-lg navbar-light bg-light mb-3"
@@ -269,10 +388,37 @@
 					</nav>
 				</div>
 
-
 				<div id="rowItems" class="row">
-
-
+					<div class="col-12 mt-2 mb-4 d-flex">
+						<p class="mt-1 mb-0 mr-2" style="font-size: 0.9em;">Ưu tiên xem:</p>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-danger btn-sm active">
+								<input type="radio" name="options" id="option1" autocomplete="off" checked> Bán chạy
+								nhất
+							</label>
+							<label class="btn btn-outline-secondary btn-sm">
+								<input type="radio" name="options" id="option2" autocomplete="off"> Giá thấp
+							</label>
+							<label class="btn btn-outline-secondary btn-sm">
+								<input type="radio" name="options" id="option3" autocomplete="off"> Giá cao
+							</label>
+							<label class="btn btn-outline-secondary btn-sm">
+								<input type="radio" name="options" id="option4" autocomplete="off"> Mới nhất
+							</label>
+						</div>
+						<div class="d-flex ml-auto">
+							<select class="form-select form-select-sm"
+								style="border: 1px solid rgb(219, 219, 219); border-radius: 3px; font-size: 0.9em;"
+								aria-label=".form-select-sm example">
+								<option selected>Bán chạy nhất</option>
+								<option value="1">Giá thấp</option>
+								<option value="2">Giá cao</option>
+								<option value="3">Mới nhất</option>
+							</select>
+							<p class="ml-3 mr-2 mb-0 p-0 text-danger" style="font-size: 1.2em;"><i class="fa-solid fa-table-list"></i></p>
+							<p class="ml-2 mr-2 mb-0 p-0" style="font-size: 1.2em; color: #CCC;"><i class="fa-solid fa-list"></i></p>
+						</div>
+					</div>
 				</div>
 				<div class="col-12">
 					<nav aria-label="...">
@@ -324,7 +470,6 @@
 	<!--San pham -->
 	<div class="container">
 		<div class="row">
-
 			<div class="col-lg-9">
 
 			</div>

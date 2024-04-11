@@ -30,4 +30,9 @@ public class AdminController {
 	public String accountFrm() {
 		return "admin-account";
 	}
+	
+	@GetMapping("/admin-supplier")
+	public String supplierFrm() {
+		return "admin-supplier";
+	}
 }

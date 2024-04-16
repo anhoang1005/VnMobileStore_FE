@@ -16,9 +16,9 @@ public class AdminController {
 		return "admin-product";
 	}
 	
-	@GetMapping("/admin-addproduct")
+	@GetMapping("/admin-insert-product")
 	public String addProductFrm() {
-		return "admin-addproduct";
+		return "admin-insert-product";
 	}
 	
 	@GetMapping("/admin-category")
@@ -49,5 +49,10 @@ public class AdminController {
 	@GetMapping("/admin-import-product")
 	public String importProductFrm() {
 		return "admin-import-product";
+	}
+	
+	@GetMapping("/admin-cart-bill")
+	public String cartBillFrm() {
+		return "admin-cart-bill";
 	}
 }

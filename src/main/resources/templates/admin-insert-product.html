@@ -37,6 +37,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
+	<script src="/js/admin-insert-product.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -95,7 +96,7 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Chính</div>
-						<a class="nav-link" href="/quanli">
+						<a class="nav-link" href="/admin-dashboard">
 							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
 							Trang chính
 						</a>
@@ -183,14 +184,15 @@
 									</div>
 									<div class="form-group col-md-12 mb-3">
 										<label for="productDescription" class="form-label">Mô tả sản phẩm</label>
-										<textarea class="form-control" id="productDescription" rows="2"
+										<textarea class="form-control" id="productDescription" rows="7"
 											placeholder="Mô tả"></textarea>
 									</div>
 									<div class="form-group col-md-6 mb-3">
 										<label for="productCategory">Danh mục</label>
 										<select id="productCategory" class="form-control">
-											<option selected>--Choose--</option>
-											<option>...</option>
+											<option value="0" selected>--Choose--</option>
+											<option value="1">...</option>
+											<option value="2">...</option>
 										</select>
 									</div>
 									<div class="form-group col-md-6 mb-3">
@@ -199,10 +201,6 @@
 											<option selected>--Choose--</option>
 											<option>...</option>
 										</select>
-									</div>
-									<div class="form-group col-md-6 mb-3">
-										<label for="formFileSm" class="form-label">Ảnh chính sản phẩm</label>
-										<input class="form-control form-control-md" id="formFileSm" type="file">
 									</div>
 								</div>
 							</div>
@@ -259,6 +257,46 @@
 								</div>
 
 							</div>
+							<div class="col-12">
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<div class="form-group">
+											<label for="productThumbail">Ảnh chính sản phẩm:</label>
+											<input id="productThumbail" type="file" accept="image/*"
+												class="form-control" required>
+											<small style="color: red;" id="thumbnailMessage"></small>
+										</div>
+										<div class="mb-3 d-flex">
+											<div>
+												<div class="avatar-container"
+													style="width: 150px; height: 150px; overflow: hidden;">
+													<img id="thumbnailImg" class="avatar"
+														style="width: 100%; height: 100%; object-fit: cover;"
+														src="https://via.placeholder.com/300x300?text=300x300" alt="Avatar">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="form-group">
+											<label for="plusThumbail">Ảnh phụ sản phẩm:</label>
+											<input id="plusThumbail" type="file" accept="image/*" class="form-control"
+												multiple required>
+											<small style="color: red;" id="thumbnailMessage"></small>
+										</div>
+										<div id="listPlusthumbnail" class="mb-3 d-flex">
+											<div class="avatar-container ms-2"
+												style="width: 150px; height: 150px; overflow: hidden;">
+												<img id="plusImg" class="avatar"
+													style="width: 100%; height: 100%; object-fit: cover;"
+													src="https://via.placeholder.com/300x300?text=300x300" alt="Avatar">
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
 						</div>
 					</div>
 
@@ -369,8 +407,11 @@
 							</div>
 						</div>
 					</div>
-
-
+					<div class="col-12 mt-4 d-flex justify-content-center">
+						<button id="cancelInsertProduct" class="btn btn-lg btn-secondary col-5">Hủy</button>
+						<button id="submitInsertProduct" class="btn btn-lg btn-success col-5 ms-3">Thêm mặt
+							hàng</button>
+					</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">

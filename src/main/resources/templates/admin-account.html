@@ -94,7 +94,7 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Chính</div>
-						<a class="nav-link" href="/quanli">
+						<a class="nav-link" href="/admin-dashboard">
 							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
 							Trang chính
 						</a>
@@ -269,12 +269,9 @@
 						<div class="modal-body">
 							<div>
 								<div class="mb-3">
-									<input type="hidden" class="form-control" id="hidden-id">
-								</div>
-								<div class="mb-3">
 									<label for="upcategory-name" class="col-form-label">Quyền truy cập:</label>
 									<select id="roleSelect" class="form-select" aria-label="Default select example">
-										<option value="" selected>--Vai trò--</option>
+										<option value="INVALID" selected>--Vai trò--</option>
 										<option value="QUANLI">Quản lí</option>
 										<option value="KHACHHANG">Khách hàng</option>
 										<option value="NHANVIENKHO">Nhân viên kho</option>

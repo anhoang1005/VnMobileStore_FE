@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Quản lí nhà cung cấp</title>
+	<title>Tạo hóa đơn</title>
 
 	<!--Jquery.js-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
@@ -33,7 +33,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
-	<script src="/js/admin-import-product_js.js"></script>
+	<script src="/js/admin-cart-bill.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -158,109 +158,98 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">Nhập hàng</h1>
+					<h1 class="mt-4">Tạo hóa đơn</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="index.html">Trang chính</a></li>
-						<li class="breadcrumb-item active">Nhập hàng</li>
+						<li class="breadcrumb-item active">Tạo hóa đơn</li>
 					</ol>
 					<div class="mb-3 d-flex">
 						<h4>Nhà cung cấp đã chọn: <span id="supplierNameChoose"></span></h4>
 						<button id="backPage" class="btn btn-success btn-sm col-sm-3 ms-auto"><i
-								class="fa-solid fa-plus"></i> Chọn nhà cung cấp khác</button>
+								class="fa-solid fa-plus"></i> Bổ sung hóa đơn</button>
 					</div>
-					<div class="card mb-4">
-						<div class="card-header bg-danger text-white">
-							<i class="fas fa-table me-1"></i> Nhà cung cấp: <span id="supplierName">FPT (23 sản
-								phẩm)</span>
-						</div>
-						<div class="card-body">
-							<div class="col-12 mb-3">
-								<div class="d-flex justify-content-end">
-									<button id="cancelBill" class="btn btn-danger btn-sm col-sm-3">
-										Hủy hóa đơn</button>
-									<button id="viewBill" class="btn btn-success btn-sm col-sm-3 ms-2">
-										Xem hóa đơn <span id="billQuantity">(0)</span></button>
+					<div class="mb-4">
+						<div class="container mb-4">
+							<div class="row">
+								<div class="col-lg-9">
+									<div id="cartTable" class="table-responsive">
+										<h3 id="cartItemQuantity"></h3>
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="text-center" scope="col">
+														<input id="allCartItemChecked" name="allCartItemChecked"
+															type="checkbox"
+															aria-label="Checkbox for following text input">
+													</th>
+													<th class="text-center" scope="col"></th>
+													<th class="text-center" scope="col"></th>
+													<th class="text-center" scope="col"></th>
+													<th class="text-center" scope="col"></th>
+													<th class="text-center" scope="col">
+														<button id="deleteAllCartItem" class="btn btn-sm btn-danger">
+															Xóa tất cả
+														</button>
+													</th>
+												</tr>
+											</thead>
+
+											<tbody id="cartItemColumn">
+											</tbody>
+										</table>
+									</div>
 								</div>
-							</div>
-							<div class="mb-3 d-flex">
-								<div class="input-group">
-									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
-										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
-											class="fas fa-search"></i></button>
-								</div>
-								<select style="max-width: 200px;" class="form-select form-select-sm"
-									aria-label=".form-select-sm example">
-									<option selected>--Chọn--</option>
-									<option value="1">Giá thấp</option>
-									<option value="2">Giá cao</option>
-									<option value="3">Mới nhất</option>
-								</select>
-							</div>
-							<div class="table-response">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th scope="col">Mã sản phẩm</th>
-											<th scope="col">Ảnh minh họa</th>
-											<th scope="col">Tên sản phẩm</th>
-											<th scope="col">Danh mục</th>
-											<th scope="col">Số sao</th>
-											<th scope="col">Số phiên bản</th>
-											<th scope="col">Đã bán</th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody id="bodyTable">
-										<tr>
-											<td>#S001</td>
-											<td>
-												<div class="avatar-container" style="width: 70px; overflow: hidden;">
-													<img id="userAvatar" class="avatar"
-														style="width: 100%; height: auto; object-fit: cover;"
-														src="/img/avatar/me.jpg" alt="Avatar">
+
+								<div class="col-lg-3">
+									<div class="card bg-light mb-3">
+										<div class="card-header bg-danger text-white text-uppercase"><i
+												class="fa-solid fa-cart-shopping"></i> Tạo hóa đơn</div>
+										<div class="card-body">
+											<p class="name" style="color: black; font-size: 1em">
+												<strong>Số mặt hàng đã chọn: <span
+														id="checkedCartIemquantity"></span></strong>
+											</p>
+											<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
+											<div>
+												<div class="form-group mb-3">
+													<label for="shipping">Người tạo hóa đơn:</label>
+													<input id="createdBillPerson" class="form-control" type="text" disable>
 												</div>
-											</td>
-											<td>San pham 1</td>
-											<td>Apple</td>
-											<td>3</td>
-											<td>
-												<button supplier-id="1" id="importProduct"
-													class="btn btn-success btn-sm col-sm-12"><i
-														class="fa-solid fa-cart-plus"></i> Thêm</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
+												<div class="form-group">
+													<label for="supplierName">Nhà cung cấp:</label>
+													<input id="supplierName" class="form-control" type="text" disable>
+												</div>
+												<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
+												<p class="name" style="color: black; font-size: 1em"><strong>Thành tiền:
+														<span id="totalCheckedCart" style="color: red"></span></strong>
+												</p>
+												<button id="checkoutCart" class="btn btn-danger btn-md col-sm-12">
+													<i class="fa fa-shopping-cart"></i> TẠO HÓA ĐƠN
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
 								<nav aria-label="...">
-									<ul id="pageCurrent" page-current="1" class="pagination">
-										<li class="page-item disable">
-											<a id="pageNumberPrevious" class="page-link disable">Trang truớc</a>
+									<ul class="pagination">
+										<li class="page-item disabled">
+											<a class="page-link" href="#" tabindex="-1">Previous</a>
 										</li>
-										<li class="page-item d-none">
-											<a id="pagePrevious" class="page-link">1</a>
-										</li>
+										<li class="page-item"><a class="page-link" href="#">1</a></li>
 										<li class="page-item active">
-											<a id="pageNumberCurrent" class="page-link">1</a>
+											<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
 										</li>
-										<li class="page-item d-none">
-											<a id="pageNext" class="page-link">3</a>
-										</li>
+										<li class="page-item"><a class="page-link" href="#">3</a></li>
 										<li class="page-item">
-											<a class="page-link">...</a>
-										</li>
-										<li class="page-item">
-											<a id="pageCount" class="page-link">1</a>
-										</li>
-										<li class="page-item disable">
-											<a id="pageNumberNext" class="page-link disable">Trang sau</a>
+											<a class="page-link" href="#">Next</a>
 										</li>
 									</ul>
 								</nav>
 							</div>
 						</div>
 					</div>
-				</div>
 			</main>
 
 			<!-- Modal add bill-->
@@ -328,7 +317,8 @@
 			</div>
 
 			<!--Lock Account Modal-->
-			<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
 				<div class="modal-dialog modal-md">
 					<div class="modal-content">
 						<div class="modal-header">

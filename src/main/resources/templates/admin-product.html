@@ -8,7 +8,6 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>Quản lí mặt hàng</title>
-
 	<!--Jquery.js-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
 		referrerpolicy="no-referrer"></script>
@@ -94,7 +93,7 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Chính</div>
-						<a class="nav-link" href="/quanli">
+						<a class="nav-link" href="/admin-dashboard">
 							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
 							Trang chính
 						</a>
@@ -196,6 +195,8 @@
 									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
 											class="fas fa-search"></i></button>
 								</div>
+								<button id="insertProductBtn" class="btn btn-success btn-sm col-sm-2 p-0 m-0"><i
+										class="fa-solid fa-plus"></i> Thêm sản phẩm</button>
 							</div>
 							<div class="table-response">
 								<table class="table table-striped">
@@ -209,9 +210,9 @@
 											<th scope="col">Ảnh sản phẩm</th>
 											<th scope="col">Tên sản phẩm</th>
 											<th scope="col">Danh mục</th>
+											<th scope="col">Nhà cung cấp</th>
 											<th scope="col">Thời gian tạo</th>
 											<th scope="col">Đánh giá</th>
-											<th scope="col">Số phiên bản</th>
 											<th scope="col">Đã bán</th>
 											<th scope="col">Action</th>
 										</tr>
@@ -306,7 +307,15 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<p id="confirmMess"></p>
+							<div class="col-12 d-flex">
+								<div class="mb-2" id="confirmIcon">
+									<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<strong><p  id="subMess"></p></strong>
+									<p id="confirmMess"></p>
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
@@ -317,24 +326,26 @@
 
 			<!--Lock Account Modal-->
 			<div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-md">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<div class="mb-3">
-								<input type="hidden" class="form-control" id="deleted-id">
+							<div class="col-12 d-flex">
+								<div class="mb-2">
+									<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<p><strong>Xóa sản phẩm</strong></p>
+									<p>Bạn có chắc muốn xóa sản phẩm này?</p>
+								</div>
 							</div>
-							<p id="deleteMessage" style="color: red;"><i style="color: red"
-									class="fa-solid fa-circle-info"></i> Bạn có
-								chắc muốn khóa tài khoản
-								này?</p>
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="confirmLockBtn" class="btn btn-danger">Xác nhận</button>
+							<button class="btn btn-secondary btn-md col-sm-3" data-bs-dismiss="modal">Hủy</button>
+							<button id="confirmLockBtn" class="btn btn-danger btn-md col-sm-3">Xác nhận</button>
 						</div>
 					</div>
 				</div>
@@ -350,13 +361,15 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<div class="mb-3">
-								<input type="hidden" class="form-control" id="undeleted-id">
+							<div class="col-12 d-flex">
+								<div class="mb-2">
+									<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<p><strong>Khôi phục sản phẩm</strong></p>
+									<p>Bạn có chắc muốn khôi phục sản phẩm này?</p>
+								</div>
 							</div>
-							<p id="deleteMessage" style="color: red;"><i style="color: red"
-									class="fa-solid fa-circle-info"></i> Bạn có
-								chắc muốn mở khóa tài khoản
-								này?</p>
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>

@@ -64,15 +64,14 @@ $(document).ready(function() {
 	}
 
 	//Chinh sua thong tin ca nhan
-	function editProfile(fullName, phoneNumber, email, avatar) {
+	function editProfile(fullName, phoneNumber, email) {
 		$.ajax({
 			method: "POST",
 			url: "http://localhost:8888/api/custom/user/editProfile",
 			data: JSON.stringify({
 				fullName: fullName,
 				phoneNumber: phoneNumber,
-				email: email,
-				avatar: avatar
+				email: email
 			}),
 			contentType: 'application/json',
 			headers: {
@@ -81,10 +80,7 @@ $(document).ready(function() {
 			success: function(response) {
 				if (response.success) {
 					$("#updateProfileModal").modal('hide');
-					vnMobileToken.fullName = fullName;
-					vnMobileToken.phoneNumber = phoneNumber;
-					vnMobileToken.avatar = avatar;
-					localStorage.setItem('VnMobileToken', JSON.stringify(vnMobileToken));
+					localStorage.setItem('VnMobileToken', JSON.stringify(response.data));
 					window.location.href = '/profile';
 					//showInfo(vnMobileToken);
 				} else {
@@ -166,23 +162,24 @@ $(document).ready(function() {
 			return;
 		}
 		var formData = new FormData();
-		formData.append('image', file);
+		formData.append('email', email)
+		formData.append('file', file);
 		$("#changeAvatarModal").modal('hide');
 		$("#overlay").show();
 		$.ajax({
-			method: "POST",
-			url: "http://localhost:8888/api/cloudinary/upload",
+			method: "PUT",
+			url: "http://localhost:8888/api/custom/user/changeAvatar",
 			data: formData,
-			processData: false, // Không xử lý dữ liệu
-			contentType: false, // Không cần thiết vì FormData tự sinh content type
+			processData: false,
+			contentType: false,
 			headers: {
 				'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
 			},
 			success: function(response) {
 				$("#overlay").hide();
 				if (response.success) {
-					var avatar = response.data.secure_url;
-					editProfile(fullName, phoneNumber, email, avatar);
+					localStorage.setItem('VnMobileToken', JSON.stringify(response.data));
+					window.location.href = '/profile';
 				} else {
 					window.location.href = "/403";
 				}
@@ -190,7 +187,7 @@ $(document).ready(function() {
 			error: function(xhr, status, error) {
 				$("#overlay").hide();
 				console.log(error);
-				//window.location.href = "/403";
+				window.location.href = "/403";
 			}
 		});
 	});
@@ -225,10 +222,14 @@ $(document).ready(function() {
 			$("#reupdate_password").val('');
 			return;
 		}
+		else if (newPassword === currentPassword) {
+			$("#uppasswordMessage").text('Mật khẩu mới không được trùng với mật khẩu cũ!');
+			return;
+		}
 
 		$.ajax({
 			method: "PUT",
-			url: "http://localhost:8888/api/customer/user/changePassword",
+			url: "http://localhost:8888/api/custom/user/changePassword",
 			data: {
 				email: emailUser,
 				password: currentPassword,

@@ -105,7 +105,9 @@ $(document).ready(function() {
 				}
 				html += `(${response.data.ratingStar.toFixed(1)}) | ${response.data.listReview} đánh giá`;
 				$("#productRateStar").html(html);
-
+				$("#reviewRateStar").html(`${response.data.ratingStar.toFixed(1)}`);
+				$("#reviewComment").html(`${response.data.listReview} đánh giá`);
+				
 				//Type da chon
 				var typeProduct = response.data.listType.find(type => type.room == version); //Type Product
 				$("#productPrice").html(`${typeProduct.price.toLocaleString('vi-VN')}đ`); //Product Price version

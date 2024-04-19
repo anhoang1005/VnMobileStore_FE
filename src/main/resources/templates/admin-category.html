@@ -30,10 +30,15 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="/asset/js/chart-area-demo.js"></script>
+	<script src="/asset/js/chart-bar-demo.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
+
 	<script src="/js/admin-category_js.js"></script>
+	<script src="/js/admin-menu.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -64,7 +69,7 @@
 						<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
 							src="/img/avatar/me.jpg" alt="Avatar">
 					</div>
-					<span id="userfullName" class="ml-2 text-white">Hoàng Văn An</span>
+					<span id="userfullName" class="ms-2 text-white">Hoàng Văn An</span>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i> Tài khoản</a></li>
@@ -169,22 +174,33 @@
 							Danh sách danh mục
 						</div>
 						<div class="card-body">
-							<div class="mb-3 d-flex">
-								<div class="input-group">
-									<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
-										aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-									<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
-											class="fas fa-search"></i></button>
+							<div class="col-md-12 mb-4">
+								<div class="row">
+									<div class="col-md-3 p-2">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+											<option selected>--Xác thực--</option>
+											<option value="1">Đã xác thực</option>
+											<option value="2">Chưa xác thực</option>
+										</select>
+									</div>
+									<div class="col-md-3 p-2">
+										<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
+											aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+										<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+												class="fas fa-search"></i></button>
+									</div>
+									<div class="col-md-3 p-2 ms-auto">
+										<button id="insertCategoryBtn" class="btn btn-success btn-sm col-12"><i
+												class="fa-solid fa-plus"></i> Thêm
+											hãng</button>
+									</div>
 								</div>
-								<button id="insertCategoryBtn" class="btn btn-success btn-sm col-md-2"><i
-										class="fa-solid fa-plus"></i> Thêm
-									hãng</button>
 							</div>
-							<div class="table-response">
-								<table class="table table-striped">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr>
-											<th scope="col">
+											<th scope="col" style="max-width: 40px;">
 												<input class="form-check-input" type="checkbox" value=""
 													id="flexCheckDefault">
 											</th>
@@ -214,10 +230,11 @@
 										</tr>
 									</tbody>
 								</table>
-								<nav aria-label="...">
+							</div>
+							<nav aria-label="..." class="mt-3">
 									<ul id="pageCurrent" page-current="1" class="pagination">
 										<li class="page-item">
-											<a id="pageNumberPrevious" class="page-link">Trang truớc</a>
+											<a id="pageNumberPrevious" class="page-link">Truớc</a>
 										</li>
 										<li class="page-item">
 											<a id="pagePrevious" class="page-link"></a>
@@ -232,14 +249,13 @@
 											<a class="page-link">...</a>
 										</li>
 										<li class="page-item">
-											<a id="pageCount" class="page-link">102</a>
+											<a id="pageCount" class="page-link">3</a>
 										</li>
 										<li class="page-item">
-											<a id="pageNumberNext" class="page-link">Trang sau</a>
+											<a id="pageNumberNext" class="page-link">Sau</a>
 										</li>
 									</ul>
 								</nav>
-							</div>
 						</div>
 					</div>
 				</div>

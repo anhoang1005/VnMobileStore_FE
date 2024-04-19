@@ -84,7 +84,7 @@ $(document).ready(function() {
 			tableHtml += `<tr>
 								<td>#P000${value.id}</td>
 								<td>
-									<div class="avatar-container" style="width: 70px; overflow: hidden;">
+									<div class="avatar-container" style="width: 80px; overflow: hidden;">
 										<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
 											src="${value.thumbnail}" alt="san-pham">
 									</div>

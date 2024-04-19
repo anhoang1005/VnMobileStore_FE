@@ -69,12 +69,159 @@ $(document).ready(function() {
 								<th>
 									<img style="width: 100px; height: auto" src="${value.thumbnail}" alt="alt" />
 								</th>
-								
-							</tr>
-
-				`;
+								<td>
+									<strong><span>${value.title}</span></strong>
+									<br>
+									<span class="mr-2">Phiên bản: ${value.type.ram}GB-${value.type.room}GB</span>
+									<br>
+									<span>Màu: ${value.color.color}</span>
+									<div style="display: flex; flex-direction: column;">
+										<span class="mt-3"><strong>Đơn giá: ${value.type.basePrice.toLocaleString('vi-VN')}đ</strong></span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<button minus-id="${value.color.id}" class="btn btn-danger minus-btn" type="button">-</button>
+										</div>
+										<input id="inputQuantity${value.color.id}" type="number"
+											class="form-control quantity-input col-4" name="quantity${index}" min="1" max="10"
+											value="${value.quantity}">
+										<div class="input-group-append">
+											<button plus-id="${value.color.id}" class="btn btn-success plus-btn" type="button">+</button>
+										</div>
+									</div>
+									<br>
+								</td>
+								<td class="text-center" style="color: red"><strong>${(value.quantity * value.type.basePrice).toLocaleString('vi-VN')}đ</strong></td>
+								<td class="text-center">
+									<button delete-bill=${value.color.id} class="btn btn-sm btn-danger deletebill-btn" data-toggle="modal" data-target="#deleteCartItemModal">
+										<i class="fa fa-trash"></i>
+									</button>
+								</td>
+							</tr>`;
 			totalPrice = BigInt(totalPrice) + BigInt(value.quantity * value.type.basePrice);
 		});
 		$("#cartItemColumn").html(cartHtml);
+		$("#totalCheckedCart").html(`${totalPrice.toLocaleString('vi-VN')}đ`);
 	}
+
+	$("#backPage").click(function() {
+		var supplierId = getUrlParam();
+		console.log(supplierId);
+		window.location.href = "admin-import-product?supplier-id=" + supplierId;
+	});
+
+	function updateCartBillQuantity(colorId, value) {
+		var vnMobileBill = [];
+		if (localStorage.getItem('vnMobileBill') !== null) {
+			vnMobileBill = JSON.parse(localStorage.getItem('vnMobileBill'));
+			var index = vnMobileBill.findIndex(product => product.color.id == colorId);
+			console.log(index);
+			vnMobileBill[index].quantity = value;
+			localStorage.setItem('vnMobileBill', JSON.stringify(vnMobileBill));
+			showListBill();
+		}
+	}
+
+	function deleteBillItem(colorId) {
+		var vnMobileBill = [];
+		if (localStorage.getItem('vnMobileBill') !== null) {
+			vnMobileBill = JSON.parse(localStorage.getItem('vnMobileBill'));
+			var index = vnMobileBill.findIndex(product => product.color.id == colorId);
+			vnMobileBill.splice(index, 1);
+			localStorage.setItem('vnMobileBill', JSON.stringify(vnMobileBill));
+			showListBill();
+		}
+	}
+
+	$(document).on('click', '.minus-btn', function() {
+		var productId = $(this).attr('minus-id');
+		var value = $("#inputQuantity" + productId).val();
+		if (value > 1) {
+			updateCartBillQuantity(productId, value - 1);
+			$("#inputQuantity" + productId).val(value - 1);
+		};
+	});
+
+	$(document).on('click', '.plus-btn', function() {
+		var productId = $(this).attr('plus-id');
+		var currentQuantity = $("#inputQuantity" + productId).val();
+		if (currentQuantity < 100) {
+			var newValue = parseInt(currentQuantity) + 1;
+			updateCartBillQuantity(productId, newValue);
+			$("#inputQuantity" + productId).val(newValue);
+		};
+	});
+
+	$(document).on('click', '.deletebill-btn', function() {
+		var productId = $(this).attr('delete-bill');
+		$("#cancelModal").modal('show');
+
+		$("#confirmCancelBtn").click(function() {
+			deleteBillItem(productId);
+			$("#cancelModal").modal('hide');
+		});
+	});
+
+	$("#checkoutCart").click(function() {
+		var vnMobileBill = [];
+		var supplierId = getUrlParam();
+		if (localStorage.getItem('vnMobileBill') !== null) {
+			vnMobileBill = JSON.parse(localStorage.getItem('vnMobileBill'));
+		}
+		if(vnMobileBill.length===0){
+			$("#huyModal").modal('show');
+			return;
+		}
+		$("#addBillModal").modal('show');
+		var listBillItems = [];
+		$.each(vnMobileBill, function(index, value) {
+			var billItems = {
+				productId: value.id,
+				typeId: value.type.id,
+				colorId: value.color.id,
+				quantity: value.quantity
+			}
+			listBillItems.push(billItems);
+		});
+
+		$("#confirmAddBillBtn").click(function() {
+			var BillRequest = {
+				emailUser: vnMobileToken.email,
+				supplierId: supplierId,
+				listBillItems: listBillItems
+			};
+
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/admin/supplier/createbill",
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token,
+					'Content-Type': 'application/json'
+				},
+				data: JSON.stringify(BillRequest),
+				success: function(response) {
+					$("#addBillModal").modal('hide');
+					if (response.success) {
+						$("#successModal").modal('show');
+						$("#confirmExportBill").click(function() {
+							var url = "http://localhost:8888/api/uploadfile/file/" + response.data;
+							console.log(url);
+							$("#successModal").modal('hide');
+							window.location.href = url;
+						});
+					} else {
+						window.location.href = "/403";
+					}
+				},
+				error: function(xhr, status, error) {
+					$("#overlay").hide();
+					window.location.href = "/403";
+				}
+			});
+		});
+	});
+
+
 });

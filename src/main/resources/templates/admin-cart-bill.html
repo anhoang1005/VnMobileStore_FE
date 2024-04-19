@@ -34,6 +34,7 @@
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
 	<script src="/js/admin-cart-bill.js"></script>
+	<script src="/js/admin-menu.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -64,7 +65,7 @@
 						<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
 							src="/img/avatar/me.jpg" alt="Avatar">
 					</div>
-					<span id="userfullName" class="ml-2 text-white">Hoàng Văn An</span>
+					<span id="userfullName" class="ms-2 text-white">Hoàng Văn An</span>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i> Tài khoản</a></li>
@@ -169,12 +170,12 @@
 								class="fa-solid fa-plus"></i> Bổ sung hóa đơn</button>
 					</div>
 					<div class="mb-4">
-						<div class="container mb-4">
+						<div class="mb-4">
 							<div class="row">
 								<div class="col-lg-9">
 									<div id="cartTable" class="table-responsive">
 										<h3 id="cartItemQuantity"></h3>
-										<table class="table table-striped">
+										<table class="table table-striped table-hover">
 											<thead>
 												<tr>
 													<th class="text-center" scope="col">
@@ -182,11 +183,12 @@
 															type="checkbox"
 															aria-label="Checkbox for following text input">
 													</th>
-													<th class="text-center" scope="col"></th>
-													<th class="text-center" scope="col"></th>
-													<th class="text-center" scope="col"></th>
-													<th class="text-center" scope="col"></th>
-													<th class="text-center" scope="col">
+													<th style="min-width: 150px;" scope="col">Ảnh</th>
+													<th style="min-width: 150px;" scope="col">Chi tiết</th>
+													<th style="min-width: 150px;" scope="col">Số lượng</th>
+													<th style="min-width: 150px;" class="text-center" scope="col">Giá cơ
+														bản</th>
+													<th style="min-width: 150px;" class="text-center" scope="col">
 														<button id="deleteAllCartItem" class="btn btn-sm btn-danger">
 															Xóa tất cả
 														</button>
@@ -203,7 +205,7 @@
 								<div class="col-lg-3">
 									<div class="card bg-light mb-3">
 										<div class="card-header bg-danger text-white text-uppercase"><i
-												class="fa-solid fa-cart-shopping"></i> Tạo hóa đơn</div>
+												class="fa-solid fa-cart-shopping"></i> Hóa đơn</div>
 										<div class="card-body">
 											<p class="name" style="color: black; font-size: 1em">
 												<strong>Số mặt hàng đã chọn: <span
@@ -212,19 +214,25 @@
 											<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
 											<div>
 												<div class="form-group mb-3">
-													<label for="shipping">Người tạo hóa đơn:</label>
-													<input id="createdBillPerson" class="form-control" type="text" disable>
+													<label class="mb-1" for="createdBillPerson">Người tạo hóa đơn:</label>
+													<input id="createdBillPerson" class="form-control" type="text"
+														disable>
 												</div>
 												<div class="form-group">
-													<label for="supplierName">Nhà cung cấp:</label>
+													<label class="mb-1" for="supplierName">Nhà cung cấp:</label>
 													<input id="supplierName" class="form-control" type="text" disable>
 												</div>
-												<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
-												<p class="name" style="color: black; font-size: 1em"><strong>Thành tiền:
-														<span id="totalCheckedCart" style="color: red"></span></strong>
-												</p>
-												<button id="checkoutCart" class="btn btn-danger btn-md col-sm-12">
-													<i class="fa fa-shopping-cart"></i> TẠO HÓA ĐƠN
+												<hr class="bg-dark mb-5 mt-3 d-inline-block mx-auto w-100">
+												<div class="d-flex justify-content-between">
+													<p class="name" style="color: black; font-size: 1.2em">
+														<strong>Thành tiền:</strong>
+													</p>
+													<strong>
+														<span id="totalCheckedCart" style="color: red; font-size: 1.2em;"></span>
+													</strong>
+												</div>
+												<button id="checkoutCart" class="btn btn-danger btn-md col-md-12">
+													<i class="fa fa-shopping-cart"></i> LƯU HÓA ĐƠN
 												</button>
 											</div>
 										</div>
@@ -251,71 +259,7 @@
 						</div>
 					</div>
 			</main>
-
-			<!-- Modal add bill-->
-			<div class="modal fade" id="addSupplierBillModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-				aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm vào hóa đơn</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="col-12 d-flex">
-								<div class="avatar-container" style="width: 150px; height: 150px; overflow: hidden;">
-									<img id="thumbnailImg" class="avatar"
-										style="width: 100%; height: 100%; object-fit: cover;"
-										src="https://via.placeholder.com/300x300?text=300x300" alt="Avatar">
-								</div>
-								<div class="ms-3 mt-1" id="productInfo">
-									<h5 id="productTitleBill"></h5>
-									<p id="categoryBill"></p>
-									<div class="d-flex">
-										<p class="me-5">Đã bán: <span id="quantitySold"></span></p>
-										<p>Tồn kho: <span id="quantityInventory"></span></p>
-									</div>
-
-									<p>Giá cơ bản: <span id="basePrice" style="color: red"></span></p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="mb-3 col-6">
-									<label for="versionSelect" class="col-form-label">Chọn phiên bản:</label>
-									<select id="versionSelect" class="form-select" aria-label="Default select example">
-
-									</select>
-									<small style="color: red;" id="versionMessage"></small>
-								</div>
-								<div class="mb-3 col-6">
-									<label for="colorSelect" class="col-form-label">Chọn màu sắc:</label>
-									<select id="colorSelect" class="form-select" aria-label="Default select example">
-
-									</select>
-									<small style="color: red;" id="colorMessage"></small>
-								</div>
-								<div class="mb-3 col-12">
-									<label for="quantitySubmit" class="col-form-label">Số lượng:</label>
-									<div class="input-group">
-										<input id="quantitySubmit" type="number" class="form-control quantity-input"
-											name="quantity" min="1" value="1">
-									</div>
-									<small style="color: red;" id="quantityMessage"></small>
-								</div>
-								<div class="mt-3 mb-3 col-12 d-flex">
-									<p>Thành tiền: </p>
-									<p id="totalPrice" class="ms-auto" style="color: red;"></p>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer d-flex">
-							<button class="btn btn-secondary col-sm-3" data-bs-dismiss="modal">Hủy</button>
-							<button id="submitAddBill" class="btn btn-primary col-sm-3 ml-auto">Thêm mới</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			
 			<!--Lock Account Modal-->
 			<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
@@ -331,14 +275,41 @@
 									<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
 								</div>
 								<div class="mb-3 ms-3">
-									<p><strong>Hủy hóa đơn</strong></p>
-									<p>Bạn có chắc muốn hủy hóa đơn này?</p>
+									<p><strong>Bỏ sản phẩm</strong></p>
+									<p>Bạn có chắc muốn bỏ sản phẩm này khỏi hóa đơn?</p>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-secondary btn-md col-sm-3" data-bs-dismiss="modal">Hủy</button>
 							<button id="confirmCancelBtn" class="btn btn-danger btn-md col-sm-3">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!--Lock Account Modal-->
+			<div class="modal fade" id="huyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 d-flex">
+								<div class="mb-2">
+									<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<p><strong>Hóa đơn trống</strong></p>
+									<p>Hóa đơn của bạn trống, vui lòng thêm sản phẩm vào hóa đơn</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-danger">Xác nhận</button>
 						</div>
 					</div>
 				</div>
@@ -368,6 +339,66 @@
 						</div>
 						<div class="modal-footer">
 							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Add Bill Modal -->
+			<div class="modal fade" id="addBillModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 d-flex">
+								<div class="mb-2" id="confirmIcon">
+									<i style="color: green; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<strong>
+										<p id="subMess">Lưu hóa đơn</p>
+									</strong>
+									<p id="confirmMess">Xác nhận lưu hóa đơn?</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-secondary col-sm-3">Hủy</button>
+							<button id="confirmAddBillBtn" class="btn btn-success col-sm-3">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- success Modal -->
+			<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 d-flex">
+								<div class="mb-2" id="confirmIcon">
+									<i style="color: green; font-size: 2em;" class="fa-solid fa-circle-check"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<strong>
+										<p>Thành công!</p>
+									</strong>
+									<p>Lưu hóa đơn thành công, bạn có muốn xuất hóa đơn không?</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-secondary col-sm-3">Hủy</button>
+							<button id="confirmExportBill" class="btn btn-success col-sm-3">Xác nhận</button>
 						</div>
 					</div>
 				</div>

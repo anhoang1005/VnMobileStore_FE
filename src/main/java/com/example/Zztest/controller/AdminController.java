@@ -55,4 +55,9 @@ public class AdminController {
 	public String cartBillFrm() {
 		return "admin-cart-bill";
 	}
+	
+	@GetMapping("/quanli-account")
+	public String quanliAccountFrm() {
+		return "quanli-account";
+	}
 }

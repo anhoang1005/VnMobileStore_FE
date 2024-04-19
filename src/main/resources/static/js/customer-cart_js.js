@@ -24,7 +24,6 @@ $(document).ready(function() {
 									<div style="display: flex; flex-direction: column;">
 										<span class="mt-3"><strong>${value.price.toLocaleString('vi-VN')}đ</strong></span>
 									</div>
-
 								</td>
 								<td>
 									<div class="input-group">

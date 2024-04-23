@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Hóa đơn nhập hàng</title>
+
+	<!--Jquery.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+	<!-- Add Popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	<!-- Bootstrap JS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+	<link href="/css/401.css" rel="stylesheet" />
+	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/asset/js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="/asset/js/chart-area-demo.js"></script>
+	<script src="/asset/js/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/asset/js/datatables-simple-demo.js"></script>
+	
+	<script src="/js/admin-supplier-bill.js"></script>
+	<script src="/js/admin-menu.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+
+	<!--Thanhmenu-->
+	<nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #cd1818;">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="index.html">VnMobile</a>
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+				class="fas fa-bars"></i></button>
+		<!-- Navbar Search-->
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?" aria-label="Search for..."
+					aria-describedby="btnNavbarSearch" />
+				<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+						class="fas fa-search"></i></button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" href="#" role="button"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					<div class="avatar-container"
+						style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
+						<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
+							src="/img/avatar/me.jpg" alt="Avatar">
+					</div>
+					<span id="userfullName" class="ms-2 text-white">Hoàng Văn An</span>
+				</a>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i> Tài khoản</a></li>
+					<li><a class="dropdown-item" href="/notifycation"><i class="fa-solid fa-bell"></i> Thông báo</a>
+					</li>
+					<li>
+						<hr class="dropdown-divider" />
+					</li>
+					<li>
+						<a id="logoutUser" style="color: red;" class="dropdown-item" href="#!">
+							<i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<!--End-->
+
+	<div id="layoutSidenav">
+
+		<!--Menu ngang-->
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">Chính</div>
+						<a class="nav-link" href="/admin-dashboard">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
+							Trang chính
+						</a>
+						<div class="sb-sidenav-menu-heading">Quản lí</div>
+						<a class="nav-link" href="/admin-product">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+							Quản lí mặt hàng
+						</a>
+						<a class="nav-link" href="/admin-category">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+							Quản lí danh mục
+						</a>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
+							Quản lí kho hàng
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
+							data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin-supplier">Nhập hàng</a>
+								<a class="nav-link" href="/admin-supplier-bill">Hóa đơn nhập hàng</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseAccount" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
+							Quản lí tài khoản
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseAccount" aria-labelledby="headingOne"
+							data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin-account">Danh sách tài khoản</a>
+								<a class="nav-link" href="/404">Danh sách nhân viên</a>
+							</nav>
+						</div>
+						<a class="nav-link" href="/admin-order">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+							Quản lí đơn hàng
+						</a>
+
+						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
+						<a class="nav-link" href="/admin-revenue-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+							Thống kê doanh thu
+						</a>
+						<a class="nav-link" href="/admin-product-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							Thống kê sản phẩm
+						</a>
+						<a class="nav-link" href="/admin-supplier-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							Thống kê nhập hàng
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!--end-->
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<h1 class="mt-4">Hóa đơn nhập hàng</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a href="index.html">Trang chính</a></li>
+						<li class="breadcrumb-item active">Hóa đơn nhập hàng</li>
+					</ol>
+					<div class="card mb-4">
+						<div class="card-header bg-danger text-white">
+							<i class="fas fa-table me-1"></i>
+							Danh sách hóa đơn
+						</div>
+						<div class="card-body">
+							<div class="col-md-12 mb-4">
+								<div class="row">
+									<div class="col-md-3 p-2">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+											<option selected>--Nhà cung cấp--</option>
+											<option value="1">Đã xác thực</option>
+											<option value="2">Chưa xác thực</option>
+										</select>
+									</div>
+									<div class="col-md-3 p-2">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+											<option selected>--Nhân viên--</option>
+											<option value="1">Đã xác thực</option>
+											<option value="2">Chưa xác thực</option>
+										</select>
+									</div>
+									<div class="col-md-3 p-2">
+										<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
+											aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+										<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+												class="fas fa-search"></i></button>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover">
+									<thead>
+										<tr>
+											<th scope="col">STT</th>
+											<th scope="col">Mã</th>
+											<th scope="col">Tên hóa đơn</th>
+											<th scope="col">Tên nhà cung cấp</th>
+											<th scope="col">Nhân viên tạo</th>
+											<th scope="col">Thời gian tạo</th>
+											<th scope="col">Giá trị hóa đơn</th>
+											<th scope="col">Hóa đơn</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody id="bodyTable">
+										
+									</tbody>
+								</table>
+							</div>
+							<nav aria-label="..." class="mt-3">
+								<ul id="pageCurrent" page-current="1" class="pagination">
+									<li id="previousLi" class="page-item">
+										<a id="pageNumberPrevious" class="page-link disable">Truớc</a>
+									</li>
+									<li class="page-item active">
+										<a id="pageNumberCurrent" class="page-link">2</a>
+									</li>
+									<li class="page-item disable">
+										<a class="page-link">...</a>
+									</li>
+									<li class="page-item">
+										<a page-count="" id="pageCount" class="page-link"></a>
+									</li>
+									<li class="page-item disable">
+										<a id="pageNumberNext" class="page-link">Sau</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!--Confirm Modal -->
+			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p id="confirmMess"></p>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Dowload Bill Modal -->
+			<div class="modal fade" id="dowloadBillModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 d-flex">
+								<div class="mb-2" id="confirmIcon">
+									<i style="color: green; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<strong>
+										<p id="subMess">Tải xuống hóa đơn</p>
+									</strong>
+									<p id="confirmMess">Xác nhận tải xuống hóa đơn?</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-secondary col-sm-3">Hủy</button>
+							<button id="confirmDơloadBillBtn" class="btn btn-success col-sm-3">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid px-4">
+					<div class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Created By Hoàng Văn An 2023</div>
+						<div>
+							<a href="#">Privacy Policy</a>
+							&middot;
+							<a href="#">Terms &amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</body>
+
+</html>

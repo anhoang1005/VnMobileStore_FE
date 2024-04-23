@@ -205,6 +205,9 @@ $(document).ready(function() {
 					$("#addBillModal").modal('hide');
 					if (response.success) {
 						$("#successModal").modal('show');
+						vnMobileBill = [];
+						localStorage.setItem('vnMobileBill', JSON.stringify(vnMobileBill));
+						showListBill();
 						$("#confirmExportBill").click(function() {
 							var url = "http://localhost:8888/api/uploadfile/file/" + response.data;
 							console.log(url);

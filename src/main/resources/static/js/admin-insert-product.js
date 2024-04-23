@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	
+	$("#overlay").hide();
+	
 	//Token
 	var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
 	if (vnMobileToken !== null && vnMobileToken.role === "QUANLI") {
@@ -67,7 +70,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
+
 	var file = null;
 	$('#productThumbail').change(function() {
 		$("#thumbnailMessage").html(``);
@@ -140,9 +143,9 @@ $(document).ready(function() {
 		showListPlusThumbnail();
 		console.log(listFiles.length);
 	});
-	
-	
-	
+
+
+
 
 	var productInfo = {};
 	var listThumbnail = [];
@@ -162,10 +165,10 @@ $(document).ready(function() {
 	});
 
 
-	var vnMobile_InsertProduct = {
-		"title": "sAn PhaM  12",
+	var insertProduct = {
+		"title": "sAn PhaM  144",
 		"productSlug": "",
-		"thumbnail": "anh san phm 1",
+		"thumbnail": "OK",
 		"price": 34000000,
 		"discount": "35000000",
 		"description": "mo ta san pham 1",
@@ -201,27 +204,56 @@ $(document).ready(function() {
 						"inventoryQuantity": 22
 					}
 				]
-			},
-			{
-				"ram": 8,
-				"room": 512,
-				"price": 30000000,
-				"discount": 32000000,
-				"basePrice": 28000000,
-				"listTypeColor": [
-					{
-						"color": "black",
-						"soldQuantity": 2,
-						"inventoryQuantity": 100
-					},
-					{
-						"color": "blue",
-						"soldQuantity": 1,
-						"inventoryQuantity": 89
-					}
-				]
 			}
 		]
 	};
 
+	$("#submitInsertProduct").click(function() {
+		var fileInput = $("#productThumbail")[0];
+		file = fileInput.files[0];
+		
+		if (!file) {
+			return;
+		}
+		else if (listFiles.length===0) {
+			return
+		}
+
+		var formData = new FormData();
+		formData.append('file', file);
+		formData.append('insertProductRequest', JSON.stringify(insertProduct));
+		
+		// Thêm danh sách các file vào FormData
+		console.log(listFiles.length);
+		for (var j = 0; j < listFiles.length; j++) {
+			formData.append('listFile', listFiles[j]);
+		}
+		$("#overlay").show();
+		$.ajax({
+			method: "POST",
+			url: "http://localhost:8888/api/admin/product/insert",
+			data: formData,
+			processData: false,  // Không xử lý dữ liệu trước khi gửi
+			contentType: false,  // Không đặt header Content-Type, để FormData tự định dạng
+			headers: {
+				'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+			},
+			success: function(response) {
+				$("#overlay").hide();
+				if (response.success) {
+					alert('ok');
+				} else {
+					alert('no');
+					console.log(response);
+				}
+			},
+			error: function(xhr, status, error) {
+				$("#overlay").hide();
+				console.log(error);
+				console.log(status);
+				console.log(xhr);
+				//window.location.href = "/403";
+			}
+		});
+	});
 });

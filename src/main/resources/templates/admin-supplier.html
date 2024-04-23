@@ -36,6 +36,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
+	
 	<script src="/js/admin-supplier_js.js"></script>
 	<script src="/js/admin-menu.js"></script>
 </head>
@@ -190,7 +191,7 @@
 									</div>
 									<div class="col-md-3 p-2 ms-auto">
 										<button id="insertSupplierBtn" class="btn btn-success btn-sm col-12"><i
-										class="fa-solid fa-plus"></i> Thêm nhà cung cấp</button>
+												class="fa-solid fa-plus"></i> Thêm nhà cung cấp</button>
 									</div>
 								</div>
 							</div>
@@ -198,24 +199,17 @@
 								<table class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr>
-											<th scope="col">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckDefault">
-											</th>
 											<th scope="col">Mã</th>
+											<th scope="col">Tên hóa đơn</th>
 											<th scope="col">Tên nhà cung cấp</th>
-											<th scope="col">Số điện thoại</th>
-											<th scope="col">Email</th>
-											<th scope="col">Địa chỉ</th>
+											<th scope="col">Nhân viên thực hiện</th>
+											<th scope="col">Thời gian tạo</th>
+											<th scope="col">Mô tả</th>
 											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody id="bodyTable">
 										<tr>
-											<th scope="row">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckDefault">
-											</th>
 											<td>#S001</td>
 											<td>FPT</td>
 											<td>0123456789</td>

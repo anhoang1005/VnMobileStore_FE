@@ -213,6 +213,7 @@ $(document).ready(function() {
 							console.log(url);
 							$("#successModal").modal('hide');
 							window.location.href = url;
+							window.location.href="/admin-supplier-bill";
 						});
 					} else {
 						window.location.href = "/403";
@@ -226,5 +227,7 @@ $(document).ready(function() {
 		});
 	});
 
-
+	$("#dismissBtn").click(function(){
+		window.location.href="/admin-supplier-bill";
+	});
 });

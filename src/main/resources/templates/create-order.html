@@ -186,30 +186,29 @@
 			</div>
 			<div class="col-md-8 order-md-1 my-border">
 				<h4 class="mb-3 mt-3">Thông tin thanh toán:</h4>
-				<div class="needs-validation" novalidate="">
+				<div id="createOrderInfo" class="needs-validation" novalidate="">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="firstname"><strong>Họ Tên:</strong></label>
 							<input id="customerName" name="nameorder" type="text" class="form-control"
 								placeholder="Họ tên" required="">
 							<div class="invalid-feedback">Bắt buộc nhập tên hợp lệ!</div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="lastName"><strong>Số điện thoại</strong></label>
 							<input name="telorder" type="text" value="" class="form-control" id="phoneNumber"
 								placeholder="Số điện thoại" required="">
 							<div class="invalid-feedback"> Bắt buộc! </div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 					</div>
-					<div class="mb-3">
-						<label for="username"><strong>Email</strong></label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text">@</span>
-							</div>
-							<input name="userorder" type="text" value="" class="form-control" id="customerEmail"
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<label for="username"><strong>Email</strong></label>
+							<input name="userorder" type="email" value="" class="form-control col-12" id="customerEmail"
 								placeholder="Email" required="">
-							<div class="invalid-feedback" style="width: 100%;"> Bắt buộc! </div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 					</div>
 					<div class="row">
@@ -220,6 +219,7 @@
 								<option value="Hà Noi">Hà Nội</option>
 							</select>
 							<div class="invalid-feedback"> Vui lòng chon tỉnh thánh phố! </div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="districtName"><strong>Quận/Huyện</strong></label>
@@ -229,6 +229,7 @@
 								<option value="Hà Noi">Hà Nội</option>
 							</select>
 							<div class="invalid-feedback"> Vui lòng chọn Quận Huyện! </div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="xaphuongName"><strong>Xã, phường</strong></label>
@@ -236,21 +237,23 @@
 								required="">
 								<option value="INVALID" selected>--Xã, Phường--</option>
 
-								<option value="Hà Noi">Hà Nội</option>
 							</select>
 							<div class="invalid-feedback"> Vui lòng chọn xã, phường! </div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="houseName"><strong>Địa chỉ cụ thể</strong></label>
 							<input name="houseName" type="text" value="" class="form-control" id="houseName"
 								placeholder="--Số nhà 12, Ngõ 3 Ao Sen--" required="">
 							<div class="invalid-feedback"> Vui lòng nhập địa chỉ! </div>
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 
 						<div class="col-md-12 mb-3">
 							<label for="notecheck"><strong>Ghi chú:</strong></label>
 							<input id="customerNote" name="notecheck" type="text" class="form-control"
 								placeholder="Ghi chú">
+							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
 					</div>
 					<hr class="mb-4">
@@ -273,14 +276,20 @@
 					<div class="d-block my-3">
 						<label for="state"><Strong>Phương thức thanh toán:</Strong></label>
 						<div class="custom-control custom-radio">
-							<input id="credit" name="checkmethod" value="1" type="radio" class="custom-control-input"
-								checked="" required="">
+							<input id="credit" name="checkmethod" value="Thanh toán khi nhận hàng" type="radio"
+								class="custom-control-input" checked="" required="">
 							<label class="custom-control-label" for="credit">Thanh toán khi nhận hàng</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="debit" name="checkmethod" value="0" type="radio" class="custom-control-input"
+							<input id="debit" name="checkmethod" value="VNPAY" type="radio" class="custom-control-input"
 								required="">
 							<label class="custom-control-label" for="debit">VNPAY</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input id="debit1" name="checkmethod" value="ZALOPAY" type="radio"
+								class="custom-control-input" required="" disabled>
+							<label class="custom-control-label" for="debit1">ZALOPAY <span style="color: green;">(Tính
+									năng đang phát triển)</span></label>
 						</div>
 					</div>
 					<hr class="mb-4">
@@ -294,6 +303,91 @@
 		</div>
 	</div>
 	<!-- end container -->
+
+	<!-- success Modal -->
+	<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="btn-close close-success-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: green; font-size: 2em;" class="fa-solid fa-circle-check"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<strong>
+								<p>Đặt hàng thành công!</p>
+							</strong>
+							<p>Đặt hàng thành công, bạn có muốn xem chi tiết đơn hàng không?</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="dismissBtn" data-bs-dismiss="modal" class="btn btn-secondary close-success-modal col-sm-3">Hủy</button>
+					<button id="confirmBtn" class="btn btn-success confirm-success col-sm-3">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- success Modal -->
+	<div class="modal fade" id="vnPaySuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="btn-close close-vnpay-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: green; font-size: 2em;" class="fa-solid fa-circle-check"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<strong>
+								<p>Thanh toán thành công!</p>
+							</strong>
+							<p>Thanh toán thành công, đơn hàng của bạn đã được tạo, bạn có muốn xem đơn hàng không?</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="dismissBtn" data-bs-dismiss="modal" class="btn btn-secondary close-vnpay-modal col-sm-3">Hủy</button>
+					<button id="confirmBtn" class="btn btn-success confirm-vnpay-success col-sm-3">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Lock Account Modal-->
+	<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2">
+							<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<p><strong id="subError">Thiếu thông tin</strong></p>
+							<p id="errorMess">Bạn nhập thiếu thông tin sản phẩm, vui lòng kiểm tra lại!</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmErrorBtn" data-bs-dismiss="modal" class="btn btn-danger close-modal">Xác
+						nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!--Footer-->
 	<footer class="text-light">

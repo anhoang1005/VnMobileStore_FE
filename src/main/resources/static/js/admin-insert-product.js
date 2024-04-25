@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	
+
 	$("#overlay").hide();
-	
+
 	//Token
 	var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
 	if (vnMobileToken !== null && vnMobileToken.role === "QUANLI") {
@@ -20,7 +20,7 @@ $(document).ready(function() {
 			},
 			success: function(response) {
 				if (response.success) {
-					var categoryHtml = `<option value="INVALID" selected>--Danh mục--</option>`;
+					var categoryHtml = `<option value="" selected>--Danh mục--</option>`;
 					$.each(response.data, function(index, value) {
 						if (value.deleted === true) {
 							categoryHtml += `<option value="${value.id}">${value.categoryName}</option>`
@@ -50,7 +50,7 @@ $(document).ready(function() {
 			},
 			success: function(response) {
 				if (response.success) {
-					var supplierHtml = `<option value="INVALID" selected>--Nhà cung cấp--</option>`;
+					var supplierHtml = `<option value="" selected>--Nhà cung cấp--</option>`;
 					$.each(response.data, function(index, value) {
 						if (value.deleted === true) {
 							supplierHtml += `<option value="${value.id}">${value.supplierName}</option>`
@@ -144,85 +144,265 @@ $(document).ready(function() {
 		console.log(listFiles.length);
 	});
 
+	function checkTypeNotEmpty() {
+		var isEmpty = true;
+		$("#cardType input").each(function() {
+			var inputVal = $(this).val().trim();
+			if (inputVal === "") {
+				var parentDiv = $(this).parent();
+				var smallElements = parentDiv.find("small");
+				smallElements.html('Không được để trống!');
+				isEmpty = false;
+			}
+		});
+		return isEmpty;
+	}
 
-
-
-	var productInfo = {};
-	var listThumbnail = [];
+	function checkColorNotEmpty() {
+		var isEmpty = true;
+		$("#cardColor input").each(function() {
+			var inputVal = $(this).val().trim();
+			if (inputVal === "") {
+				var parentDiv = $(this).parent();
+				var smallElements = parentDiv.find("small");
+				smallElements.html('Không được để trống!');
+				isEmpty = false;
+			}
+		});
+		return isEmpty;
+	}
+	
+	function checkNotEmpty() {
+		var isEmpty = true;
+		$("#cardInfo input").each(function() {
+			var inputVal = $(this).val().trim();
+			if (inputVal === "") {
+				var parentDiv = $(this).parent();
+				var smallElements = parentDiv.find("small");
+				smallElements.html('Không được để trống!');
+				isEmpty = false;
+			}
+		});
+		return isEmpty;
+	}
+	
+	function checkNotEmptyListTypeColor(){
+		var isNotEmpty = true;
+		for(var i = 0; i<listProductType.length; i++){
+			if(listProductType[i].listTypeColor.length===0){
+				isNotEmpty = false;
+			}
+		}
+		return isNotEmpty;
+	}
+	
+	//Tao them Type
 	var listProductType = [];
-	var listTypeColor = [];
+	$("#createProductType").click(function() {
+		$('small').empty();
+		console.log(checkTypeNotEmpty());
+		if (!checkTypeNotEmpty()) {
+			return;
+		}
+		var typeExist = listProductType.find(type => type.ram === $("#productRam").val() && type.room === $("#productRom").val());
+		if(typeExist!==undefined){
+			$("#ramMessage").html(`Trùng version khác!`);
+			$("#roomMessage").html(`Trùng version khác!`);
+			return;
+		}
+		var productType = {
+			"ram": $("#productRam").val(),
+			"room": $("#productRom").val(),
+			"price": parseInt($("#productPrice").val()),
+			"discount": parseInt($("#productDiscount").val()),
+			"basePrice": parseInt($("#productbasePrice").val()),
+			"listTypeColor": []
+		};
+		listProductType.push(productType);
+		showListType(listProductType);
+		$('#cardType input').val(``);
+	});
+	
+	//Tao them color
+	$("#createColorType").click(function() {
+		$('small').empty();
+		if (!checkColorNotEmpty()) {
+			return;
+		}
+		var typeIndex = parseInt($("#versionTypeColor").attr('type-index'));
+		var listColorCurrent = listProductType[typeIndex].listTypeColor;
+		var colorExist = listColorCurrent.find(color => color.color === $("#productColor").val());
+		if(colorExist){
+			$("#colorMessage").html(`Trùng màu đã thêm trước đó!`);
+			return;
+		}
+		var productColor = {
+			"color": $("#productColor").val(),
+			"soldQuantity": 0,
+			"inventoryQuantity": $("#productInventory").val()
+		};
+		listColorCurrent.push(productColor);
+		listProductType[typeIndex].listTypeColor = listColorCurrent;
+		showListColor(listProductType[typeIndex].listTypeColor);
+		$('#cardColor input').val(``);
+	});
+
+	function showListType(listType) {
+		var typeHtml = ``;
+		$.each(listType, function(index, value) {
+			typeHtml += `<tr>
+							<th scope="row">${index + 1}</th>
+							<td>${value.ram}GB</td>
+							<td>${value.room}GB</td>
+							<td>${value.basePrice.toLocaleString('vi-VN')}đ</td>
+							<td>${value.price.toLocaleString('vi-VN')}đ</td>
+							<td>${value.discount.toLocaleString('vi-VN')}đ</td>
+							<td>
+								<button type-index="${index}" class="btn btn-success view-color"><i class="fa-regular fa-eye"></i></button>
+								<button type-index="${index}" class="btn btn-danger delete-type"><i class="fa-solid fa-trash-can"></i></button>
+							</td>
+						</tr>`
+		});
+		$("#typeTableBody").html(typeHtml);
+	}
+
+	function showListColor(listColor) {
+		var colorHtml = ``;
+		$.each(listColor, function(index, value) {
+			colorHtml += `<tr>
+							<th scope="row">${index + 1}</th>
+							<td>${value.color}</td>
+							<td>${value.inventoryQuantity}</td>
+							<td>
+								<button color-index="${index}" class="btn btn-danger delete-color"><i
+									class="fa-solid fa-trash-can"></i></button>
+							</td>
+						</tr>`
+		});
+		$("#colorBody").html(colorHtml);
+	}
+
+	$(document).on('click', '.delete-type', function() {
+		var typeIndex = $(this).attr('type-index');
+		listProductType.splice(typeIndex, 1)
+		showListType(listProductType);
+	});
+
+	$(document).on('click', '.view-color', function() {
+		var typeIndex = $(this).attr('type-index');
+		console.log(typeIndex);
+		var listColorIndex = listProductType[typeIndex].listTypeColor;
+		$("#versionTypeColor").html(`Phiên bản: ${listProductType[typeIndex].ram}GB-${listProductType[typeIndex].room}GB`);
+		$("#versionTypeColor").attr('type-index', typeIndex);
+		showListColor(listColorIndex);
+	});
+	
+	$(document).on('click', '.delete-color', function(){
+		var colorIndex = parseInt($(this).attr('color-index'));
+		var typeIndex = parseInt($("#versionTypeColor").attr('type-index'));
+		listProductType[typeIndex].listTypeColor.splice(colorIndex, 1);
+		var listColorIndex = listProductType[typeIndex].listTypeColor;
+		showListColor(listColorIndex);
+	});
 
 	$("#cancelInsertProduct").click(function() {
 		window.location.href = '/admin-product';
 	});
-
 	$("#submitInsertProduct").click(function() {
-		$("#productTitle").val();
-		$("#productBasePrice").val();
-		$("#productDescription").val();
-		$("#productCategory").val();
-		$("#productSupplier").val();
-	});
+		$('small').empty();
 
-
-	var insertProduct = {
-		"title": "sAn PhaM  144",
-		"productSlug": "",
-		"thumbnail": "OK",
-		"price": 34000000,
-		"discount": "35000000",
-		"description": "mo ta san pham 1",
-		"categoryId": 2,
-		"supplierId": 1,
-		"productInfo": {
-			"screen": "6.67",
-			"cpu": "Apple 17",
-			"gpu": "Apple 17",
-			"weight": 200,
-			"frontCamera": "12MP",
-			"backCamera": "64MP",
-			"oreraionSystem": "Android 13",
-			"battery": "5000"
-		},
-		"listThumbnail": [],
-		"listProdductType": [
-			{
-				"ram": 8,
-				"room": 256,
-				"price": 25000000,
-				"discount": 27000000,
-				"basePrice": 23000000,
-				"listTypeColor": [
-					{
-						"color": "black",
-						"soldQuantity": 0,
-						"inventoryQuantity": 24
-					},
-					{
-						"color": "blue",
-						"soldQuantity": 1,
-						"inventoryQuantity": 22
-					}
-				]
-			}
-		]
-	};
-
-	$("#submitInsertProduct").click(function() {
 		var fileInput = $("#productThumbail")[0];
 		file = fileInput.files[0];
-		
-		if (!file) {
+
+		if ($("#productTitle").val() === "") {
+			$("#nameMessage").html(`Không được để trống!`);
+			$("#errorMess").html(`Bạn thiếu thông tin về tên sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
 			return;
 		}
-		else if (listFiles.length===0) {
-			return
+		else if ($("#productBasePrice").val() === "") {
+			$("#priceMessage").html(`Không được để trống!`);
+			$("#errorMess").html(`Bạn thiếu thông tin về giá cơ bản sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
 		}
+		else if ($("#productDescription").val() === "") {
+			$("#desMessage").html(`Không được để trống!`);
+			$("#errorMess").html(`Bạn thiếu thông tin về mô tả sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+		else if ($("#productCategory").val() === "") {
+			$("#categoryMessage").html(`Bạn phải chọn danh mục!`);
+			$("#errorMess").html(`Bạn thiếu thông tin về danh mục sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+		else if ($("#productSupplier").val() === "") {
+			$("#supplierMessage").html(`Bạn phải chọn nhà cung cấp!`);
+			$("#errorMess").html(`Bạn thiếu thông tin về nhà cung cấp sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+		else if (!checkNotEmpty()) {
+			$("#errorMess").html(`Bạn thiếu thông tin về chi tiết sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+
+		else if (!file) {
+			$("#thumbnailMessage").html('Bạn phải chọn ảnh chính sản phẩm!');
+			$("#errorMess").html(`Bạn thiếu thông tin ảnh chính sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+		else if (listFiles.length === 0) {
+			$("#plusThumbnailMessage").html('Bạn phải chọn ảnh phụ sản phẩm!');
+			$("#errorMess").html(`Bạn thiếu thông tin về ảnh phụ sản phẩm! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+		else if(listProductType.length===0){
+			$("#errorMess").html(`Bạn chưa thêm phiên bản sản phẩm nào! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+		else if(!checkNotEmptyListTypeColor()){
+			$("#errorMess").html(`Bạn chưa thêm màu sản phẩm cho một số phiên bản sản phẩm ! Vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+
+		var productInfo = {
+			"screen": $("#productScreen").val(),
+			"cpu": $("#productCpu").val(),
+			"gpu": $("#productGpu").val(),
+			"weight": $("#productWeight").val(),
+			"frontCamera": $("#productFrontCamera").val(),
+			"backCamera": $("#productBackCamera").val(),
+			"oreraionSystem": $("#productOperatingSystem").val(),
+			"battery": $("#productBattery").val()
+		}
+
+		var insertProduct = {
+			"title": $("#productTitle").val(),
+			"productSlug": "",
+			"thumbnail": "OK",
+			"price": $("#productBasePrice").val(),
+			"discount": "35000000",
+			"description": $("#productDescription").val(),
+			"categoryId": parseInt($("#productCategory").val()),
+			"supplierId": parseInt($("#productSupplier").val()),
+			"productInfo": productInfo,
+			"listThumbnail": [],
+			"listProdductType": listProductType
+		};
+
 
 		var formData = new FormData();
 		formData.append('file', file);
 		formData.append('insertProductRequest', JSON.stringify(insertProduct));
-		
+
 		// Thêm danh sách các file vào FormData
 		console.log(listFiles.length);
 		for (var j = 0; j < listFiles.length; j++) {
@@ -241,7 +421,13 @@ $(document).ready(function() {
 			success: function(response) {
 				$("#overlay").hide();
 				if (response.success) {
-					alert('ok');
+					$("#successModal").modal('show');
+					$("#confirmBtn").click(function() {
+						window.location.href = '/admin-insert-product';
+					});
+					$("#dismissBtn").click(function() {
+						window.location.href = '/admin-product';
+					});
 				} else {
 					alert('no');
 					console.log(response);

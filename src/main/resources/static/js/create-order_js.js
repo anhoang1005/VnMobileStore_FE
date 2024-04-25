@@ -1,5 +1,69 @@
 $(document).ready(function() {
 
+	//Token
+	var vnMobileToken = null;
+	if (localStorage.getItem('VnMobileToken') !== null) {
+		var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
+		$("#nameCheckOut").val(`${vnMobileToken.fullName}`);
+		$("#emailUser").val(`${vnMobileToken.email}`);
+		var cartOrderStoraged = "VNMobileOrderCart_" + vnMobileToken.email;
+		showTrackingInfo(cartOrderStoraged)
+	}
+	else {
+		window.location.href = '/401';
+	}
+
+	getUrlParam();
+
+	function changeURL() {
+		var newURL = '/create-order'; // URL mới bạn muốn đổi
+		var newTitle = 'Tạo đơn hàng'; // Tiêu đề mới của trang
+
+		history.pushState(null, newTitle, newURL);
+
+		// Cập nhật tiêu đề của trang
+		document.title = newTitle;
+	}
+
+	function getUrlParam() {
+		var currentUrl = window.location.href;
+		var searchParams = new URLSearchParams(new URL(currentUrl).search);
+		var pageValue = searchParams.get('vnp_TransactionStatus');
+		if (pageValue !== null && pageValue === "00") {
+			var vnpay_order = JSON.parse(sessionStorage.getItem('VNPAY_Order_Create'));
+			vnpay_order.orderPayment.status = "Đã thanh toán";
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/customer/order/inserttest",
+				data: JSON.stringify(vnpay_order),
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+				},
+				contentType: 'application/json',
+				success: function(response) {
+					if (response.success) {
+						$("#vnPaySuccessModal").modal('show');
+						changeURL();
+					} else {
+						$("subError").html(`Đặt hàng thất bại!`);
+						$("#errorMess").html(`Đặt hàng lỗi, chúg tôi sẽ khắc phục lỗi này sớm nhất có thể!`);
+						$("#errorModal").modal('show');
+					}
+				},
+				error: function(xhr, status, error) {
+					$("#overlay").hide();
+					window.location.href = "/403";
+				}
+			});
+			console.log(vnpay_order);
+		}
+		else if (pageValue !== null && pageValue === "02") {
+			$("subError").html(`Thanh toán thất bại!`);
+			$("#errorMess").html(`Bạn chưa thanh toán thành công nên đơn hàng sẽ bị hủy, vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+		}
+	}
+
 	function showTrackingInfo(cartOrderStoraged) {
 		var orderCart = [];
 		if (localStorage.getItem(cartOrderStoraged) !== null) {
@@ -61,19 +125,6 @@ $(document).ready(function() {
 		else {
 			window.location.href = '/403';
 		}
-	}
-
-	//Token
-	var vnMobileToken = null;
-	if (localStorage.getItem('VnMobileToken') !== null) {
-		var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
-		$("#nameCheckOut").val(`${vnMobileToken.fullName}`);
-		$("#emailUser").val(`${vnMobileToken.email}`);
-		var cartOrderStoraged = "VNMobileOrderCart_" + vnMobileToken.email;
-		showTrackingInfo(cartOrderStoraged)
-	}
-	else {
-		window.location.href = '/401';
 	}
 
 	//Ham cap nhat gia tong
@@ -280,22 +331,22 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
-	
+
+
 	//Ham lay gia tri co ban cua don hang
-	function getBaseTotalPrice(){
+	function getBaseTotalPrice() {
 		var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
 		var cartOrderStoraged = "VNMobileOrderCart_" + vnMobileToken.email;
 		var orderCart = [];
 		var baseTotalPrice = 0;
-		if(localStorage.getItem(cartOrderStoraged)!==null){
+		if (localStorage.getItem(cartOrderStoraged) !== null) {
 			orderCart = JSON.parse(localStorage.getItem(cartOrderStoraged));
 			$.each(orderCart, function(index, value) {
-				baseTotalPrice = BigInt(baseTotalPrice) + BigInt(value.quantity*value.price);
+				baseTotalPrice = BigInt(baseTotalPrice) + BigInt(value.quantity * value.price);
 			});
 		}
-		else{
-			window.location.href='/403';
+		else {
+			window.location.href = '/403';
 		}
 		return baseTotalPrice;
 	}
@@ -386,6 +437,7 @@ $(document).ready(function() {
 					console.log("finalPrice: " + finalTotalPrice);
 					//var finalTotalPrice = BigInt(getBaseTotalPrice) + BigInt(feeData.service_fee);
 					$('#totalOrderPrice').html(`${finalTotalPrice.toLocaleString('vi-VN')}đ`);
+					$('#totalOrderPrice').attr('final-price', finalTotalPrice);
 				});
 				getApiThoiGianDuKienGHN(serviceId, to_district, to_wardCode, function(timeOrderData) {
 					console.log("Thoi gian timestamp: " + timeOrderData.leadtime);
@@ -394,10 +446,10 @@ $(document).ready(function() {
 					const leadtimeDay = leadtimeDate.getDate();
 					const leadtimeMonth = leadtimeDate.getMonth() + 1; // Tháng bắt đầu từ 0, nên cần cộng thêm 1
 					const leadtimeYear = leadtimeDate.getFullYear();
-					
+
 					const leadtimeDateString = leadtimeDay + '/' + leadtimeMonth + '/' + leadtimeYear;
 					console.log("Ngày dự kiến:", leadtimeDateString);
-					
+
 					const currentTime = Math.floor(Date.now() / 1000);
 					const leadtimeInSeconds = timeOrderData.leadtime - currentTime;
 					const remainingDays = Math.floor(leadtimeInSeconds / (24 * 3600));
@@ -430,22 +482,166 @@ $(document).ready(function() {
 			$("#introMessage").html(``);
 		}
 	});
-	
+
+	function checkNotEmpty() {
+		var isEmpty = true;
+		$("#createOrderInfo input").each(function() {
+			var inputVal = $(this).val().trim();
+			if (inputVal === "" || inputVal === "INVALID") {
+				var parentDiv = $(this).parent();
+				var smallElements = parentDiv.find("small");
+				smallElements.html('Không được để trống!');
+				isEmpty = false;
+			}
+		});
+		return isEmpty;
+	}
+
 	//An nut thanh toan
 	$("#submitOrderCart").click(function() {
+		$('#createOrderInfo small').empty();
+
+		if (!checkNotEmpty()) {
+			$("subError").html(`Thiếu thông tin!`);
+			$("#errorMess").html(`Bạn nhập thiếu thông tin đơn hàng, vui lòng kiểm tra lại!`);
+			$("#errorModal").modal('show');
+			return;
+		}
+
+		var totalPrice = $('#totalOrderPrice').attr('final-price');
+		if (!totalPrice) {
+			return;
+		}
+		var cartOrderStoraged = "VNMobileOrderCart_" + vnMobileToken.email;
+		var orderCart = JSON.parse(localStorage.getItem(cartOrderStoraged));
+
+		var listItem = [];
+
+		$.each(orderCart, function(index, value) {
+			var cartItem = {
+				"orderColorId": value.colorTypeId,
+				"color": value.color,
+				"price": value.price,
+				"quantity": value.quantity,
+				"totalPrice": 0
+			}
+			listItem.push(cartItem);
+		});
+
+		var finalSubmitOrder = {
+			"email": vnMobileToken.email,
+			"customerNote": $('#customerNote').val(),
+			"totalPrice": $('#totalOrderPrice').attr('final-price'),
+			"listItem": listItem,
+			"orderTracking": {
+				"carrier": "GIAO HANG NHANH",
+				"url": "url1",
+				"fee": $('#totalOrderFee').attr('totalFee-order'),
+				"shippingCode": "shippingcode",
+				"customerProvince": $('#provinceName option:selected').text(),
+				"customerDistrict": $('#districtName option:selected').text(),
+				"customerWard": $('#xaphuongName option:selected').text(),
+				"customerAdress": $("#houseName").val(),
+				"customerName": $('#customerName').val(),
+				"customerTelephone": $('#phoneNumber').val(),
+				"customerEmail": $('#customerEmail').val()
+			},
+			"orderPayment": {
+				"gateway": $('input[name="checkmethod"]:checked').val(),
+				"bankCode": "NO",
+				"paymentInfo": "THANH TOÁN ĐƠN HÀNG VNMOBILE",
+				"status": "Chưa thanh toán"
+			}
+		}
+
+		console.log(finalSubmitOrder);
+
 		var customer_name = $('#customerName').val();
 		var customer_phoneNumber = $('#phoneNumber').val();
 		var customer_email = $('#customerEmail').val();
 		var customer_note = $('#customerNote').val();
-		
+
+
 		var to_houseno = $('#houseName').val();
-		var to_ward = $('#xaphuongName option:selected').val();
-		var to_district = $('#districtName option:selected').val();
-		var to_province = $('#provinceName option:selected').val();
-		
-		//var totalOrderPrice = $('#').html();
-		//var feeOrder = $('#').html();
+		var to_ward = $('#xaphuongName option:selected').text();
+		var to_district = $('#districtName option:selected').text();
+		var to_province = $('#provinceName option:selected').text();
+		console.log(to_ward + ' ' + to_district + ' ' + to_province);
+
+		if ($('input[name="checkmethod"]:checked').val() === "Thanh toán khi nhận hàng") {
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/customer/order/inserttest",
+				data: JSON.stringify(finalSubmitOrder),
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+				},
+				contentType: 'application/json',
+				success: function(response) {
+					if (response.success) {
+						$("#successModal").modal('show');
+					} else {
+						$("subError").html(`Đặt hàng thất bại!`);
+						$("#errorMess").html(`Đặt hàng lỗi, chúg tôi sẽ khắc phục lỗi này sớm nhất có thể!`);
+						$("#errorModal").modal('show');
+					}
+				},
+				error: function(xhr, status, error) {
+					$("#overlay").hide();
+					window.location.href = "/403";
+				}
+			});
+		}
+		else if ($('input[name="checkmethod"]:checked').val() === "VNPAY") {
+			sessionStorage.setItem('VNPAY_Order_Create', JSON.stringify(finalSubmitOrder));
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8888/api/payment/create",
+				data: {
+					total: $('#totalOrderPrice').attr('final-price')
+				},
+				headers: {
+					'Authorization': vnMobileToken.tokenType + ' ' + vnMobileToken.token
+				},
+				success: function(response) {
+					if (response.success) {
+						window.location.href = response.data;
+					} else {
+						$("#subError").html(`Đặt hàng thất bại!`);
+						$("#errorMess").html(`Đặt hàng lỗi, chúg tôi sẽ khắc phục lỗi này sớm nhất có thể!`);
+						$("#errorModal").modal('show');
+					}
+				},
+				error: function(xhr, status, error) {
+					$("#overlay").hide();
+					window.location.href = "/403";
+				}
+			});
+		}
+
 	});
-	
-	
+
+	$(document).on('click', '.close-vnpay-modal', function() {
+		$("#vnPaySuccessModal").modal('hide');
+	});
+
+	$(document).on('click', '.confirm-vnpay-success', function() {
+		$("#vnPaySuccessModal").modal('hide');
+		window.location.href = '/order-history';
+	});
+
+	$(document).on('click', '.confirm-success', function() {
+		$("#successModal").modal('hide');
+		window.location.href = '/order-history';
+	});
+
+	$(document).on('click', '.close-modal', function() {
+		$("#errorModal").modal('hide');
+	});
+
+	$(document).on('click', '.close-success-modal', function() {
+		$("#successModal").modal('hide');
+		window.location.href = '/home';
+	});
+
 });

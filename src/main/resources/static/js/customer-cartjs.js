@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+	//Token;
+	var vnMobileToken = null;
+	if (localStorage.getItem('VnMobileToken') !== null) {
+		var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
+		var cartStoraged = "vnMobileCart_" + vnMobileToken.email;
+		showCartItem(cartStoraged);
+		console.log('in thanh cong');
+	}
+	else {
+		window.location.href = '/signin';
+	}
+
 	function showCartItem(cartStoraged) {
 		var cart = [];
 		if (localStorage.getItem(cartStoraged) !== null) {
@@ -101,18 +113,6 @@ $(document).ready(function() {
 		}
 	}
 
-	//Token;
-	var vnMobileToken = null;
-	if (localStorage.getItem('VnMobileToken') !== null) {
-		var vnMobileToken = JSON.parse(localStorage.getItem('VnMobileToken'));
-		var cartStoraged = "vnMobileCart_" + vnMobileToken.email;
-		showCartItem(cartStoraged);
-		console.log('in thanh cong');
-	}
-	else {
-		window.location.href = '/signin';
-	}
-
 	//tang so luong
 	$(document).on('click', '.plus-btn', function() {
 		var inputField = $(this).parent().prev('.quantity-input');
@@ -146,37 +146,26 @@ $(document).ready(function() {
 		});
 	});
 
-	//xoa toan bo
+	//Xoa toan bo
 	$("#deleteAllCartItem").click(function() {
 		cart = [];
-		$("#messageConfirm").html(`<i style="color: red" class="fa fa-trash"></i> <strong style="color: red">Bạn có chắc muốn bỏ các sản phẩm đã chọn khỏi giỏ hàng?</strong>`)
-		$("#confirmModal").modal('show');
-		$("#confirmModalButton").off('click').on('click', function() {
-			$("#deleteCartItemModal").modal('hide');
+		$("#deleteAllCartItemModal").modal('show');
+		$("#submitDeleteAllCartItem").off('click').on('click', function() {
+			$("#deleteAllCartItemModal").modal('hide');
 			localStorage.setItem(cartStoraged, JSON.stringify(cart));
 			showCartItem(cartStoraged);
-			console.log("Xoa thanh cong!");
+			window.location.href='/cart';
 		});
 	});
 
 	//Ấn nút thanh toán
 	$(document).on('click', '#checkoutCart', function() {
-		if (getCheckedItems().length === 0) {
-			$("#exampleModalLabel").html(`Thông báo`);
-			$("#messageConfirm").html(`<i style="color: red" class="fa fa-shopping-cart"></i> <strong style="color: red"> Bạn chưa chọn sản phẩm nào trong giỏ hàng!</strong>`)
-			$("#confirmModal").modal('show');
-			$("#confirmModalButton").off('click').on('click', function() {
-				$("#confirmModal").modal('hide');
-			});
+		if (getCheckedItems().length === 0 || JSON.parse(localStorage.getItem(cartStoraged)).length===0) {
+			$("#emptyCartModal").modal('show');
 		}
 		else {
-			$("#messageConfirm").html(`<i style="color: green" class="fa fa-shopping-cart"></i> <strong style="color: green">Tạo đơn hàng với các mặt hàng đã chọn trong giỏ hàng?</strong>`)
-			$("#confirmModal").modal('show');
-
-			$("#confirmModalButton").off('click').on('click', function() {
-				$("#deleteCartItemModal").modal('hide');
-				console.log(getCheckedItems());
-				console.log("Test: tạo đơn hàng thành công -> checkout");
+			$("#checkOutModal").modal('show');
+			$("#confirmCheckoutButton").off('click').on('click', function() {
 				var confirmCart = [];
 				var cart = [];
 				cart = JSON.parse(localStorage.getItem(cartStoraged));
@@ -186,7 +175,7 @@ $(document).ready(function() {
 					confirmCart.push(cartItem);
 				});
 				localStorage.setItem("VNMobileOrderCart_" + vnMobileToken.email, JSON.stringify(confirmCart));
-				window.location.href='/create-order';
+				window.location.href = '/create-order';
 			});
 		}
 	});

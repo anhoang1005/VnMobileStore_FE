@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#overlay").hide();
+	//$("#successModal").modal('show');
 	$("#submitSignup").on("click", function() {
 		var fullName = $('#fullName').val();
 		var phoneNumber = $('#phoneNumber').val();
@@ -116,9 +117,8 @@ $(document).ready(function() {
 					$("#overlay").hide();
 					if (response.success) {
 						$("#verifyUserModal").modal('hide');
-						$("#messageConfirm").html(`<i style="color: green" class="fa-solid fa-circle-check"></i> Xác nhận thành công!`);
-						$("#confirmModal").modal('show');
-						$("#confirmModalButton").click(function(){
+						$("#successModal").modal('show');
+						$("#successBtn").click(function(){
 							window.location.href='/signin';
 						});
 					} else {

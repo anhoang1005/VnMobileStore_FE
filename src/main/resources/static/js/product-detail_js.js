@@ -79,7 +79,7 @@ $(document).ready(function() {
 				$("#productBattery").html(`${response.data.productInfo.battery}`);
 				$("#productSystem").html(`${response.data.productInfo.operatingSystem}`);
 				$("#productWeight").html(`${response.data.productInfo.weight}`);
-				
+
 				$("#customScreen").html(`<i class="fa-solid fa-mobile-screen"></i> ${response.data.productInfo.screen}`);
 				$("#customBackCamera").html(`<i class="fa-solid fa-video"></i> ${response.data.productInfo.backCamera}`);
 				$("#customFrontCamera").html(`<i class="fa-solid fa-camera"></i> ${response.data.productInfo.frontCamera}`);
@@ -107,7 +107,7 @@ $(document).ready(function() {
 				$("#productRateStar").html(html);
 				$("#reviewRateStar").html(`${response.data.ratingStar.toFixed(1)}`);
 				$("#reviewComment").html(`${response.data.listReview} đánh giá`);
-				
+
 				//Type da chon
 				var typeProduct = response.data.listType.find(type => type.room == version); //Type Product
 				$("#productPrice").html(`${typeProduct.price.toLocaleString('vi-VN')}đ`); //Product Price version
@@ -165,19 +165,18 @@ $(document).ready(function() {
 							"stt": 0,
 							"productSlug": slug,
 							"title": response.data.title,
-							"thumbnail" : response.data.thumbnail,
+							"thumbnail": response.data.thumbnail,
 							"productTypeId": parseInt(selectedTypeSubmit),
 							"colorTypeId": parseInt(selectedColorSubmit),
 							"typeName": parseInt(typeProduct.room),
 							"color": productColor.color,
 							"weight": parseInt(response.data.productInfo.weight),
-							"price" : typeProduct.price,
+							"price": typeProduct.price,
 							"quantity": quantitySubmit
 						}
 						addToCart(productCartItem, vnMobileToken.email);
 						console.log("Mau sac:" + parseInt(selectedColorSubmit));
-						$("#messageConfirm").html(`<i style="color: green" class="fa-solid fa-circle-check"></i> <strong> Thêm giỏ hàng thành công!</strong>`);
-						$("#confirmModal").modal('show');
+						$("#addCartSuccessModal").modal('show');
 					}
 				});
 			} else {
@@ -252,9 +251,10 @@ $(document).ready(function() {
 								success: function(response) {
 									if (response.success) {
 										$('#insertReviewModal').modal('hide');
-										$("#messageConfirm").html(`<i style="color: green" class="fa-solid fa-circle-check"></i> <strong>Thêm đánh giá thành công!</strong>`);
-										$("#confirmModal").modal('show');
-										$("#confirmButton").on("click", function() {
+										$("successMessage").html(`Thành công!`);
+										$("#successConfirm").html(`Đánh giá của bạn đã được thêm thành công! Cảm ơn bạn đã đưa ra đánh giá về sản phẩm của chúng tôi!`);
+										$("#successModal").modal('show');
+										$("#successBtn").on("click", function() {
 											window.location.reload();
 										});
 									} else {
@@ -342,9 +342,10 @@ $(document).ready(function() {
 								success: function(response) {
 									if (response.success) {
 										$('#updateReviewModal').modal('hide');
-										$("#messageConfirm").html(`<i style="color: green" class="fa-solid fa-circle-check"></i> <strong> Sửa đánh giá thành công!</strong>`);
-										$("#confirmModal").modal('show');
-										$("#confirmButton").on("click", function() {
+										$("successMessage").html(`Thành công!`);
+										$("#successConfirm").html(`Sửa đánh giá thành công!`);
+										$("#successModal").modal('show');
+										$("#successBtn").on("click", function() {
 											window.location.reload();
 										});
 									} else {
@@ -384,19 +385,9 @@ $(document).ready(function() {
 								success: function(response) {
 									//console.log(response);
 									if (response.success) {
-										$('#deleteReviewModal').modal('hide');
-										$("#messageConfirm").html(`<i style="color: green" class="fa-solid fa-circle-check"></i> <strong> Xóa đánh giá thành công!</strong>`);
-										$("#confirmModal").modal('show');
-										$("#confirmButton").on("click", function() {
-											window.location.reload();
-										});
+										window.location.reload();
 									} else {
-										$('#deleteReviewModal').modal('hide');
-										$("#messageConfirm").html(`<i style="color: red" class="fa-solid fa-circle-xmark"></i> Xóa đánh giá thất bại (500)!</strong>`);
-										$("#confirmModal").modal('show');
-										$("#confirmButton").on("click", function() {
-											window.location.reload();
-										});
+										window.location.reload();
 									}
 								},
 								error: function(xhr, status, error) {
@@ -430,7 +421,7 @@ $(document).ready(function() {
 						`;
 					$("#productReview").append(customReviewHtml);
 					$("#customReviewLogin").on("click", function() {
-						window.location.href="/signin";
+						window.location.href = "/signin";
 					});
 				}
 				var userReviewHtml = ``;
@@ -478,6 +469,28 @@ $(document).ready(function() {
 			console.error(xhr.responseText);
 			console.log('Đã xảy ra lỗi khi gửi yêu cầu.' + status + error);
 		}
+	});
+
+	$('a[star-cnt]').click(function() {
+		var selectedStarCnt = parseInt($(this).attr('star-cnt')); // Lấy giá trị star-cnt
+		$('a[star-cnt]').each(function() {
+			var starCnt = parseInt($(this).attr('star-cnt'));
+			var starColor = starCnt <= selectedStarCnt ? 'orange' : 'grey'; // Chọn màu cho sao
+			$(this).find('i').css('color', starColor); // Thay đổi màu của sao
+		});
+		
+		$("#insert_rating").val(selectedStarCnt);
+	});
+	
+	$('a[upstar-cnt]').click(function() {
+		var selectedStarCnt = parseInt($(this).attr('upstar-cnt')); // Lấy giá trị star-cnt
+		$('a[upstar-cnt]').each(function() {
+			var starCnt = parseInt($(this).attr('upstar-cnt'));
+			var starColor = starCnt <= selectedStarCnt ? 'orange' : 'grey'; // Chọn màu cho sao
+			$(this).find('i').css('color', starColor); // Thay đổi màu của sao
+		});
+		
+		$("#update_rating").val(selectedStarCnt);
 	});
 
 });

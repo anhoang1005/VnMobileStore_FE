@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/signin.css">
 	<!-- Custom JS -->
-	<script src="/js/customer-cart_js.js"></script>
+	<script src="/js/customer-cartjs.js"></script>
 	<script src="/js/menu_js.js"></script>
 </head>
 
@@ -181,7 +181,7 @@
 					<p> Bạn chưa thêm sản phẩm nào! </p>
 				</div>
 				<div id="cartTable" class="table-responsive">
-					<table class="table table-striped">
+					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
 								<th class="text-center" scope="col">
@@ -190,9 +190,9 @@
 								</th>
 								<th class="text-center" scope="col"></th>
 								<th class="text-center" scope="col"></th>
+								<th class="text-center" scope="col" style="min-width: 200px;"></th>
 								<th class="text-center" scope="col"></th>
-								<th class="text-center" scope="col"></th>
-								<th class="text-center" scope="col">
+								<th class="text-center" scope="col" style="min-width: 200px;">
 									<button id="deleteAllCartItem" class="btn btn-sm btn-danger">
 										Xóa tất cả
 									</button>
@@ -218,11 +218,11 @@
 						<div>
 							<div class="form-group">
 								<label for="shipping">Mã Shipping:</label>
-								<input class="form-control" type="text" name="shipping">
+								<input class="form-control" type="text" name="shipping" placeholder="Nhập mã shipping...">
 							</div>
 							<div class="form-group">
 								<label for="givesale">Mã giảm giá:</label>
-								<input class="form-control" type="text" name="givesale" placeholder="Nhap code...">
+								<input class="form-control" type="text" name="givesale" placeholder="Nhập mã code...">
 							</div>
 							<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
 							<p class="name" style="color: black; font-size: 1em"><strong>Thành tiền: <span
@@ -235,54 +235,30 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12">
+		<div>
 			<nav aria-label="...">
 				<ul class="pagination">
 					<li class="page-item disabled">
-						<a class="page-link" href="#" tabindex="-1">Previous</a>
+						<a class="page-link" href="#" tabindex="-1">Trước</a>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
 					<li class="page-item active">
-						<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+						<a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">...</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
 					<li class="page-item">
-						<a class="page-link" href="#">Next</a>
+						<a class="page-link" href="#">Sau</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
-		
+
 	</div>
 
-	<!-- Modal Delete Cart -->
+	<!-- Delete Modal -->
 	<div class="modal fade" id="deleteCartItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Bỏ sản phẩm khỏi giỏ hàng</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p id="messageDelete" style="color: #cd1818;"><strong>Bạn có chắc muốn bỏ sản phẩm này khỏi giỏ
-							hàng?</strong>
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-					<button id="submitDeleteCartItem" type="button" class="btn btn-danger">Xác nhận</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Confirm Modal -->
-	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-dialog modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
@@ -291,17 +267,125 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<p id="messageConfirm"></p>
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<strong>
+								<p id="subMessage">Bỏ sản phẩm khỏi giỏ hàng</p>
+							</strong>
+							<p id="messageConfirm">Bạn có chăc muốn bỏ sản phẩm khỏi giỏ hàng?</p>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-					<button id="confirmModalButton" type="button" class="btn btn-success" data-dismiss="modal">Xác
+					<button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Hủy</button>
+					<button id="submitDeleteCartItem" type="button" class="btn btn-danger col-3"
+						data-dismiss="modal">Xác
 						nhận</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<!-- Delete All Modal -->
+	<div class="modal fade" id="deleteAllCartItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<strong>
+								<p id="subMessage">Xóa toàn bộ giỏ hàng</p>
+							</strong>
+							<p id="messageConfirm">Bạn có chăc muốn xóa giỏ hàng?</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Hủy</button>
+					<button id="submitDeleteAllCartItem" type="button" class="btn btn-danger col-3"
+						data-dismiss="modal">Xác
+						nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Empty Cart Modal -->
+	<div class="modal fade" id="emptyCartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: red; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<strong>
+								<p>Giỏ hàng trống!</p>
+							</strong>
+							<p>Giỏ hàng của bạn trống, vui lòng thêm sản phẩm vào giỏ hàng!</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- CheckOut Modal -->
+	<div class="modal fade" id="checkOutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: green; font-size: 2em;" class="fa-solid fa-circle-info"></i>
+						</div>
+						<div class="mb-3 ms-3">
+							<strong>
+								<p id="subMessage">Xác nhận thanh toán!</p>
+							</strong>
+							<p id="messageConfirm">Thanh toán các sản phẩm được chọn trong giỏ hàng?</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Hủy</button>
+					<button id="confirmCheckoutButton" type="button" class="btn btn-success col-3" data-dismiss="modal">Xác
+						nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!--Footer-->
 	<footer class="text-light">

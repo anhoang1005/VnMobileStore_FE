@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+	if (sessionStorage.getItem('vnMobileAdTime') === null) {
+		$("#closeNotify").hide()
+		$("#notifyModal").modal('show')
+
+		setTimeout(function() {
+			$("#closeNotify").show(); // Hiển thị nút closeNotify sau 3 giây
+		}, 3000); // 3000 milliseconds = 3 giây
+	}
+
+	//sessionStorage.setItem('vnMobileAdTime', '30')
+
+
 	//Trang dau
 	getBaseProduct(1);
 	showCategory();

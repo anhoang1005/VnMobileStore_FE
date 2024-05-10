@@ -60,4 +60,9 @@ public class AdminController {
 	public String quanliAccountFrm() {
 		return "quanli-account";
 	}
+	
+	@GetMapping("/admin-template-dashboard")
+	public String adminDashBoardFrm() {
+		return "admin-template-dashboard";
+	}
 }

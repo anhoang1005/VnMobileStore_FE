@@ -20,11 +20,6 @@ public class UserController {
 	public String homeFrm() {
 		return "home";
 	}
-
-//	@GetMapping("/productdetail/{slug}")
-//	public String productDetailFrm() {
-//		return "productdetail";
-//	}
 	
 	@GetMapping("/cart")
 	public String cartFrm() {
@@ -34,6 +29,11 @@ public class UserController {
 	@GetMapping("/detail/{slug}/{vesion}")
 	public String detailFrm() {
 		return "detail";
+	}
+	
+	@GetMapping("/product-detail/{slug}/{vesion}")
+	public String productDetailFrm() {
+		return "product-detail";
 	}
 	
 	@GetMapping("/401")
@@ -75,5 +75,10 @@ public class UserController {
 	@GetMapping("/create-order")
 	public String createOrderFrm() {
 		return "create-order";
+	}
+	
+	@GetMapping("/customer-order")
+	public String customerOrderFrm() {
+		return "customer-order";
 	}
 }

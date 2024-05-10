@@ -19,7 +19,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<!--fontAwesome-->
-	<script src="https://kit.fontawesome.com/d75d72b9b4.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/0f88defa61.js" crossorigin="anonymous"></script>
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="/css/style.css">
@@ -223,17 +223,51 @@
 				</div>
 				<div class="modal-body">
 					<form class="justify-content-center align-items-center">
-						<p><strong>Chúng tôi đã gửi một mã xác nhận vào email của bạn! Vui lòng nhập mã xác nhận để xác
+						<p><strong>Chúng tôi đã gửi một mã xác nhận gồm 6 chữ số vào email của bạn! Vui lòng nhập mã xác nhận để xác
 								nhận tài khoản!</strong></p>
 						<div class="form-group">
 							<label for="verifyCode">Mã xác nhận</label>
 							<input id="verify_code" type="text" class="form-control" required>
 							<small style="color: red;" id="verifyMessage"></small>
 						</div>
+						<br>
+						<button class="btn btn-success btn-md">Gửi lại mã</button>
 					</form>
 				</div>
 				<div class="modal-footer d-flex justify-content-center align-items-center">
 					<button id="submitverifyCode" type="button" class="btn btn-primary ml-auto">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Review Sucess Modal -->
+	<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-12 d-flex">
+						<div class="mb-2" id="confirmIcon">
+							<i style="color: green; font-size: 2em;" class="fa-regular fa-circle-check"></i>
+						</div>
+						<div class="mb-3 ml-3">
+							<strong>
+								<p id="successMessage">Đăng kí thành công!</p>
+							</strong>
+							<p id="successConfirm">Xác thực tài khoản thành công! Vui lòng đăng nhập để sử dụng dịch vụ!</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="successBtn" type="button" class="btn btn-success col-3" data-dismiss="modal">Xác
+						nhận</button>
 				</div>
 			</div>
 		</div>

@@ -29,6 +29,7 @@ $(document).ready(function() {
 		var currentUrl = window.location.href;
 		var searchParams = new URLSearchParams(new URL(currentUrl).search);
 		var pageValue = searchParams.get('vnp_TransactionStatus');
+		changeURL();
 		if (pageValue !== null && pageValue === "00") {
 			var vnpay_order = JSON.parse(sessionStorage.getItem('VNPAY_Order_Create'));
 			vnpay_order.orderPayment.status = "Đã thanh toán";
@@ -47,6 +48,7 @@ $(document).ready(function() {
 					} else {
 						$("subError").html(`Đặt hàng thất bại!`);
 						$("#errorMess").html(`Đặt hàng lỗi, chúg tôi sẽ khắc phục lỗi này sớm nhất có thể!`);
+						changeURL();
 						$("#errorModal").modal('show');
 					}
 				},
@@ -58,6 +60,7 @@ $(document).ready(function() {
 			console.log(vnpay_order);
 		}
 		else if (pageValue !== null && pageValue === "02") {
+			changeURL();
 			$("subError").html(`Thanh toán thất bại!`);
 			$("#errorMess").html(`Bạn chưa thanh toán thành công nên đơn hàng sẽ bị hủy, vui lòng kiểm tra lại!`);
 			$("#errorModal").modal('show');

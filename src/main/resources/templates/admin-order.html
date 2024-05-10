@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Quản lí đơn hàng</title>
+
+	<!--Jquery.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+	<!-- Add Popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	<!-- Bootstrap JS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+	<link href="/css/401.css" rel="stylesheet" />
+	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/asset/js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="/asset/js/chart-area-demo.js"></script>
+	<script src="/asset/js/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/asset/js/datatables-simple-demo.js"></script>
+
+	<script src="/js/admin-orderjs.js"></script>
+	<script src="/js/admin-menu.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+
+	<!--Thanhmenu-->
+	<nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #cd1818;">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="index.html">VnMobile</a>
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+				class="fas fa-bars"></i></button>
+		<!-- Navbar Search-->
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?" aria-label="Search for..."
+					aria-describedby="btnNavbarSearch" />
+				<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+						class="fas fa-search"></i></button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" href="#" role="button"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					<div class="avatar-container"
+						style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
+						<img id="userAvatar" class="avatar" style="width: 100%; height: auto; object-fit: cover;"
+							src="/img/avatar/me.jpg" alt="Avatar">
+					</div>
+					<span id="userfullName" class="ms-2 text-white">Hoàng Văn An</span>
+				</a>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i> Tài khoản</a></li>
+					<li><a class="dropdown-item" href="/notifycation"><i class="fa-solid fa-bell"></i> Thông báo</a>
+					</li>
+					<li>
+						<hr class="dropdown-divider" />
+					</li>
+					<li>
+						<a id="logoutUser" style="color: red;" class="dropdown-item" href="#!">
+							<i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<!--End-->
+
+	<div id="layoutSidenav">
+
+		<!--Menu ngang-->
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">Chính</div>
+						<a class="nav-link" href="/admin-dashboard">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
+							Trang chính
+						</a>
+						<div class="sb-sidenav-menu-heading">Quản lí</div>
+						<a class="nav-link" href="/admin-product">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+							Quản lí mặt hàng
+						</a>
+						<a class="nav-link" href="/admin-category">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+							Quản lí danh mục
+						</a>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-warehouse"></i></div>
+							Quản lí kho hàng
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
+							data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin-supplier">Nhập hàng</a>
+								<a class="nav-link" href="/admin-supplier-bill">Hóa đơn nhập hàng</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseAccount" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-user"></i></div>
+							Quản lí tài khoản
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseAccount" aria-labelledby="headingOne"
+							data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin-account">Danh sách tài khoản</a>
+								<a class="nav-link" href="/404">Danh sách nhân viên</a>
+							</nav>
+						</div>
+						<a class="nav-link" href="/admin-order">
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+							Quản lí đơn hàng
+						</a>
+
+						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
+						<a class="nav-link" href="/admin-revenue-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+							Thống kê doanh thu
+						</a>
+						<a class="nav-link" href="/admin-product-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							Thống kê sản phẩm
+						</a>
+						<a class="nav-link" href="/admin-supplier-report">
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							Thống kê nhập hàng
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!--end-->
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<h1 class="mt-4">Quản lí đơn hàng</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a href="index.html">Trang chính</a></li>
+						<li class="breadcrumb-item active">Quản lí đơn hàng</li>
+					</ol>
+					<div class="card mb-4">
+						<div class="card-header bg-danger text-white">
+							<i class="fas fa-table me-1"></i>
+							Danh sách đơn hàng
+						</div>
+						<div class="card-body">
+							<div class="col-md-12 mb-4">
+								<div class="row">
+									<div class="col-md-3 p-2">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+											<option selected>--Tình trạng--</option>
+											<option value="1">Chờ xác nhận</option>
+											<option value="3">Đang lấy hàng</option>
+											<option value="4">Đang giao hàng</option>
+											<option value="5">Giao hàng thành công</option>
+											<option value="5">Đã hủy</option>
+										</select>
+									</div>
+									<div class="col-md-3 p-2">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+											<option selected>--Thanh toán--</option>
+											<option value="1">Thanh toán khi nhận hàng</option>
+											<option value="1">VNPAY</option>
+											<option value="1">ZALOPAY</option>
+										</select>
+									</div>
+									<div class="col-md-3 p-2">
+										<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
+											aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+										<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
+												class="fas fa-search"></i></button>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover">
+									<thead>
+										<tr>
+											<th scope="col">Mã đơn hàng</th>
+											<th scope="col">Thông tin tạo đơn</th>
+											<th scope="col">Thông tin người nhận</th>
+											<th scope="col">Địa chỉ giao hàng</th>
+											<th scope="col">Thanh toán</th>
+											<th scope="col">Giao hàng</th>
+											<th scope="col">Tình trạng</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody id="bodyTable">
+										<tr>
+											<td><strong>#DH001</strong></td>
+											<td>
+												<p>Người tạo: matgoc10052002@gmail.com</p>
+												<p>Ngày tạo: 20/11/2024 13:20:23</p>
+												<p><strong>Thành tiền: 30.230.232đ</strong></p>
+											</td>
+											<td>
+												<p>Họ tên: Hoàng Văn An</p>
+												<p>Email: matgoc1005@gmail.com</p>
+												<p>Sđt: 0867865001</p>
+											</td>
+											<td>
+												<p>So nha 12</p>
+												<p>Phường Mộ Lao</p>
+												<p>Quận Hà Đông</p>
+												<p>Hà Nội</p>
+											</td>
+											<td>VnPay</td>
+											<td>
+												<p>GIAOHANGNHANH</p>
+												<p>Phí ship: 53.000đ</p>
+											</td>
+											<td>
+												<button supplier-id="1" class="btn btn-success col-12">
+													Chưa xác nhận
+												</button>
+											</td>
+											<td>
+												<button supplier-id="1" id="importProduct" class="btn btn-success">
+													<i class="fa-solid fa-cart-plus"></i>
+												</button>
+												<button supplier-id="1" id="updateSupplierBtn" class="btn btn-warning">
+													<i class="fa-solid fa-pen-to-square"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<nav aria-label="..." class="mt-3">
+								<ul id="pageCurrent" page-current="1" class="pagination">
+									<li class="page-item disable">
+										<a id="pageNumberPrevious" class="page-link disable">Truớc</a>
+									</li>
+									<li class="page-item d-none">
+										<a id="pagePrevious" class="page-link">1</a>
+									</li>
+									<li class="page-item active">
+										<a id="pageNumberCurrent" class="page-link">1</a>
+									</li>
+									<li class="page-item d-none">
+										<a id="pageNext" class="page-link">3</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link">...</a>
+									</li>
+									<li class="page-item">
+										<a id="pageCount" class="page-link">1</a>
+									</li>
+									<li class="page-item disable">
+										<a id="pageNumberNext" class="page-link disable">Sau</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!-- change order status-->
+			<div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận đơn hàng</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="mb-3">
+									<label for="supplier-name" class="col-form-label">Chọn trạng thái đơn hàng:</label>
+									<select id="statusUpdate" class="form-select form-select-sm"
+										aria-label=".form-select-sm example">
+										<option value="1">Chờ xác nhận</option>
+										<option value="2">Đang lấy hàng</option>
+										<option value="3">Đang giao hàng</option>
+										<option value="4">Giao hàng thành công</option>
+										<option value="5">Đã hủy</option>
+									</select>
+									<small style="color: red;" id="statusMessage"></small>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary col-3" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitChangeStatusBtn" class="btn btn-primary ml-auto col-3">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Confirm Modal -->
+			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 d-flex">
+								<div class="mb-2" id="confirmIcon">
+									<i class="fa-regular fa-circle-check"></i>
+								</div>
+								<div class="mb-3 ms-3">
+									<strong>
+										<p id="subMess"></p>
+									</strong>
+									<p id="confirmMess"></p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- view order detail-->
+			<div class="modal fade" id="viewOrderModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div id="detailModalBody" class="modal-body">
+							<p>Mã đơn hàng: #DH001</p>
+							<p>Ngày đặt: 20/11/2023</p>
+							<p>Người đặt: matgoc1005@gmail.com</p>
+							<p>Thông tin người nhận: Hoàng Văn An, 0867865001</p>
+							<p>Địa chỉ giao hàng: Mộ Lao, Hà Đông, Hà Nội</p>
+							<p>Cổng giao hàng: GIAO HÀNG NHANH</p>
+							<p>Cổng thanh toán: VNPAY</p>
+							<p>Tình trạng thanh toán: Đã thanh toán</p>
+							<div class="table-responsive" style="max-height: 300px; min-height: 300px;">
+								<table class="table table-bordered table-striped table-hover">
+									<thead>
+										<tr>
+											<th scope="col">Ảnh</th>
+											<th scope="col">Tên sản phẩm</th>
+											<th scope="col">Số lượng</th>
+											<th scope="col">Thành tiền</th>
+										</tr>
+									</thead>
+									<tbody id="detailOrderTable">
+										<tr>
+											<td><strong>#DH001</strong></td>
+											<td>
+												<p>Iphone 15 Pro Max</p>
+												<p>8GB-256GB Black</p>
+												<p><strong>Đơn giá: 30.230.232đ</strong></p>
+											</td>
+											<td>
+												<p>Số lượng: 1</p>
+											</td>
+											<td>
+												<p><strong>Thành tiền: 30.230.232đ</strong></p>
+											</td>
+										</tr>
+										<tr>
+											<td><strong>#DH001</strong></td>
+											<td>
+												<p>Iphone 15 Pro Max</p>
+												<p>8GB-256GB Black</p>
+												<p><strong>Đơn giá: 30.230.232đ</strong></p>
+											</td>
+											<td>
+												<p>Số lượng: 1</p>
+											</td>
+											<td>
+												<p><strong>Thành tiền: 30.230.232đ</strong></p>
+											</td>
+										</tr>
+										<tr>
+											<td><strong>#DH001</strong></td>
+											<td>
+												<p>Iphone 15 Pro Max</p>
+												<p>8GB-256GB Black</p>
+												<p><strong>Đơn giá: 30.230.232đ</strong></p>
+											</td>
+											<td>
+												<p>Số lượng: 1</p>
+											</td>
+											<td>
+												<p><strong>Thành tiền: 30.230.232đ</strong></p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="modal-footer d-flex">
+							<button class="btn btn-secondary col-3" data-bs-dismiss="modal">Hủy</button>
+							<button id="viewBtn" class="btn btn-primary ml-auto col-3">In hóa đơn</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid px-4">
+					<div class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Created By Hoàng Văn An 2023</div>
+						<div>
+							<a href="#">Privacy Policy</a>
+							&middot;
+							<a href="#">Terms &amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</body>
+
+</html>

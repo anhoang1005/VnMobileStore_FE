@@ -73,9 +73,9 @@ $(document).ready(function() {
 
 
 	//Hien table
-	function showTable(listBill) {
+	function showTable(listOrder) {
 		var tableHtml = ``;
-		$.each(listBill, function(index, value) {
+		$.each(listOrder, function(index, value) {
 			tableHtml += `<tr>
 								<th scope="row">${index + 1}</th>
 								<td>#HD000${value.id}</td>

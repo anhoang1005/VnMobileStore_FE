@@ -21,6 +21,11 @@ public class AdminController {
 		return "admin-insert-product";
 	}
 	
+	@GetMapping("/admin-update-product")
+	public String updateProductFrm() {
+		return "admin-update-product";
+	}
+	
 	@GetMapping("/admin-category")
 	public String categoryFrm() {
 		return "admin-category";
@@ -65,4 +70,20 @@ public class AdminController {
 	public String adminDashBoardFrm() {
 		return "admin-template-dashboard";
 	}
+	
+	@GetMapping("/admin-order-report")
+	public String adminOrderReportFrm() {
+		return "admin-order-report";
+	}
+	
+	@GetMapping("/admin-supplier-report")
+	public String supplierReportFrm() {
+		return "admin-supplier-report";
+	}
+	
+	@GetMapping("/admin-product-report")
+	public String productReportFrm() {
+		return "admin-product-report";
+	}
+	
 }

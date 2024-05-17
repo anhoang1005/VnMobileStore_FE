@@ -46,7 +46,7 @@
 	<!--Thanhmenu-->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #cd1818;">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">VnMobile</a>
+		<a class="navbar-brand ps-3" href="/home">VnMobile</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
 				class="fas fa-bars"></i></button>
@@ -142,9 +142,9 @@
 						</a>
 
 						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
-						<a class="nav-link" href="/admin-revenue-report">
+						<a class="nav-link" href="/admin-order-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-							Thống kê doanh thu
+							Thống kê đơn hàng
 						</a>
 						<a class="nav-link" href="/admin-product-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -176,33 +176,57 @@
 						<div class="card-body">
 							<div class="col-md-12 mb-4">
 								<div class="row">
-									<div class="col-md-3 p-2">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-											<option selected>--Vai trò--</option>
-											<option value="1">QUANLI</option>
-											<option value="2">KHACHHANG</option>
-											<option value="3">NHANVIENKHO</option>
+									<div class="col-md-2 p-2">
+										<label for="roleChange">Vai trò</label>
+										<select id="roleChange" class="form-select form-select-sm"
+											aria-label=".form-select-sm example">
+											<option value="0" selected>Tất cả</option>
+											<option value="1">Khách hàng</option>
+											<option value="2">Quản lí</option>
+											<option value="3">Nhân viên kho</option>
+											<option value="4">Nhân viên bán hàng</option>
 										</select>
 									</div>
-									<div class="col-md-3 p-2">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-											<option selected>--Tình trạng--</option>
-											<option value="3">Bị khóa</option>
-											<option value="3">Không bị khóa</option>
-										</select>
-									</div>
-									<div class="col-md-3 p-2">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-											<option selected>--Xác thực--</option>
-											<option value="1">Đã xác thực</option>
+									<div class="col-md-2 p-2">
+										<label for="statusChange">Trạng thái</label>
+										<select id="statusChange" class="form-select form-select-sm"
+											aria-label=".form-select-sm example">
+											<option value="0" selected>Bình thường</option>
+											<option value="1">Bị khóa</option>
 											<option value="2">Chưa xác thực</option>
 										</select>
 									</div>
-									<div class="col-md-3 p-2">
-										<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
+									<div class="col-md-2 p-2">
+										<label for="filterChange">Sắp xếp</label>
+										<select id="filterChange" class="form-select form-select-sm"
+											aria-label=".form-select-sm example">
+											<option value="0" selected>Mã tăng</option>
+											<option value="1">Mã giảm</option>
+										</select>
+									</div>
+									<div class="col-md-2 p-2">
+										<label for="emailSearch">Email</label>
+										<input id="emailSearch" class="form-control form-control-sm" type="text"
+											placeholder="Tìm theo email" aria-label="Search for..."
+											aria-describedby="btnNavbarSearch" />
+									</div>
+									<div class="col-md-2 p-2">
+										<label for="idSearch">Mã tài khoản</label>
+										<input id="idSearch" class="form-control form-control-sm" type="text"
+											placeholder="Tìm theo mã" aria-label="Search for..."
+											aria-describedby="btnNavbarSearch" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2 p-2">
+										<label for="start-date">Ngày bắt đầu</label>
+										<input id="start-date" class="form-control form-control-sm" type="date"
 											aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-										<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
-												class="fas fa-search"></i></button>
+									</div>
+									<div class="col-md-2 p-2">
+										<label for="start-date">Ngày kết thúc</label>
+										<input id="start-date" class="form-control form-control-sm" type="date"
+											aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 									</div>
 								</div>
 							</div>

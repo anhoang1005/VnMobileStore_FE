@@ -14,16 +14,18 @@ else {
 }
 
 $(document).ready(function() {
-	baseTable(0, 0, "EMPTY", 1);
+	baseTable(0, 0, "EMPTY", 'EMPTY', 'EMPTY', 1);
 	//Table mo dau trang
-	function baseTable(status, gateway, keyword, pageNumber) {
+	function baseTable(status, gateway, keyword, startDate, endDate, pageNumber) {
 		$.ajax({
 			method: "GET",
-			url: "http://localhost:8888/api/admin/order/admin-search",
+			url: "http://localhost:8888/api/admin/order/admin-search2",
 			data: {
 				status: status,
 				gateway: gateway,
 				keyword: keyword,
+				startDate: startDate,
+				endDate: endDate,
 				pageNumber: pageNumber
 			},
 			headers: {
@@ -35,12 +37,12 @@ $(document).ready(function() {
 					$("#pageCount").html(`${response.pageData}`);
 					$("#pageNumberCurrent").html(pageNumber);
 				} else {
-					window.location.href = "/404";
+					//window.location.href = "/404";
 				}
 			},
 			error: function(xhr, status, error) {
 				$("#overlay").hide();
-				window.location.href = "/403";
+				//window.location.href = "/403";
 			}
 		});
 	}
@@ -174,7 +176,13 @@ $(document).ready(function() {
 			if (keywordChange === "") {
 				keywordChange = "EMPTY";
 			}
-			baseTable(statusChange, gatewayChange, keywordChange, parseInt(currentPage) - 1);
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			if (startDate === "" || endDate === "") {
+				startDate = 'EMPTY';
+				endDate = 'EMPTY'
+			}
+			baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, parseInt(currentPage) - 1);
 		}
 	});
 
@@ -189,7 +197,13 @@ $(document).ready(function() {
 			if (keywordChange === "") {
 				keywordChange = "EMPTY";
 			}
-			baseTable(statusChange, gatewayChange, keywordChange, parseInt(currentPage) + 1);
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			if (startDate === "" || endDate === "") {
+				startDate = 'EMPTY';
+				endDate = 'EMPTY'
+			}
+			baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, parseInt(currentPage) + 1);
 		}
 	});
 
@@ -222,7 +236,9 @@ $(document).ready(function() {
 						if (keywordChange === "") {
 							keywordChange = "EMPTY";
 						}
-						baseTable(statusChange, gatewayChange, keywordChange, currentPage);
+						var startDate = $("#startDate").val();
+						var endDate = $("#endDate").val();
+						baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, currentPage);
 					} else {
 						window.location.href = "/404";
 					}
@@ -315,7 +331,13 @@ $(document).ready(function() {
 		if (keywordChange === "") {
 			keywordChange = "EMPTY";
 		}
-		baseTable(statusChange, gatewayChange, keywordChange, 1);
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		if (startDate === "" || endDate === "") {
+			startDate = 'EMPTY';
+			endDate = 'EMPTY'
+		}
+		baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, 1);
 	});
 
 	$("#gatewayChange").change(function() {
@@ -325,7 +347,13 @@ $(document).ready(function() {
 		if (keywordChange === "") {
 			keywordChange = "EMPTY";
 		}
-		baseTable(statusChange, gatewayChange, keywordChange, 1);
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		if (startDate === "" || endDate === "") {
+			startDate = 'EMPTY';
+			endDate = 'EMPTY'
+		}
+		baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, 1);
 	});
 	$('#searchOrder').on('input', function() {
 		var statusChange = $("#statusChange").val();
@@ -334,7 +362,44 @@ $(document).ready(function() {
 		if (keywordChange === "") {
 			keywordChange = "EMPTY";
 		}
-		baseTable(statusChange, gatewayChange, keywordChange, 1);
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		if (startDate === "" || endDate === "") {
+			startDate = 'EMPTY';
+			endDate = 'EMPTY'
+		}
+		baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, 1);
+	});
+	$("#startDate").change(function() {
+		var statusChange = $("#statusChange").val();
+		var gatewayChange = $("#gatewayChange").val();
+		var keywordChange = $("#searchOrder").val();
+		if (keywordChange === "") {
+			keywordChange = "EMPTY";
+		}
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		if (startDate === "" || endDate === "") {
+			startDate = 'EMPTY';
+			endDate = 'EMPTY'
+		}
+		baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, 1);
+	});
+
+	$("#endDate").change(function() {
+		var statusChange = $("#statusChange").val();
+		var gatewayChange = $("#gatewayChange").val();
+		var keywordChange = $("#searchOrder").val();
+		if (keywordChange === "") {
+			keywordChange = "EMPTY";
+		}
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		if (startDate === "" || endDate === "") {
+			startDate = 'EMPTY';
+			endDate = 'EMPTY'
+		}
+		baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, 1);
 	});
 
 	$("#searchOrderId").on('input', function() {
@@ -345,7 +410,13 @@ $(document).ready(function() {
 			if (keywordChange === "") {
 				keywordChange = "EMPTY";
 			}
-			baseTable(statusChange, gatewayChange, keywordChange, 1);
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			if (startDate === "" || endDate === "") {
+				startDate = 'EMPTY';
+				endDate = 'EMPTY'
+			}
+			baseTable(statusChange, gatewayChange, keywordChange, startDate, endDate, 1);
 		}
 		else {
 			var searchChange = $("#searchOrderId").val();

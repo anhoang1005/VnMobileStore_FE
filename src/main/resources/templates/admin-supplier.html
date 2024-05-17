@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Quản lí nhà cung cấp</title>
+	<title>Thống kê nhập hàng</title>
 
 	<!--Jquery.js-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
@@ -36,7 +36,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
-	
+
 	<script src="/js/admin-supplier_js.js"></script>
 	<script src="/js/admin-menu.js"></script>
 </head>
@@ -46,7 +46,7 @@
 	<!--Thanhmenu-->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #cd1818;">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">VnMobile</a>
+		<a class="navbar-brand ps-3" href="/home">VnMobile</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
 				class="fas fa-bars"></i></button>
@@ -142,9 +142,9 @@
 						</a>
 
 						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
-						<a class="nav-link" href="/admin-revenue-report">
+						<a class="nav-link" href="/admin-order-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-							Thống kê doanh thu
+							Thống kê đơn hàng
 						</a>
 						<a class="nav-link" href="/admin-product-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -176,21 +176,30 @@
 						<div class="card-body">
 							<div class="col-md-12 mb-4">
 								<div class="row">
-									<div class="col-md-3 p-2">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-											<option selected>--Xác thực--</option>
-											<option value="1">Đã xác thực</option>
-											<option value="2">Chưa xác thực</option>
+									<div class="col-md-2 p-2">
+										<label for="statusChange">Trạng thái</label>
+										<select id="statusChange" class="form-select form-select-sm"
+											aria-label=".form-select-sm example">
+											<option value="1" selected>Bình thường</option>
+											<option value="2">Đã xóa</option>
 										</select>
 									</div>
-									<div class="col-md-3 p-2">
-										<input class="form-control-sm" type="text" placeholder="Bạn cần tìm gì?"
-											aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-										<button class="btn btn-dark btn-sm" id="btnNavbarSearch" type="button"><i
-												class="fas fa-search"></i></button>
+									<div class="col-md-2 p-2">
+										<label for="filterChange">Sắp xếp</label>
+										<select id="filterChange" class="form-select form-select-sm"
+											aria-label=".form-select-sm example">
+											<option value="1" selected>Mã tăng</option>
+											<option value="2">Mã giảm</option>
+										</select>
 									</div>
-									<div class="col-md-3 p-2 ms-auto">
-										<button id="insertSupplierBtn" class="btn btn-success btn-sm col-12"><i
+									<div class="col-md-2 p-2">
+										<label for="supplierSearch">Nhà cung cấp</label>
+										<input id="supplierSearch" class="form-control form-control-sm" type="text"
+											placeholder="Tìm theo tên" aria-label="Search for..."
+											aria-describedby="btnNavbarSearch" />
+									</div>
+									<div class="col-md-3 mt-3 p-2 ms-auto">
+										<button id="insertSupplierBtn" class="btn btn-success btn-md col-12"><i
 												class="fa-solid fa-plus"></i> Thêm nhà cung cấp</button>
 									</div>
 								</div>
@@ -199,13 +208,13 @@
 								<table class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr>
+											<th scope="col">#</th>
 											<th scope="col">Mã</th>
-											<th scope="col">Tên hóa đơn</th>
 											<th scope="col">Tên nhà cung cấp</th>
-											<th scope="col">Nhân viên thực hiện</th>
-											<th scope="col">Thời gian tạo</th>
-											<th scope="col">Mô tả</th>
-											<th scope="col"></th>
+											<th scope="col">Thông tin</th>
+											<th scope="col">Số sản phẩm</th>
+											<th scope="col">Thông tin tạo</th>
+											<th scope="col">Thao tác</th>
 										</tr>
 									</thead>
 									<tbody id="bodyTable">
@@ -228,7 +237,9 @@
 									</tbody>
 								</table>
 							</div>
-							<nav aria-label="..." class="mt-3">
+						</div>
+						<div class="row">
+							<nav aria-label="..." class="mt-3 ms-3">
 								<ul id="pageCurrent" page-current="1" class="pagination">
 									<li class="page-item disable">
 										<a id="pageNumberPrevious" class="page-link disable">Truớc</a>
@@ -258,7 +269,7 @@
 				</div>
 			</main>
 
-			<!-- Modal them category-->
+			<!-- Modal them supplier-->
 			<div class="modal fade" id="insertSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog">
@@ -300,8 +311,8 @@
 							</div>
 						</div>
 						<div class="modal-footer d-flex">
-							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="submitInsertSupplier" class="btn btn-primary ml-auto">Thêm mới</button>
+							<button class="btn btn-secondary col-sm-3" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitInsertSupplier" class="btn btn-primary ml-auto col-sm-3">Thêm mới</button>
 						</div>
 					</div>
 				</div>
@@ -352,8 +363,8 @@
 							</div>
 						</div>
 						<div class="modal-footer d-flex">
-							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="submitUpdateSupplier" class="btn btn-primary ml-auto">Xác nhận</button>
+							<button class="btn btn-secondary col-sm-3" data-bs-dismiss="modal">Hủy</button>
+							<button id="submitUpdateSupplier" class="btn btn-primary ml-auto col-sm-3">Xác nhận</button>
 						</div>
 					</div>
 				</div>
@@ -372,7 +383,8 @@
 							<p id="confirmMess"></p>
 						</div>
 						<div class="modal-footer">
-							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success">Xác nhận</button>
+							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-success col-3">Xác
+								nhận</button>
 						</div>
 					</div>
 				</div>

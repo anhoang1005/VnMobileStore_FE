@@ -37,6 +37,18 @@ $(document).ready(function() {
 		});
 	}
 
+	function getDateByTimeStamp(inputTime) {
+		const dateObj = new Date(inputTime);
+		const day = dateObj.getDate().toString().padStart(2, "0");
+		const month = (dateObj.getMonth() + 1).toString().padStart(2, "0"); // Tháng bắt đầu từ 0 nên cần cộng thêm 1
+		const year = dateObj.getFullYear();
+		const hours = dateObj.getHours().toString().padStart(2, "0");
+		const minutes = dateObj.getMinutes().toString().padStart(2, "0");
+		const seconds = dateObj.getSeconds().toString().padStart(2, "0");
+		const formattedTime = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+		return formattedTime;
+	}
+
 	//Hien table
 	function showTable(listSupplier) {
 		var tableHtml = ``;
@@ -46,23 +58,19 @@ $(document).ready(function() {
 								<input class="form-check-input" type="checkbox" value=""
 								id="flexCheckDefault">
 							</th>
-							<td>#A0000${value.id}</td>
-							<td>${value.supplierName}</td>
-							<td>${value.email}</td>
-							<td>${value.phoneNumber}</td>
-							<td>${value.adress}</td>`;
-			//if (value.deleted === true) {
-			//tableHtml += `<td>
-			//<button account-id="${value.id}" class="btn btn-success update-account"><i class="fa-solid fa-pen-to-square"></i></button>
-			//<button account-id="${value.id}" class="btn btn-danger lock-account"><i class="fa-solid fa-lock"></i></button>
-			//</td>`
-			//}
-			//else {
-			//tableHtml += `<td>
-			//<button account-id="${value.id}" class="btn btn-success update-account"><i class="fa-solid fa-pen-to-square"></i></button>
-			//<button account-id="${value.id}" class="btn btn-warning unlock-account"><i class="fa-solid fa-unlock"></i></button>
-			//</td>`
-			//}
+							<td><strong>#A000${value.id}</strong></td>
+							<td><strong>${value.supplierName}</strong></td>
+							<td>
+								<p>Email: ${value.email}</p>
+								<p>Sdt: ${value.phoneNumber}</p>
+								<p>Địa chỉ: ${value.adress}</p>
+							</td>
+							<td>${value.productQuantity}</td>
+							<td>
+								<p>Tạo vào: ${getDateByTimeStamp(value.createdAt)}</p>
+								<p>Tạo bởi: anhoang10052002@gmail.com</p>
+							</td>
+							`;
 			if (value.deleted === true) {
 				tableHtml += `<td>
 							<button supplier-id="${value.id}" supplier-deleted="${value.deleted}" class="btn btn-success import-product"><i
@@ -92,10 +100,10 @@ $(document).ready(function() {
 	$(document).on('click', '.import-product', function() {
 		var supplierId = $(this).attr('supplier-id');
 		var supplierStatus = $(this).attr('supplier-deleted');
-		if(supplierStatus === 'true'){
+		if (supplierStatus === 'true') {
 			window.location.href = '/admin-import-product' + '?supplier-id=' + supplierId;
 		}
-		else{
+		else {
 			$("#confirmMess").html(`<i style="color: red" class="fa-solid fa-circle-xmark"></i> Nhà cung cấp này đã bị khóa! Không thể nhập hàng!`);
 			$("#confirmModal").modal('show');
 		}
@@ -116,19 +124,19 @@ $(document).ready(function() {
 			var supplierAdress = $("#supplier-adress").val();
 			var supplierDes = $("#supplier-des").val();
 			if (supplierName === "") {
-				$("#upnameMessage").html(`Tên không được trống!`);
+				$("#nameMessage").html(`Tên không được trống!`);
 				return;
 			}
 			else if (supplierPhoneNumer === "") {
-				$("#upphoneNumberMessage").html(`Số điện thoại không được trống!`);
+				$("#phoneNumberMessage").html(`Số điện thoại không được trống!`);
 				return;
 			}
 			else if (supplierEmail === "") {
-				$("#upemailMessage").html(`Email không được để trống!`);
+				$("#emailMessage").html(`Email không được để trống!`);
 				return;
 			}
 			else if (supplierAdress === "") {
-				$("#upadressMessage").html(`Địa chỉ không được làm trống!`);
+				$("#adressMessage").html(`Địa chỉ không được làm trống!`);
 				return;
 			}
 			else if (supplierAdress === "") {

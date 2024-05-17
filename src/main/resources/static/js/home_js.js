@@ -138,12 +138,16 @@ $(document).ready(function() {
 			url: "http://localhost:8888/api/category/getall",
 			success: function(response) {
 				if (response.success) {
-					var categoryHtml = ``;
+					var categoryHtml = `<p class="pl-0 ml-0 col-12"><strong>Hãng sản xuất</strong></p>
+										<div class="form-check col-6 mb-2">
+											<input class="form-check-input" type="radio" name="categoryRadios" value="0" id="categoryRadios0" checked>
+											<label class="form-check-label" for="categoryRadios0">Tất cả</label>
+										</div>`;
 					$.each(response.data, function(index, value) {
 						if (value.deleted === true) {
 							categoryHtml += `<div class="form-check col-6 mb-2">
-												<input class="form-check-input category-select mb-2" type="checkbox" value="${value.id}" id="select-category${value.id}">
-												<label class="form-check-label" for="select-category${value.id}">${value.categoryName}</label>
+												<input class="form-check-input" type="radio" name="categoryRadios" value="${value.id}" id="categoryRadios${value.id}">
+												<label class="form-check-label" for="categoryRadios${value.id}">${value.categoryName}</label>
 											</div>`
 						}
 					});

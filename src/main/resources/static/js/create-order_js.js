@@ -630,12 +630,12 @@ $(document).ready(function() {
 
 	$(document).on('click', '.confirm-vnpay-success', function() {
 		$("#vnPaySuccessModal").modal('hide');
-		window.location.href = '/order-history';
+		window.location.href = '/customer-order';
 	});
 
 	$(document).on('click', '.confirm-success', function() {
 		$("#successModal").modal('hide');
-		window.location.href = '/order-history';
+		window.location.href = '/customer-order';
 	});
 
 	$(document).on('click', '.close-modal', function() {
@@ -645,6 +645,10 @@ $(document).ready(function() {
 	$(document).on('click', '.close-success-modal', function() {
 		$("#successModal").modal('hide');
 		window.location.href = '/home';
+	});
+	
+	$("#mapFrame").click(function(){
+		$("#mapModal").modal('show');
 	});
 
 });

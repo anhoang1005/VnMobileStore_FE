@@ -248,12 +248,15 @@
 							<div class="invalid-feedback"> Vui lòng nhập địa chỉ! </div>
 							<small class="inputMess" style="color: red;" id="nameMessage"></small>
 						</div>
-
 						<div class="col-md-12 mb-3">
 							<label for="notecheck"><strong>Ghi chú:</strong></label>
 							<input id="customerNote" name="notecheck" type="text" class="form-control"
 								placeholder="Ghi chú">
 							<small class="inputMess" style="color: red;" id="nameMessage"></small>
+						</div>
+						<div class="col-md-3 mb-3">
+							<button class="btn btn-primary" id="mapFrame"><i class="fa-solid fa-location-dot"></i>
+								Google Map</button>
 						</div>
 					</div>
 					<hr class="mb-4">
@@ -310,7 +313,8 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-					<button type="button" class="btn-close close-success-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close close-success-modal" data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="col-12 d-flex">
@@ -326,20 +330,22 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button id="dismissBtn" data-bs-dismiss="modal" class="btn btn-secondary close-success-modal col-sm-3">Hủy</button>
+					<button id="dismissBtn" data-bs-dismiss="modal"
+						class="btn btn-secondary close-success-modal col-sm-3">Hủy</button>
 					<button id="confirmBtn" class="btn btn-success confirm-success col-sm-3">Xác nhận</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- success Modal -->
 	<div class="modal fade" id="vnPaySuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-					<button type="button" class="btn-close close-vnpay-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close close-vnpay-modal" data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="col-12 d-flex">
@@ -355,7 +361,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button id="dismissBtn" data-bs-dismiss="modal" class="btn btn-secondary close-vnpay-modal col-sm-3">Hủy</button>
+					<button id="dismissBtn" data-bs-dismiss="modal"
+						class="btn btn-secondary close-vnpay-modal col-sm-3">Hủy</button>
 					<button id="confirmBtn" class="btn btn-success confirm-vnpay-success col-sm-3">Xác nhận</button>
 				</div>
 			</div>
@@ -368,7 +375,8 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-					<button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close close-modal" data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="col-12 d-flex">
@@ -383,6 +391,36 @@
 				</div>
 				<div class="modal-footer">
 					<button id="confirmErrorBtn" data-bs-dismiss="modal" class="btn btn-danger close-modal">Xác
+						nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- map Modal -->
+	<!-- CheckOut Modal -->
+	<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-location-dot"></i> Google Map
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="ratio ratio-16x9" style="border: #252525;">
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.292513285901!2d105.78486297393253!3d20.980908489422987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accdd8a1ad71%3A0xa2f9b16036648187!2zSOG7jWMgdmnhu4duIEPDtG5nIG5naOG7hyBCxrB1IGNow61uaCB2aeG7hW4gdGjDtG5n!5e0!3m2!1svi!2s!4v1715803055795!5m2!1svi!2s"
+							allowfullscreen="" style="border: 1px solid red;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Hủy</button>
+					<button id="mapButton" type="button" class="btn btn-success col-3" data-dismiss="modal">Xác
 						nhận</button>
 				</div>
 			</div>

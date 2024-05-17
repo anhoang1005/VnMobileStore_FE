@@ -42,7 +42,7 @@
 	<!--Thanhmenu-->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #cd1818;">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">VnMobile</a>
+		<a class="navbar-brand ps-3" href="/home">VnMobile</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
 				class="fas fa-bars"></i></button>
@@ -138,9 +138,9 @@
 						</a>
 
 						<div class="sb-sidenav-menu-heading">BÁO CÁO</div>
-						<a class="nav-link" href="/admin-revenue-report">
+						<a class="nav-link" href="/admin-order-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-							Thống kê doanh thu
+							Thống kê đơn hàng
 						</a>
 						<a class="nav-link" href="/admin-product-report">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -214,7 +214,8 @@
 											<hr class="bg-dark mb-2 mt-0 d-inline-block mx-auto w-100">
 											<div>
 												<div class="form-group mb-3">
-													<label class="mb-1" for="createdBillPerson">Người tạo hóa đơn:</label>
+													<label class="mb-1" for="createdBillPerson">Người tạo hóa
+														đơn:</label>
 													<input id="createdBillPerson" class="form-control" type="text"
 														disable>
 												</div>
@@ -228,7 +229,8 @@
 														<strong>Thành tiền:</strong>
 													</p>
 													<strong>
-														<span id="totalCheckedCart" style="color: red; font-size: 1.2em;"></span>
+														<span id="totalCheckedCart"
+															style="color: red; font-size: 1.2em;"></span>
 													</strong>
 												</div>
 												<button id="checkoutCart" class="btn btn-danger btn-md col-md-12">
@@ -259,7 +261,7 @@
 						</div>
 					</div>
 			</main>
-			
+
 			<!--Lock Account Modal-->
 			<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
@@ -287,10 +289,9 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!--Lock Account Modal-->
-			<div class="modal fade" id="huyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-				aria-hidden="true">
+			<div class="modal fade" id="huyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-md">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -343,7 +344,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- Add Bill Modal -->
 			<div class="modal fade" id="addBillModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
@@ -356,7 +357,8 @@
 						<div class="modal-body">
 							<div class="col-12 d-flex">
 								<div class="mb-2" id="confirmIcon">
-									<i style="color: rgb(85, 85, 255); font-size: 2em;" class="fa-solid fa-circle-info"></i>
+									<i style="color: rgb(85, 85, 255); font-size: 2em;"
+										class="fa-solid fa-circle-info"></i>
 								</div>
 								<div class="mb-3 ms-3">
 									<strong>
@@ -367,13 +369,14 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button id="confirmBtn" data-bs-dismiss="modal" class="btn btn-secondary col-sm-3">Hủy</button>
+							<button id="confirmBtn" data-bs-dismiss="modal"
+								class="btn btn-secondary col-sm-3">Hủy</button>
 							<button id="confirmAddBillBtn" class="btn btn-success col-sm-3">Xác nhận</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- success Modal -->
 			<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
@@ -397,7 +400,8 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button id="dismissBtn" data-bs-dismiss="modal" class="btn btn-secondary col-sm-3">Hủy</button>
+							<button id="dismissBtn" data-bs-dismiss="modal"
+								class="btn btn-secondary col-sm-3">Hủy</button>
 							<button id="confirmExportBill" class="btn btn-success col-sm-3">Xác nhận</button>
 						</div>
 					</div>

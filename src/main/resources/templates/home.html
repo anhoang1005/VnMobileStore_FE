@@ -223,39 +223,32 @@
 				</nav>
 				<div class="mt-0 mb-3 col-12">
 					<div class="row" id="categorySelect">
-						<p class="pl-0 ml-0 col-12"><strong>Hãng sản xuất</strong></p>
-						<div class="form-check col-6 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="allCategory" checked>
-							<label class="form-check-label" for="allCategory">Tất cả</label>
-						</div>
+
 					</div>
 				</div>
 				<div class="mt-0 mb-3 col-12">
 					<div class="row">
 						<p class="pl-0 ml-0 col-12"><strong>Mức giá</strong></p>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="allPrice" checked>
-							<label class="form-check-label" for="allPrice">Tất cả</label>
+							<input class="form-check-input" type="radio" name="priceRadios" id="priceRadios1" value="0"
+								checked>
+							<label class="form-check-label" for="priceRadios1">Tất cả</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Dưới 2 triệu</label>
+							<input class="form-check-input" type="radio" name="priceRadios" id="priceRadios2" value="1">
+							<label class="form-check-label" for="priceRadios2">Dưới 1 triệu</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Từ 2 - 4 triệu</label>
+							<input class="form-check-input" type="radio" name="priceRadios" id="priceRadios3" value="2">
+							<label class="form-check-label" for="priceRadios3">Dưới 2 triệu</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Từ 4 - 8 triệu</label>
+							<input class="form-check-input" type="radio" name="priceRadios" id="priceRadios4" value="3">
+							<label class="form-check-label" for="priceRadios4">Dưới 3 triệu</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Từ 8 - 15 triệu</label>
-						</div>
-						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Trên 15 triệu</label>
+							<input class="form-check-input" type="radio" name="priceRadios" id="priceRadios5" value="4">
+							<label class="form-check-label" for="priceRadios5">Dưới 4 triệu</label>
 						</div>
 					</div>
 				</div>
@@ -263,20 +256,19 @@
 					<div class="row">
 						<p class="pl-0 ml-0 col-12"><strong>Hệ điều hành</strong></p>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="allSystem" checked>
-							<label class="form-check-label" for="allSystem">Tất cả</label>
+							<input class="form-check-input" type="radio" name="systemRadios" value="0"
+								id="systemRadios0" checked>
+							<label class="form-check-label" for="systemRadios0">Tất cả</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Android</label>
+							<input class="form-check-input" type="radio" name="systemRadios" value="1"
+								id="systemRadios1">
+							<label class="form-check-label" for="systemRadios1">Android</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">IOS (Apple)</label>
-						</div>
-						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Bàn phím 4G</label>
+							<input class="form-check-input" type="radio" name="systemRadios" value="2"
+								id="systemRadios2">
+							<label class="form-check-label" for="systemRadios2">IOS (Apple)</label>
 						</div>
 					</div>
 				</div>
@@ -284,24 +276,25 @@
 					<div class="row">
 						<p class="pl-0 ml-0 col-12"><strong>RAM</strong></p>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="allSystem" checked>
-							<label class="form-check-label" for="allSystem">Tất cả</label>
+							<input class="form-check-input" type="radio" name="ramRadios" value="" id="ramRadios0"
+								checked>
+							<label class="form-check-label" for="ramRadios0">Tất cả</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Ram dưới 4GB</label>
+							<input class="form-check-input" type="radio" name="ramRadios" value="" id="ramRadios1">
+							<label class="form-check-label" for="ramRadios1">Ram dưới 4GB</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Ram từ 4 - 6 GB</label>
+							<input class="form-check-input" type="radio" name="ramRadios" value="" id="ramRadios2">
+							<label class="form-check-label" for="ramRadios2">Ram từ 4 - 8 GB</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Ram từ 6 - 8 GB</label>
+							<input class="form-check-input" type="radio" name="ramRadios" value="" id="ramRadios3">
+							<label class="form-check-label" for="ramRadios3">Ram từ 8 - 12 GB</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Ram trên 8 GB</label>
+							<input class="form-check-input" type="radio" name="ramRadios" value="" id="ramRadios4">
+							<label class="form-check-label" for="ramRadios4">Ram trên 12 GB</label>
 						</div>
 					</div>
 				</div>
@@ -309,41 +302,36 @@
 					<div class="row">
 						<p class="pl-0 ml-0 col-12"><strong>Hiệu năng và pin</strong></p>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="allBattery" checked>
-							<label class="form-check-label" for="allBattery">Tất cả</label>
+							<input class="form-check-input" type="radio" name="batteryRadios" value="0"
+								id="batteryRadios0" checked>
+							<label class="form-check-label" for="batteryRadios0">Tất cả</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Dưới 3000 mah</label>
+							<input class="form-check-input" type="radio" name="batteryRadios" value="1"
+								id="batteryRadios1">
+							<label class="form-check-label" for="batteryRadios1">Dưới 3000 mah</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Pin từ 3000 - 4000 mah</label>
+							<input class="form-check-input" type="radio" name="batteryRadios" value="2"
+								id="batteryRadios2">
+							<label class="form-check-label" for="batteryRadios2">Pin từ 3000 - 4000 mah</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Pin từ 4000 - 5000 mah</label>
+							<input class="form-check-input" type="radio" name="batteryRadios" value="3"
+								id="batteryRadios3">
+							<label class="form-check-label" for="batteryRadios3">Pin từ 4000 - 5000 mah</label>
 						</div>
 						<div class="form-check col-12 mb-2">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">Siêu trâu trên 5000 mah</label>
+							<input class="form-check-input" type="radio" name="batteryRadios" value="4"
+								id="batteryRadios4">
+							<label class="form-check-label" for="batteryRadios4">Siêu trâu trên 5000 mah</label>
 						</div>
 					</div>
 				</div>
-
-				<!--<div class="card bg-light mb-3 my-border">
-					<div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> DANH MỤC
-					</div>
-					<ul class="list-group category_block">
-						<li class="list-group-item text-white"><a href="home?action=cateview&cid=${cate.id}">Apple</a>
-						</li>
-						<li class="list-group-item text-white"><a href="home?action=cateview&cid=${cate.id}">SamSung</a>
-						</li>
-					</ul>
-				</div>-->
-
-
-
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe class="embed-responsive-item"
+						src="https://www.youtube.com/embed/B959inr5JwI?si=AY4nl6wHZ1Hg0GyK" allowfullscreen></iframe>
+				</div>
 			</div>
 			<div class="col-lg-9">
 				<div id="priceSection" class="fs-5 mb-3 my-border">
@@ -423,18 +411,28 @@
 					</div>
 				</div>
 				<div class="col-12">
-					<nav aria-label="...">
-						<ul class="pagination">
-							<li class="page-item disabled">
-								<a class="page-link" href="#" tabindex="-1">Previous</a>
+					<nav aria-label="..." class="mt-3">
+						<ul id="pageCurrent" page-current="1" class="pagination">
+							<li class="page-item disable">
+								<a id="pageNumberPrevious" class="page-link disable">Truớc</a>
 							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item d-none">
+								<a id="pagePrevious" class="page-link">1</a>
+							</li>
 							<li class="page-item active">
-								<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+								<a id="pageNumberCurrent" class="page-link">1</a>
 							</li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item d-none">
+								<a id="pageNext" class="page-link">3</a>
+							</li>
 							<li class="page-item">
-								<a class="page-link" href="#">Next</a>
+								<a class="page-link">...</a>
+							</li>
+							<li class="page-item">
+								<a id="pageCount" class="page-link">1</a>
+							</li>
+							<li class="page-item disable">
+								<a id="pageNumberNext" class="page-link disable">Sau</a>
 							</li>
 						</ul>
 					</nav>
@@ -492,7 +490,8 @@
 			<div class="modal-content" style="background-color: rgba(0, 0, 0, 0); border: none; box-shadow: none;">
 				<div class="modal-header">
 					<h5 class="modal-title text-white" id="exampleModalLabel">Quảng cáo</h5>
-					<button id="closeNotify" type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<button id="closeNotify" type="button" class="close text-white" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -510,6 +509,26 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="popup-button">
+		<a id="popupButton">
+			<div class="avatar-container" style="width: 3.3em; height: 3.3em; overflow: hidden; border-radius: 50%;">
+				<img id="userAvatar" class="avatar" style="width: 100%; height: 100%; object-fit: cover;"
+					src="/img/avatar/me.jpg" alt="Avatar">
+			</div>
+		</a>
+	</div>
+	<div id="popupContent" class="popup-content">
+		<h5>Liên hệ với CEO</h5>
+		<a href="https://www.facebook.com/duyvu.hoang.5682"><i class="fa-brands fa-facebook"></i> Hoàng Văn An</a>
+	</div>
+	<script>
+		$(document).ready(function () {
+			$('#popupButton').click(function () {
+				$('#popupContent').toggle();
+			});
+		});
+	</script>
 
 	<!--Footer-->
 	<footer class="text-light">
@@ -573,6 +592,25 @@
 	.my-border {
 		border-radius: 2%;
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	}
+
+	.popup-button {
+		position: fixed;
+		bottom: 20px;
+		left: 20px;
+		z-index: 1000;
+	}
+
+	.popup-content {
+		position: fixed;
+		bottom: 90px;
+		left: 20px;
+		z-index: 999;
+		display: none;
+		border: 1px solid #ccc;
+		background-color: white;
+		padding: 15px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	}
 </style>
 <script>

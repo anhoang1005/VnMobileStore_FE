@@ -35,7 +35,7 @@
 
 	<link rel="stylesheet" href="/css/signin.css">
 
-	<script src="/js/admin-insert-product.js"></script>
+	<script src="/js/admin-view-product.js"></script>
 	<script src="/js/admin-menu.js"></script>
 </head>
 
@@ -161,7 +161,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">Sửa mặt hàng</h1>
+					<h1 id="productStatus" class="mt-4">Sửa mặt hàng</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="/admin-dashboard">Trang chính</a></li>
 						<li class="breadcrumb-item"><a href="/admin-product">Quản lí mặt hàng</a></li>
@@ -299,13 +299,21 @@
 											<small class="inputMess" style="color: red;"
 												id="plusThumbnailMessage"></small>
 										</div>
-										<div id="listPlusthumbnail" class="mt-3 mb-3 d-flex">
-											<div class="avatar-container me-2"
-												style="width: 150px; height: 150px; overflow: hidden;">
-												<img id="plusImg" class="avatar"
-													style="width: 100%; height: 100%; object-fit: cover;"
-													src="https://via.placeholder.com/300x300?text=300x300" alt="Avatar">
-											</div>
+										<div class="table-responsive">
+											<table class="table table-bordered mt-2">
+												<tr id="listPlusthumbnail">
+													<th>
+														<div class="avatar-container me-2"
+															style="width: 150px; height: 150px; overflow: hidden;">
+															<img id="plusImg" class="avatar"
+																style="width: 100%; height: 100%; object-fit: cover;"
+																src="https://via.placeholder.com/300x300?text=300x300"
+																alt="Avatar">
+														</div>
+													</th>
+
+												</tr>
+											</table>
 										</div>
 									</div>
 								</div>
@@ -371,6 +379,7 @@
 													</tr>
 												</thead>
 												<tbody id="typeTableBody">
+													
 												</tbody>
 											</table>
 										</div>

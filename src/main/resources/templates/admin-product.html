@@ -37,7 +37,7 @@
 		crossorigin="anonymous"></script>
 	<script src="/asset/js/datatables-simple-demo.js"></script>
 
-	<script src="/js/admin-product.js"></script>
+	<script src="/js/admin-product_js.js"></script>
 	<script src="/js/admin-menu.js"></script>
 
 </head>
@@ -190,34 +190,44 @@
 										<label for="supplierChange">Nhà cung cấp</label>
 										<select id="supplierChange" class="form-select form-select-sm"
 											aria-label=".form-select-sm example">
-											<option value="0" selected>Tất cả</option>
-											<option value="1">FPT</option>
-											<option value="2">CELLPHONES</option>
+
 										</select>
 									</div>
 									<div class="col-md-2 p-2">
 										<label for="statusChange">Trạng thái</label>
 										<select id="statusChange" class="form-select form-select-sm"
 											aria-label=".form-select-sm example">
-											<option value="0" selected>Bình thường</option>
-											<option value="1">Đã xóa</option>
-											<option value="2">Đã xóa</option>
+											<option value="1" selected>Bình thường</option>
+											<option value="0">Đã xóa</option>
 										</select>
 									</div>
-
 									<div class="col-md-2 p-2">
-										<label for="productSearch">Trạng thái</label>
-										<input id="productSearch" class="form-control form-control-sm" type="text"
-											placeholder="Tìm theo tên" aria-label="Search for..."
-											aria-describedby="btnNavbarSearch" />
+										<label for="sortChange">Sắp xếp</label>
+										<select id="sortChange" class="form-select form-select-sm"
+											aria-label=".form-select-sm example">
+											<option value="0" selected>Mã giảm</option>
+											<option value="1">Mã tăng</option>
+										</select>
 									</div>
 									<div class="col-md-3 mt-3 p-2 ms-auto">
 										<button id="insertProductBtn" class="btn btn-success btn-md col-12"><i
 												class="fa-solid fa-plus"></i> Thêm sản phẩm</button>
 									</div>
+									<div class="col-md-2 p-2">
+										<label for="productSearchId">Mã mặt hàng</label>
+										<input id="productSearchId" class="form-control form-control-sm" type="text"
+											placeholder="Tìm theo mã" aria-label="Search for..."
+											aria-describedby="btnNavbarSearch" />
+									</div>
+									<div class="col-md-2 p-2">
+										<label for="productSearch">Tên mặt hàng</label>
+										<input id="productSearch" class="form-control form-control-sm" type="text"
+											placeholder="Tìm theo tên" aria-label="Search for..."
+											aria-describedby="btnNavbarSearch" />
+									</div>
 								</div>
 							</div>
-							<div class="table-responsive" style="max-height: 700px;">
+							<div class="table-responsive" style="max-height: 700px; min-height: 500px;">
 								<table class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr>
@@ -261,17 +271,27 @@
 								</table>
 							</div>
 							<nav aria-label="..." class="mt-3">
-								<ul class="pagination">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1">Trước</a>
+								<ul id="pageCurrent" page-current="1" class="pagination">
+									<li class="page-item disable">
+										<a id="pageNumberPrevious" class="page-link disable">Truớc</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item d-none">
+										<a id="pagePrevious" class="page-link">1</a>
+									</li>
 									<li class="page-item active">
-										<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+										<a id="pageNumberCurrent" class="page-link">1</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item d-none">
+										<a id="pageNext" class="page-link">3</a>
+									</li>
 									<li class="page-item">
-										<a class="page-link" href="#">Sau</a>
+										<a class="page-link">...</a>
+									</li>
+									<li class="page-item">
+										<a id="pageCount" class="page-link">1</a>
+									</li>
+									<li class="page-item disable">
+										<a id="pageNumberNext" class="page-link disable">Sau</a>
 									</li>
 								</ul>
 							</nav>
@@ -279,42 +299,6 @@
 					</div>
 				</div>
 			</main>
-
-			<!-- Phan quyen Account-->
-			<div class="modal fade" id="phanquyenModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-				aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Phân quyền</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div>
-								<div class="mb-3">
-									<input type="hidden" class="form-control" id="hidden-id">
-								</div>
-								<div class="mb-3">
-									<label for="upcategory-name" class="col-form-label">Quyền truy cập:</label>
-									<select id="roleSelect" class="form-select" aria-label="Default select example">
-										<option value="" selected>--Vai trò--</option>
-										<option value="QUANLI">Quản lí</option>
-										<option value="KHACHHANG">Khách hàng</option>
-										<option value="NHANVIENKHO">Nhân viên kho</option>
-										<option value="NHANVIENBANHANG">Nhân viên bán hàng</option>
-										<option value="NHANVIENGIAOHANG">Nhân viên giao hàng</option>
-									</select>
-									<small style="color: red;" id="phanquyenMessage"></small>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer d-flex">
-							<button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-							<button id="submitUpdateAccount" class="btn btn-primary ml-auto">Xác nhận</button>
-						</div>
-					</div>
-				</div>
-			</div>
 
 			<!--Confirm Modal -->
 			<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"

@@ -2,7 +2,14 @@ $(document).ready(function() {
 	var vnMobileTokenString = localStorage.getItem('VnMobileToken');
 	var vnMobileToken = JSON.parse(vnMobileTokenString);
 	if (vnMobileToken !== null) {
-
+		const specificDateTime = vnMobileToken.expiresAt;
+		const specificDate = new Date(specificDateTime);
+		const currentDate = new Date();
+		if(specificDate> currentDate){
+			alert('Hết phiên đăng nhập, bạn cần đăng nhập lại!');
+			localStorage.removeItem('VnMobileToken');
+			window.location.href='/login';
+		}
 		if (vnMobileToken.role === 'QUANLI') {
 			$("#userfullName").text(vnMobileToken.fullName);
 			$("#orderHistory").hide();
